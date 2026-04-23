@@ -433,7 +433,7 @@ export default function Home() {
               placeholder="Ask anything — products, email drafts, client prep, UK questions…"
               rows={1}
               disabled={isStreaming}
-              className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400 min-h-[48px] max-h-[200px] overflow-y-auto leading-relaxed"
+              className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400 min-h-[48px] max-h-[200px] overflow-y-auto leading-relaxed"
             />
             <button
               onClick={() => sendMessage(input)}
