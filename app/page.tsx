@@ -325,7 +325,7 @@ export default function Home() {
           </div>
           <div>
             <h1 className="font-semibold text-base leading-tight">BDS Sales Copilot</h1>
-            <p className="text-slate-400 text-xs">Backdropsource · Powered by Claude</p>
+            <p className="text-slate-400 text-xs">Backdropsource</p>
           </div>
         </div>
 
