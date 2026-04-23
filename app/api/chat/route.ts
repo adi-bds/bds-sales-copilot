@@ -119,7 +119,7 @@ function detectFilesToLoad(messages: Message[]): string[] {
   }
 
   // ── Client intelligence ───────────────────────────────────────────────────
-  if (/\bclient\b|\bcustomer\b|\baccount\b|call.?prep|who.?is|before.?the.?call|their.?history|b2b/.test(recentText)) {
+  if (/\bclient\b|\bcustomer\b|\baccount\b|call.?prep|who.?is|before.?the.?call|their.?history|b2b|previously ordered|same as (before|last time|my last)|reorder|order again|same order|my (last|previous) order|i (ordered|bought) before/.test(recentText)) {
     files.add('core/b2b_customers.md');
   }
 
@@ -251,7 +251,7 @@ export async function POST(req: NextRequest) {
 
     const stream = await client.messages.stream({
       model: 'claude-sonnet-4-5',
-      max_tokens: 8192,
+      max_tokens: 1024,
       system: systemPrompt,
       messages: (messages as Message[]).map((m) => ({
         role: m.role as 'user' | 'assistant',
