@@ -6,10 +6,6 @@ import { join } from 'path';
 const client = new Anthropic();
 
 // ─── Knowledge File Loader ─────────────────────────────────────────────────
-// Files are cached in memory after the first read. In serverless environments
-// this cache lives for the duration of a warm instance — cold starts re-read
-// from disk, which is fast (~ms) for these small markdown files.
-
 const fileCache = new Map<string, string>();
 
 function loadFile(relativePath: string): string {
@@ -26,18 +22,139 @@ function loadFile(relativePath: string): string {
   return content;
 }
 
+// ─── Order Lookup ──────────────────────────────────────────────────────────
+
+type OrderItem = { qty: string; name: string; price: string; sku: string };
+type Order = {
+  order: string;
+  date: string;
+  email: string;
+  customer: string;
+  company: string;
+  city: string;
+  state: string;
+  phone: string;
+  total: string;
+  currency: string;
+  financial_status: string;
+  fulfillment_status: string;
+  discount_code: string;
+  discount_amount: string;
+  items: OrderItem[];
+};
+type OrderIndex = {
+  orders: Record<string, Order>;
+  by_email: Record<string, string[]>;
+  by_name: Record<string, string[]>;
+};
+
+let ordersIndex: OrderIndex | null = null;
+
+function loadOrdersIndex(): OrderIndex {
+  if (ordersIndex) return ordersIndex;
+  const path = join(process.cwd(), 'knowledge', 'orders', 'orders_index.json');
+  if (!existsSync(path)) {
+    console.warn('[BDS Copilot] orders_index.json not found');
+    ordersIndex = { orders: {}, by_email: {}, by_name: {} };
+    return ordersIndex;
+  }
+  ordersIndex = JSON.parse(readFileSync(path, 'utf-8')) as OrderIndex;
+  console.log(`[BDS Copilot] Orders index loaded: ${Object.keys(ordersIndex.orders).length} orders`);
+  return ordersIndex;
+}
+
+function lookupOrders(messages: Message[]): string {
+  const recentRaw = messages.slice(-4).map((m) => m.content).join(' ');
+  const recentLow = recentRaw.toLowerCase();
+
+  // Only run order lookup when the conversation hints at order/customer history
+  if (
+    !/order|#\d{4,}|us#|previously|reorder|last order|same order|what did|who is|who'?s|history|i ordered|i bought/.test(
+      recentLow
+    )
+  ) {
+    return '';
+  }
+
+  const index = loadOrdersIndex();
+  const found = new Map<string, Order>();
+
+  // 1. Match explicit order numbers: US#16111 | #16111 | 16111
+  const orderNumRe = /(?:us#?|#)(\d{4,6})/gi;
+  let m: RegExpExecArray | null;
+  while ((m = orderNumRe.exec(recentRaw)) !== null) {
+    const key = `US#${m[1]}`;
+    if (index.orders[key]) found.set(key, index.orders[key]);
+  }
+  // Bare 5-digit numbers that look like order IDs
+  const bareNumRe = /\b(1[0-9]{4})\b/g;
+  while ((m = bareNumRe.exec(recentRaw)) !== null) {
+    const key = `US#${m[1]}`;
+    if (index.orders[key]) found.set(key, index.orders[key]);
+  }
+
+  // 2. Match by email address
+  const emailRe = /[\w.+-]+@[\w.-]+\.\w+/g;
+  while ((m = emailRe.exec(recentRaw)) !== null) {
+    const email = m[0].toLowerCase();
+    (index.by_email[email] || []).forEach((n) => {
+      if (index.orders[n]) found.set(n, index.orders[n]);
+    });
+  }
+
+  // 3. Match by "Firstname Lastname" (two consecutive Title-Case words)
+  const namePairRe = /\b([A-Z][a-z]{1,})\s+([A-Z][a-z]{1,})\b/g;
+  while ((m = namePairRe.exec(recentRaw)) !== null) {
+    const key = `${m[1]} ${m[2]}`.toLowerCase();
+    (index.by_name[key] || []).forEach((n) => {
+      if (index.orders[n]) found.set(n, index.orders[n]);
+    });
+  }
+
+  if (found.size === 0) return '';
+
+  // Group by customer (email or name) and sort most recent first
+  const byCustomer = new Map<string, Order[]>();
+  for (const order of found.values()) {
+    const key = order.email || order.customer.toLowerCase();
+    if (!byCustomer.has(key)) byCustomer.set(key, []);
+    byCustomer.get(key)!.push(order);
+  }
+
+  const lines: string[] = ['## ═══ ORDER HISTORY (SHOPIFY) ═══\n'];
+  for (const orders of byCustomer.values()) {
+    orders.sort((a, b) => b.date.localeCompare(a.date));
+    const first = orders[0];
+    lines.push(
+      `**${first.customer}**${first.company ? ` — ${first.company}` : ''}`
+    );
+    lines.push(
+      `Email: ${first.email} | Phone: ${first.phone || 'n/a'} | ${first.city}, ${first.state}`
+    );
+    lines.push(`Total orders on file: ${orders.length}\n`);
+    for (const o of orders) {
+      lines.push(
+        `${o.order} | ${o.date} | $${o.total} | ${o.fulfillment_status}${o.discount_code ? ` | discount: ${o.discount_code} -$${o.discount_amount}` : ''}`
+      );
+      for (const item of o.items) {
+        lines.push(`  • ${item.qty}× ${item.name} @ $${item.price}`);
+      }
+    }
+    lines.push('');
+  }
+
+  console.log(
+    `[BDS Copilot] Order lookup returned ${found.size} order(s) for ${byCustomer.size} customer(s)`
+  );
+  return lines.join('\n');
+}
+
 // ─── Retrieval Routing ────────────────────────────────────────────────────
-// sales_playbook.md is the only always-load — pricing, discounts, workflow.
-// Everything else loads conditionally to keep the context lean and fast.
-const ALWAYS_LOAD = [
-  'core/sales_playbook.md',
-];
+const ALWAYS_LOAD = ['core/sales_playbook.md'];
 
 type Message = { role: string; content: string };
 
 function detectFilesToLoad(messages: Message[]): string[] {
-  // Analyse the last 4 messages for context so multi-turn conversations
-  // (e.g. "draft an email for that UK client") carry forward correctly.
   const recentText = messages
     .slice(-4)
     .map((m) => m.content)
@@ -54,7 +171,6 @@ function detectFilesToLoad(messages: Message[]): string[] {
 
   if (isUK) {
     let ukCount = 0;
-
     if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem/.test(recentText)) {
       files.add('uk/uk_complaints_playbook.md'); ukCount++;
     }
@@ -73,8 +189,6 @@ function detectFilesToLoad(messages: Message[]): string[] {
     if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch/.test(recentText)) {
       files.add('uk/uk_initial_inquiry_playbook.md'); ukCount++;
     }
-
-    // UK mentioned but no specific stage detected → load summary + initial inquiry
     if (ukCount === 0) {
       files.add('uk/uk_sales_master_summary.md');
       files.add('uk/uk_initial_inquiry_playbook.md');
@@ -114,7 +228,7 @@ function detectFilesToLoad(messages: Message[]): string[] {
     files.add('products/products_other.md');
   }
 
-  // Generic product or recommendation request with no specific category match
+  // Generic product request with no specific category
   if (/\bproduct\b|recommend|what.?do.?we.?have|what.?do.?we.?sell|catalog|our.?range|what.?options/.test(recentText)) {
     const hasSpecific = [...files].some(
       (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
@@ -144,7 +258,7 @@ function detectFilesToLoad(messages: Message[]): string[] {
 
 // ─── System Prompt Builder ────────────────────────────────────────────────
 
-function buildSystemPrompt(filePaths: string[]): string {
+function buildSystemPrompt(filePaths: string[], orderContext: string): string {
   const knowledgeSections = filePaths
     .map((fp) => {
       const content = loadFile(fp);
@@ -159,15 +273,16 @@ function buildSystemPrompt(filePaths: string[]): string {
     .filter(Boolean)
     .join('\n\n---\n\n');
 
+  const orderSection = orderContext ? `\n\n---\n\n${orderContext}` : '';
+
   return `${CORE_INSTRUCTIONS}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 KNOWLEDGE BASE — loaded for this conversation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-The following reference files have been selected based on the topic of this conversation.
-Use them as your primary source of truth — cite them directly rather than guessing.
+Use these as your primary source of truth — cite directly, never guess.
 
-${knowledgeSections}`;
+${knowledgeSections}${orderSection}`;
 }
 
 // ─── Core Instructions ────────────────────────────────────────────────────
@@ -181,6 +296,7 @@ const CORE_INSTRUCTIONS = `You are the BDS Sales Copilot for Backdropsource (bac
 - Products: name, price, URL, one-line reason. Max 3 options.
 - Unknown spec or price: say "Check Shopify admin." Nothing more.
 - Never fabricate product names, prices, or order history.
+- Order history: if ORDER HISTORY section is present, use it. If not, say "I don't have that order on file — check Shopify admin."
 
 ## Company
 - HQ: Dallas TX | India office: Coimbatore
@@ -209,7 +325,8 @@ export async function POST(req: NextRequest) {
     }
 
     const selectedFiles = detectFilesToLoad(messages as Message[]);
-    const systemPrompt = buildSystemPrompt(selectedFiles);
+    const orderContext = lookupOrders(messages as Message[]);
+    const systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
 
     const stream = await client.messages.stream({
       model: 'claude-sonnet-4-5',
