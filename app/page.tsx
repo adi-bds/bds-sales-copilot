@@ -227,20 +227,14 @@ export default function Home() {
       <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{background:'#0B1A2E'}}>
 
         {/* Logo */}
-        <div className="px-4 pt-5 pb-4 flex items-center gap-3">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 flex-shrink-0">
-            <circle cx="50" cy="50" r="50" fill="#111"/>
-            <clipPath id="top"><polygon points="0,0 100,0 100,100 0,0"/></clipPath>
-            <clipPath id="bot"><polygon points="0,0 100,100 0,100 0,0"/></clipPath>
-            <circle cx="50" cy="50" r="47" fill="#1B2D6E" clipPath="url(#top)"/>
-            <circle cx="50" cy="50" r="47" fill="#9B1B3B" clipPath="url(#bot)"/>
-            <text x="27" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">B</text>
-            <text x="54" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">S</text>
+        <div className="px-4 pt-5 pb-4">
+          <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg" className="w-44 h-auto">
+            <rect x="0" y="0" width="104" height="36" fill="#1B2A4A"/>
+            <rect x="104" y="0" width="96" height="36" fill="#CC1F1F"/>
+            <text x="52" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">BACKDROP</text>
+            <text x="152" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">SOURCE</text>
           </svg>
-          <div>
-            <div className="text-white font-semibold text-sm leading-tight">Backdropsource</div>
-            <div className="text-slate-500 text-[10px] font-medium tracking-wide uppercase">Sales Copilot</div>
-          </div>
+          <div className="text-slate-500 text-[10px] mt-1.5 font-medium tracking-wide uppercase">Sales Copilot</div>
         </div>
 
         {/* New chat */}
@@ -342,9 +336,15 @@ export default function Home() {
           {/* Welcome — no category selected */}
           {!activeNav && !activeGeo && (
             <div className="flex flex-col items-center justify-center h-full px-8 text-center">
-              <div className="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-2xl font-bold text-white mb-5 select-none">
-                B
-              </div>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 mb-5">
+                <circle cx="50" cy="50" r="50" fill="#111"/>
+                <clipPath id="bsTop"><polygon points="0,0 100,0 100,100 0,0"/></clipPath>
+                <clipPath id="bsBot"><polygon points="0,0 100,100 0,100 0,0"/></clipPath>
+                <circle cx="50" cy="50" r="47" fill="#1B2D6E" clipPath="url(#bsTop)"/>
+                <circle cx="50" cy="50" r="47" fill="#9B1B3B" clipPath="url(#bsBot)"/>
+                <text x="27" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">B</text>
+                <text x="54" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">S</text>
+              </svg>
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
               <p className="text-slate-400 text-sm max-w-xs leading-relaxed">
                 Select a category from the sidebar to get started with product lookups, email drafts, training, or client prep.
