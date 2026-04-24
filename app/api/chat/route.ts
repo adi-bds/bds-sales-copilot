@@ -69,7 +69,7 @@ function lookupOrders(messages: Message[]): string {
 
   // Only run order lookup when the conversation hints at order/customer history
   if (
-    !/order|#\d{4,}|us#|previously|reorder|last order|same order|what did|who is|who'?s|history|i ordered|i bought/.test(
+    !/order|#\d{4,}|us#|au#|eu#|nz#|ca#|previously|reorder|last order|same order|what did|who is|who'?s|history|i ordered|i bought/.test(
       recentLow
     )
   ) {
@@ -79,18 +79,20 @@ function lookupOrders(messages: Message[]): string {
   const index = loadOrdersIndex();
   const found = new Map<string, Order>();
 
-  // 1. Match explicit order numbers: US#16111 | #16111 | 16111
-  const orderNumRe = /(?:us#?|#)(\d{4,6})/gi;
+  // 1. Match all regional order numbers: US#16111, AU#20244, EU#18959, NZ#3643, CA#6570
+  const orderNumRe = /\b(us|au|eu|nz|ca)#?(\d{4,6})\b/gi;
   let m: RegExpExecArray | null;
   while ((m = orderNumRe.exec(recentRaw)) !== null) {
-    const key = `US#${m[1]}`;
+    const key = `${m[1].toUpperCase()}#${m[2]}`;
     if (index.orders[key]) found.set(key, index.orders[key]);
   }
-  // Bare 5-digit numbers that look like order IDs
-  const bareNumRe = /\b(1[0-9]{4})\b/g;
-  while ((m = bareNumRe.exec(recentRaw)) !== null) {
-    const key = `US#${m[1]}`;
-    if (index.orders[key]) found.set(key, index.orders[key]);
+  // Bare #XXXXX — try all region prefixes
+  const bareHashRe = /(?<![a-zA-Z])#(\d{4,6})\b/g;
+  while ((m = bareHashRe.exec(recentRaw)) !== null) {
+    for (const prefix of ['US', 'AU', 'EU', 'NZ', 'CA']) {
+      const key = `${prefix}#${m[1]}`;
+      if (index.orders[key]) found.set(key, index.orders[key]);
+    }
   }
 
   // 2. Match by email address
