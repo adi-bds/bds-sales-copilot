@@ -227,10 +227,20 @@ export default function Home() {
       <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{background:'#0B1A2E'}}>
 
         {/* Logo */}
-        <div className="px-4 pt-5 pb-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.avif" alt="Backdropsource" className="w-40 h-auto" />
-          <div className="text-slate-500 text-[10px] mt-2 font-medium tracking-wide uppercase">Sales Copilot</div>
+        <div className="px-4 pt-5 pb-4 flex items-center gap-3">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 flex-shrink-0">
+            <circle cx="50" cy="50" r="50" fill="#111"/>
+            <clipPath id="top"><polygon points="0,0 100,0 100,100 0,0"/></clipPath>
+            <clipPath id="bot"><polygon points="0,0 100,100 0,100 0,0"/></clipPath>
+            <circle cx="50" cy="50" r="47" fill="#1B2D6E" clipPath="url(#top)"/>
+            <circle cx="50" cy="50" r="47" fill="#9B1B3B" clipPath="url(#bot)"/>
+            <text x="27" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">B</text>
+            <text x="54" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">S</text>
+          </svg>
+          <div>
+            <div className="text-white font-semibold text-sm leading-tight">Backdropsource</div>
+            <div className="text-slate-500 text-[10px] font-medium tracking-wide uppercase">Sales Copilot</div>
+          </div>
         </div>
 
         {/* New chat */}
