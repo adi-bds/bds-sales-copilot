@@ -102,10 +102,12 @@ function lookupOrders(messages: Message[]): string {
     });
   }
 
-  // 3. Match by "Firstname Lastname" (two consecutive Title-Case words)
-  const namePairRe = /\b([A-Z][a-z]{1,})\s+([A-Z][a-z]{1,})\b/g;
-  while ((m = namePairRe.exec(recentRaw)) !== null) {
-    const key = `${m[1]} ${m[2]}`.toLowerCase();
+  // 3. Match by name — check all two-word combinations from recent text
+  // against the name index (case-insensitive). Works regardless of how
+  // the rep types the name (all lower, Title Case, ALL CAPS, etc.)
+  const wordTokens = recentRaw.toLowerCase().match(/\b[a-z]{2,}\b/g) || [];
+  for (let wi = 0; wi < wordTokens.length - 1; wi++) {
+    const key = `${wordTokens[wi]} ${wordTokens[wi + 1]}`;
     (index.by_name[key] || []).forEach((n) => {
       if (index.orders[n]) found.set(n, index.orders[n]);
     });
