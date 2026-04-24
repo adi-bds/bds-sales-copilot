@@ -228,12 +228,8 @@ export default function Home() {
 
         {/* Logo */}
         <div className="px-4 pt-5 pb-4">
-          <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg" className="w-44 h-auto">
-            <rect x="0" y="0" width="104" height="36" fill="#1B2A4A"/>
-            <rect x="104" y="0" width="96" height="36" fill="#CC1F1F"/>
-            <text x="52" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">BACKDROP</text>
-            <text x="152" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">SOURCE</text>
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.avif" alt="Backdropsource" className="w-40 h-auto" />
           <div className="text-slate-500 text-[10px] mt-1.5 font-medium tracking-wide uppercase">Sales Copilot</div>
         </div>
 
@@ -337,7 +333,7 @@ export default function Home() {
           {!activeNav && !activeGeo && (
             <div className="flex flex-col items-center justify-center h-full px-8 text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bs-logo.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
+              <img src="/serviceorg-medium.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
               <p className="text-slate-400 text-sm max-w-xs leading-relaxed">
                 Select a category from the sidebar to get started with product lookups, email drafts, training, or client prep.
