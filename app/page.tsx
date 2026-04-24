@@ -90,7 +90,7 @@ function MessageContent({ content }: { content: string }) {
               const nm = line.match(/^(\d+)\.\s(.+)/);
               if (nm) return (
                 <div key={li} className="flex gap-2 my-0.5 pl-1">
-                  <span className="text-blue-500 font-medium flex-shrink-0 text-xs mt-[3px] min-w-[1.25rem] leading-5">{nm[1]}.</span>
+                  <span className="text-red-500 font-medium flex-shrink-0 text-xs mt-[3px] min-w-[1.25rem] leading-5">{nm[1]}.</span>
                   <span className="text-sm leading-relaxed text-slate-700">{formatInline(nm[2])}</span>
                 </div>
               );
@@ -221,14 +221,14 @@ export default function Home() {
   const isReady = !!(activeNav && (!activeNav.geo || activeGeo));
 
   return (
-    <div className="flex h-screen bg-slate-950 font-sans overflow-hidden">
+    <div className="flex h-screen font-sans overflow-hidden" style={{background:'#0B1A2E'}}>
 
       {/* ── Sidebar ───────────────────────────────────────────────────── */}
-      <aside className="w-56 flex-shrink-0 flex flex-col bg-slate-950 border-r border-slate-800/60">
+      <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{background:'#0B1A2E'}}>
 
         {/* Logo */}
         <div className="px-4 py-5 flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+          <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
             B
           </div>
           <div>
@@ -241,7 +241,7 @@ export default function Home() {
         <div className="px-3 mb-4">
           <button
             onClick={startNewChat}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-sm"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all text-sm"
           >
             <IconPlus />
             <span>New chat</span>
@@ -250,7 +250,7 @@ export default function Home() {
 
         {/* Nav items */}
         <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto">
-          <p className="text-slate-600 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Categories</p>
+          <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Categories</p>
 
           {NAV_ITEMS.map((item) => {
             const isGeoParent = item.geo;
@@ -264,26 +264,26 @@ export default function Home() {
                   onClick={() => selectNav(item)}
                   className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${
                     isActive
-                      ? 'bg-blue-600/15 text-blue-400 font-medium'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/70'
+                      ? 'bg-red-600/15 text-red-400 font-medium'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                   }`}
                 >
-                  <span className={isActive ? 'text-blue-400' : 'text-slate-500'}>{item.icon}</span>
+                  <span className={isActive ? 'text-red-400' : 'text-slate-500'}>{item.icon}</span>
                   <span className="flex-1 text-left">{item.label}</span>
                   {isGeoParent && <IconChevron open={geoOpen} />}
                 </button>
 
                 {/* Geo sub-items */}
                 {isGeoParent && geoOpen && (
-                  <div className="ml-3 mt-0.5 space-y-0.5 border-l border-slate-800 pl-3">
+                  <div className="ml-3 mt-0.5 space-y-0.5 border-l border-white/10 pl-3">
                     {GEO_REGIONS.map((geo) => (
                       <button
                         key={geo.code}
                         onClick={() => selectGeo(geo)}
                         className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-all ${
                           activeGeo?.code === geo.code
-                            ? 'bg-blue-600/15 text-blue-400 font-medium'
-                            : 'text-slate-500 hover:text-slate-200 hover:bg-slate-800/50'
+                            ? 'bg-red-600/15 text-red-400 font-medium'
+                            : 'text-slate-500 hover:text-slate-200 hover:bg-white/5'
                         }`}
                       >
                         <span className="text-base leading-none">{geo.flag}</span>
@@ -298,10 +298,10 @@ export default function Home() {
         </nav>
 
         {/* Bottom */}
-        <div className="p-3 border-t border-slate-800/60">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-3">
+        <div className="p-3 border-t border-white/5">
+          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-3">
             <div className="text-white font-semibold text-xs mb-0.5">Sales Copilot</div>
-            <div className="text-blue-200 text-xs leading-relaxed">17,771 orders across all regions</div>
+            <div className="text-red-200 text-xs leading-relaxed">17,771 orders across all regions</div>
           </div>
         </div>
       </aside>
@@ -314,7 +314,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <h2 className="font-semibold text-slate-900 text-base">{headerLabel}</h2>
             {isReady && messages.length > 0 && (
-              <span className="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-full border border-blue-100">
+              <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded-full border border-red-100">
                 Active
               </span>
             )}
@@ -336,7 +336,7 @@ export default function Home() {
           {/* Welcome — no category selected */}
           {!activeNav && !activeGeo && (
             <div className="flex flex-col items-center justify-center h-full px-8 text-center">
-              <div className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-2xl font-bold text-white mb-5 select-none">
+              <div className="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-2xl font-bold text-white mb-5 select-none">
                 B
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
@@ -363,15 +363,15 @@ export default function Home() {
               {messages.map((msg, i) => (
                 <div key={i} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {msg.role === 'assistant' && (
-                    <div className="w-7 h-7 bg-slate-900 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 select-none">
+                    <div className="w-7 h-7 bg-red-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 select-none">
                       B
                     </div>
                   )}
                   <div className={`rounded-2xl px-4 py-3 ${
                     msg.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-sm max-w-[72%]'
+                      ? 'text-white rounded-br-sm max-w-[72%]'
                       : 'bg-white text-slate-700 rounded-bl-sm border border-slate-200 shadow-sm flex-1 min-w-0'
-                  }`}>
+                  }`} style={msg.role === 'user' ? {background:'#1B3A6B'} : {}}>
                     {msg.role === 'user'
                       ? <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                       : msg.content === '' && isStreaming
@@ -380,7 +380,7 @@ export default function Home() {
                     }
                   </div>
                   {msg.role === 'user' && (
-                    <div className="w-7 h-7 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">
+                    <div className="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">
                       R
                     </div>
                   )}
@@ -396,7 +396,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <div className={`flex gap-3 items-end bg-slate-50 rounded-2xl border transition-all px-4 py-3 ${
               isReady
-                ? 'border-slate-300 focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-100'
+                ? 'border-slate-300 focus-within:border-red-400 focus-within:ring-2 focus-within:ring-red-100'
                 : 'border-slate-200 opacity-50'
             }`}>
               <textarea
@@ -413,7 +413,7 @@ export default function Home() {
                 onClick={() => sendMessage(input)}
                 disabled={!input.trim() || isStreaming || !isReady}
                 aria-label="Send"
-                className="w-8 h-8 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                className="w-8 h-8 bg-red-600 text-white rounded-xl flex items-center justify-center hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0"
               >
                 <IconSend />
               </button>
