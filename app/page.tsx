@@ -227,14 +227,14 @@ export default function Home() {
       <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{background:'#0B1A2E'}}>
 
         {/* Logo */}
-        <div className="px-4 py-5 flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
-            B
-          </div>
-          <div>
-            <div className="text-white font-semibold text-sm leading-tight">BDS Copilot</div>
-            <div className="text-slate-500 text-xs">Backdropsource</div>
-          </div>
+        <div className="px-4 pt-5 pb-4">
+          <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg" className="w-44 h-auto">
+            <rect x="0" y="0" width="104" height="36" fill="#1B2A4A"/>
+            <rect x="104" y="0" width="96" height="36" fill="#CC1F1F"/>
+            <text x="52" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">BACKDROP</text>
+            <text x="152" y="23.5" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="11.5" fontWeight="700" letterSpacing="1.2">SOURCE</text>
+          </svg>
+          <div className="text-slate-500 text-[10px] mt-1.5 font-medium tracking-wide uppercase">Sales Copilot</div>
         </div>
 
         {/* New chat */}
