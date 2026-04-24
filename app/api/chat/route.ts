@@ -181,36 +181,30 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
 
   const files = new Set<string>(ALWAYS_LOAD);
 
-  // ── UK detection ──────────────────────────────────────────────────────────
-  const isUK =
-    /\buk\b|\bbritish\b|britain|england|\bgbp\b|\bpounds?\b|\.co\.uk|backdropsource\.co|kaviya|uk\s+rep|uk\s+team|uk\s+client|uk\s+email/.test(
-      recentText
-    );
-
-  if (isUK) {
-    let ukCount = 0;
-    if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem/.test(recentText)) {
-      files.add('uk/uk_complaints_playbook.md'); ukCount++;
-    }
-    if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better/.test(recentText)) {
-      files.add('uk/uk_objection_playbook.md'); ukCount++;
-    }
-    if (/mockup|artwork|proof|design|approve|approval|2d|visual/.test(recentText)) {
-      files.add('uk/uk_mockup_design_playbook.md'); ukCount++;
-    }
-    if (/quote|pricing|cost|how much|invoice/.test(recentText)) {
-      files.add('uk/uk_quote_playbook.md'); ukCount++;
-    }
-    if (/follow.?up|check.?in|reorder|repeat.?order|coming back|haven.t heard/.test(recentText)) {
-      files.add('uk/uk_followup_reorder_playbook.md'); ukCount++;
-    }
-    if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch/.test(recentText)) {
-      files.add('uk/uk_initial_inquiry_playbook.md'); ukCount++;
-    }
-    if (ukCount === 0) {
-      files.add('uk/uk_sales_master_summary.md');
-      files.add('uk/uk_initial_inquiry_playbook.md');
-    }
+  // ── Situation-based playbooks — apply to ALL geos ────────────────────────
+  // Built from UK email threads but the rules are universal across all markets.
+  let playbookCount = 0;
+  if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem/.test(recentText)) {
+    files.add('uk/uk_complaints_playbook.md'); playbookCount++;
+  }
+  if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better/.test(recentText)) {
+    files.add('uk/uk_objection_playbook.md'); playbookCount++;
+  }
+  if (/mockup|artwork|proof|design|approve|approval|2d|visual/.test(recentText)) {
+    files.add('uk/uk_mockup_design_playbook.md'); playbookCount++;
+  }
+  if (/quote|pricing|cost|how much|invoice/.test(recentText)) {
+    files.add('uk/uk_quote_playbook.md'); playbookCount++;
+  }
+  if (/follow.?up|check.?in|reorder|repeat.?order|coming back|haven.t heard/.test(recentText)) {
+    files.add('uk/uk_followup_reorder_playbook.md'); playbookCount++;
+  }
+  if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch|just reached out|just emailed/.test(recentText)) {
+    files.add('uk/uk_initial_inquiry_playbook.md'); playbookCount++;
+  }
+  // No specific stage detected → load master summary as general guidance
+  if (playbookCount === 0) {
+    files.add('uk/uk_sales_master_summary.md');
   }
 
   // ── Customization rules ───────────────────────────────────────────────────
@@ -326,8 +320,8 @@ const CORE_INSTRUCTIONS = `You are the BDS Sales Copilot for Backdropsource (bac
 ## Tone by market
 - US/AU/NZ: warm, direct | UK: restrained-warm, first names, answer-first | UAE/DE/FR: formal
 
-## UK clients
-Follow the UK playbooks in the knowledge base exactly — they are built from 1,368 real email threads.
+## Sales playbooks
+The playbooks in the knowledge base apply to ALL markets, not just UK. They are built from 1,368 real email threads and cover the right approach for complaints, objections, quotes, mockups, follow-ups, and new inquiries regardless of geo. Adapt tone and currency for the market, but follow the playbook structure.
 
 ## Escalate to manager
 Custom pricing, discounts over 10%, order exceptions, complaints requiring refunds.`;
