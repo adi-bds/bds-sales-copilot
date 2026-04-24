@@ -333,6 +333,41 @@ The playbooks in the knowledge base apply to ALL markets, not just UK. They are 
 ## Escalate to manager
 Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or involving safety issues, clients threatening chargebacks or legal action.`;
 
+// ─── Model Selection ──────────────────────────────────────────────────────
+// Sonnet: anything requiring tone, nuance, or complex reasoning
+// Haiku:  fast factual lookups — order history, product info, geo queries
+//
+// Rule of thumb: if the rep is going to send this output directly to a client
+// → Sonnet. If they're just looking something up → Haiku.
+
+const SONNET = 'claude-sonnet-4-5';
+const HAIKU  = 'claude-haiku-4-5-20251001';
+
+function selectModel(messages: Message[], category?: string, geo?: string): string {
+  const recentText = messages.slice(-2).map((m) => m.content).join(' ').toLowerCase();
+
+  // Always use Sonnet for these categories — output goes to clients
+  if (category === 'email')    return SONNET;
+  if (category === 'training') return SONNET;
+
+  // Sonnet for sensitive or nuanced situations regardless of category
+  if (/complaint|damaged|wrong item|missing|refund|furious|angry|upset|escalat/.test(recentText)) return SONNET;
+  if (/objection|too expensive|cheaper|competitor|price.?match/.test(recentText))                  return SONNET;
+  if (/draft|write.*email|email.*write|follow.?up email|reply to/.test(recentText))                return SONNET;
+  if (/train|explain|how does|walk me through|why do|what is the difference/.test(recentText))     return SONNET;
+
+  // Haiku for fast lookups — order history, product info, call prep, geo queries
+  if (category === 'product')  return HAIKU;
+  if (category === 'callprep') return HAIKU;
+  if (category === 'geo')      return HAIKU;
+
+  // Haiku for straightforward lookup signals
+  if (/order|#\d{4,}|previous|what did|who is|look up|find|how much|price|stock/.test(recentText)) return HAIKU;
+
+  // Default to Sonnet for anything ambiguous
+  return SONNET;
+}
+
 // ─── API Route Handler ────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
@@ -346,9 +381,10 @@ export async function POST(req: NextRequest) {
     const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
     const orderContext = lookupOrders(messages as Message[]);
     const systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
+    const model = selectModel(messages as Message[], category, geo);
 
     const stream = await client.messages.stream({
-      model: 'claude-sonnet-4-5',
+      model,
       max_tokens: 1024,
       system: systemPrompt,
       messages: (messages as Message[]).map((m) => ({
