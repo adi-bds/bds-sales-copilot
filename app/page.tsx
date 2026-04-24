@@ -9,50 +9,76 @@ type Message = {
   content: string;
 };
 
-// ─── Quick-action prompts shown on the empty state ─────────────────────────
+type GeoRegion = {
+  code: string;
+  flag: string;
+  label: string;
+  placeholder: string;
+};
 
-const QUICK_PROMPTS = [
+type MainCategory = {
+  id: string;
+  icon: string;
+  label: string;
+  description: string;
+  placeholder: string;
+  color: string;
+};
+
+// ─── Category & Geo Definitions ───────────────────────────────────────────
+
+const MAIN_CATEGORIES: MainCategory[] = [
   {
-    icon: '🔍',
-    label: 'Product lookup',
-    description: 'Find the right product for any use case',
-    prompt:
-      'A client needs a professional freestanding display for a 10×10 trade show booth. Budget is around $1,500 and they want something easy to set up. What should I recommend?',
+    id: 'product',
+    icon: '📦',
+    label: 'Product Lookup & Info',
+    description: 'Find the right product, specs, and pricing for any client',
+    placeholder: 'Ask about a product, size, configuration, or price…',
+    color: 'blue',
   },
   {
+    id: 'email',
     icon: '✉️',
-    label: 'Draft an email',
-    description: 'Write a sales email for any stage',
-    prompt:
-      "Draft a follow-up email for a client who requested a quote for 5 tension fabric media walls 3 days ago and hasn't responded yet.",
+    label: 'Email Draft',
+    description: 'Write a sales email for any stage of the process',
+    placeholder: 'Describe the client situation and what the email should do…',
+    color: 'violet',
   },
   {
-    icon: '🇬🇧',
-    label: 'UK inquiry',
-    description: 'Handle a UK client question',
-    prompt:
-      'A UK client emailed asking about a 3m backdrop for a corporate exhibition in London next month. Draft a first reply in the BDS UK style.',
+    id: 'training',
+    icon: '🎓',
+    label: 'Training a Sales Rep',
+    description: 'Learn the BDS product range, pricing, and sales process',
+    placeholder: 'Ask anything — products, process, how to handle objections…',
+    color: 'emerald',
   },
   {
-    icon: '👥',
-    label: 'Client call prep',
-    description: 'Get talking points before a call',
-    prompt:
-      "I have a call in 10 minutes with a returning B2B client. What should I know about our top accounts and what should I be pitching to recurring clients?",
-  },
-  {
-    icon: '📋',
-    label: 'Train me',
-    description: 'Learn the BDS product range',
-    prompt:
-      "I'm new to BDS. Walk me through the main product categories and which ones to recommend first for trade show clients.",
+    id: 'callprep',
+    icon: '📞',
+    label: 'Client Call Prep',
+    description: 'Get intel, talking points, and order history before a call',
+    placeholder: 'Enter a client name, email, or order number to pull their history…',
+    color: 'amber',
   },
 ];
 
+const GEO_REGIONS: GeoRegion[] = [
+  { code: 'uk',  flag: '🇬🇧', label: 'UK',  placeholder: 'Ask about a UK client, quote, order, or inquiry…' },
+  { code: 'us',  flag: '🇺🇸', label: 'US',  placeholder: 'Ask about a US client, order, or inquiry…' },
+  { code: 'aus', flag: '🇦🇺', label: 'AUS', placeholder: 'Ask about an AU client, order, or inquiry…' },
+  { code: 'nz',  flag: '🇳🇿', label: 'NZ',  placeholder: 'Ask about a NZ client, order, or inquiry…' },
+  { code: 'ca',  flag: '🇨🇦', label: 'CA',  placeholder: 'Ask about a CA client, order, or inquiry…' },
+];
+
+const COLOR_STYLES: Record<string, { card: string; icon: string; badge: string }> = {
+  blue:    { card: 'hover:border-blue-400 hover:shadow-blue-50',   icon: 'bg-blue-50 text-blue-600',    badge: 'bg-blue-100 text-blue-700' },
+  violet:  { card: 'hover:border-violet-400 hover:shadow-violet-50', icon: 'bg-violet-50 text-violet-600', badge: 'bg-violet-100 text-violet-700' },
+  emerald: { card: 'hover:border-emerald-400 hover:shadow-emerald-50', icon: 'bg-emerald-50 text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' },
+  amber:   { card: 'hover:border-amber-400 hover:shadow-amber-50',  icon: 'bg-amber-50 text-amber-600',  badge: 'bg-amber-100 text-amber-700' },
+  geo:     { card: 'hover:border-slate-400 hover:shadow-slate-50',  icon: 'bg-slate-100 text-slate-600', badge: 'bg-slate-100 text-slate-700' },
+};
+
 // ─── Markdown renderer ────────────────────────────────────────────────────
-// Handles the most common patterns in Claude's responses without any
-// external dependencies: headers, bold, inline code, bullet/numbered lists,
-// code blocks, table rows, and horizontal rules.
 
 type FormattedNode = React.ReactNode;
 
@@ -76,103 +102,47 @@ function formatInline(text: string): FormattedNode[] {
 function MessageContent({ content }: { content: string }) {
   if (!content) return null;
 
-  // Split by fenced code blocks first so we can render them as <pre>
   const segments = content.split(/(```[\s\S]*?```)/g);
 
   return (
     <div className="space-y-0.5">
       {segments.map((segment, si) => {
-        // Code block
         if (segment.startsWith('```') && segment.endsWith('```')) {
           const inner = segment.slice(3, -3);
           const newlineIdx = inner.indexOf('\n');
           const code = newlineIdx === -1 ? inner : inner.slice(newlineIdx + 1);
           return (
-            <pre
-              key={si}
-              className="bg-slate-900 text-green-300 rounded-lg p-3 text-xs overflow-x-auto font-mono my-2 leading-relaxed"
-            >
+            <pre key={si} className="bg-slate-900 text-green-300 rounded-lg p-3 text-xs overflow-x-auto font-mono my-2 leading-relaxed">
               {code}
             </pre>
           );
         }
 
-        // Regular text — process line by line
         const lines = segment.split('\n');
         return (
           <div key={si}>
             {lines.map((line, li) => {
-              // H3
-              if (line.startsWith('### ')) {
-                return (
-                  <h3 key={li} className="font-semibold text-sm mt-3 mb-0.5 text-gray-900">
-                    {formatInline(line.slice(4))}
-                  </h3>
-                );
-              }
-              // H2
-              if (line.startsWith('## ')) {
-                return (
-                  <h2 key={li} className="font-semibold text-sm mt-4 mb-1 text-gray-900">
-                    {formatInline(line.slice(3))}
-                  </h2>
-                );
-              }
-              // H1
-              if (line.startsWith('# ')) {
-                return (
-                  <h1 key={li} className="font-bold text-base mt-4 mb-1 text-gray-900">
-                    {formatInline(line.slice(2))}
-                  </h1>
-                );
-              }
-              // Horizontal rule
-              if (/^-{3,}$/.test(line.trim()) || /^={3,}$/.test(line.trim())) {
-                return <hr key={li} className="my-2 border-gray-200" />;
-              }
-              // Table separator row — skip rendering
-              if (/^\|[\s\-:|]+\|/.test(line.trim())) {
-                return null;
-              }
-              // Table data row — monospace so columns stay legible
-              if (line.trim().startsWith('|')) {
-                return (
-                  <code key={li} className="block text-xs font-mono text-gray-700 leading-5 whitespace-pre">
-                    {line}
-                  </code>
-                );
-              }
-              // Bullet list item
-              if (/^[\-\*] /.test(line)) {
-                return (
-                  <div key={li} className="flex gap-2 my-0.5 pl-1">
-                    <span className="text-gray-400 flex-shrink-0 mt-[3px] text-xs leading-5">•</span>
-                    <span className="text-sm leading-relaxed">{formatInline(line.slice(2))}</span>
-                  </div>
-                );
-              }
-              // Numbered list item
-              const numMatch = line.match(/^(\d+)\.\s(.+)/);
-              if (numMatch) {
-                return (
-                  <div key={li} className="flex gap-2 my-0.5 pl-1">
-                    <span className="text-blue-600 font-medium flex-shrink-0 text-xs mt-[3px] min-w-[1.25rem] leading-5">
-                      {numMatch[1]}.
-                    </span>
-                    <span className="text-sm leading-relaxed">{formatInline(numMatch[2])}</span>
-                  </div>
-                );
-              }
-              // Empty line → small gap
-              if (line.trim() === '') {
-                return <div key={li} className="h-1.5" />;
-              }
-              // Regular paragraph
-              return (
-                <p key={li} className="text-sm leading-relaxed">
-                  {formatInline(line)}
-                </p>
+              if (line.startsWith('### ')) return <h3 key={li} className="font-semibold text-sm mt-3 mb-0.5 text-gray-900">{formatInline(line.slice(4))}</h3>;
+              if (line.startsWith('## '))  return <h2 key={li} className="font-semibold text-sm mt-4 mb-1 text-gray-900">{formatInline(line.slice(3))}</h2>;
+              if (line.startsWith('# '))   return <h1 key={li} className="font-bold text-base mt-4 mb-1 text-gray-900">{formatInline(line.slice(2))}</h1>;
+              if (/^-{3,}$/.test(line.trim()) || /^={3,}$/.test(line.trim())) return <hr key={li} className="my-2 border-gray-200" />;
+              if (/^\|[\s\-:|]+\|/.test(line.trim())) return null;
+              if (line.trim().startsWith('|')) return <code key={li} className="block text-xs font-mono text-gray-700 leading-5 whitespace-pre">{line}</code>;
+              if (/^[\-\*] /.test(line)) return (
+                <div key={li} className="flex gap-2 my-0.5 pl-1">
+                  <span className="text-gray-400 flex-shrink-0 mt-[3px] text-xs leading-5">•</span>
+                  <span className="text-sm leading-relaxed">{formatInline(line.slice(2))}</span>
+                </div>
               );
+              const numMatch = line.match(/^(\d+)\.\s(.+)/);
+              if (numMatch) return (
+                <div key={li} className="flex gap-2 my-0.5 pl-1">
+                  <span className="text-blue-600 font-medium flex-shrink-0 text-xs mt-[3px] min-w-[1.25rem] leading-5">{numMatch[1]}.</span>
+                  <span className="text-sm leading-relaxed">{formatInline(numMatch[2])}</span>
+                </div>
+              );
+              if (line.trim() === '') return <div key={li} className="h-1.5" />;
+              return <p key={li} className="text-sm leading-relaxed">{formatInline(line)}</p>;
             })}
           </div>
         );
@@ -187,17 +157,11 @@ function TypingDots() {
   return (
     <div className="flex gap-1 py-1">
       {[0, 150, 300].map((delay) => (
-        <span
-          key={delay}
-          className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"
-          style={{ animationDelay: `${delay}ms` }}
-        />
+        <span key={delay} className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: `${delay}ms` }} />
       ))}
     </div>
   );
 }
-
-// ─── Send icon ────────────────────────────────────────────────────────────
 
 function SendIcon() {
   return (
@@ -211,18 +175,34 @@ function SendIcon() {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput]       = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
+  // Category selection state
+  const [activeCategory, setActiveCategory] = useState<MainCategory | null>(null);
+  const [activeGeo, setActiveGeo]           = useState<GeoRegion | null>(null);
+  const [geoExpanded, setGeoExpanded]       = useState(false);
 
-  // Scroll to bottom whenever messages update
+  const messagesEndRef        = useRef<HTMLDivElement>(null);
+  const messagesContainerRef  = useRef<HTMLDivElement>(null);
+  const textareaRef           = useRef<HTMLTextAreaElement>(null);
+  const abortControllerRef    = useRef<AbortController | null>(null);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Focus textarea when entering a category
+  useEffect(() => {
+    if ((activeCategory || activeGeo) && messages.length === 0) {
+      setTimeout(() => textareaRef.current?.focus(), 50);
+    }
+  }, [activeCategory, activeGeo, messages.length]);
+
+  const currentPlaceholder =
+    activeGeo?.placeholder ??
+    activeCategory?.placeholder ??
+    'Ask anything — products, emails, client prep, orders…';
 
   const sendMessage = useCallback(
     async (content: string) => {
@@ -232,29 +212,31 @@ export default function Home() {
       const userMessage: Message = { role: 'user', content: trimmed };
       const updatedMessages = [...messages, userMessage];
 
-      // Optimistically add user message + empty assistant placeholder
       setMessages([...updatedMessages, { role: 'assistant', content: '' }]);
       setInput('');
       setIsStreaming(true);
 
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-      }
+      if (textareaRef.current) textareaRef.current.style.height = 'auto';
 
       const controller = new AbortController();
       abortControllerRef.current = controller;
+
+      // Build category context for smarter routing
+      const categoryContext = activeGeo
+        ? { category: 'geo', geo: activeGeo.code }
+        : activeCategory
+        ? { category: activeCategory.id, geo: null }
+        : { category: null, geo: null };
 
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: updatedMessages }),
+          body: JSON.stringify({ messages: updatedMessages, ...categoryContext }),
           signal: controller.signal,
         });
 
-        if (!response.ok) {
-          throw new Error(`API returned ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`API returned ${response.status}`);
 
         const reader = response.body!.getReader();
         const decoder = new TextDecoder();
@@ -264,8 +246,6 @@ export default function Home() {
           const { done, value } = await reader.read();
           if (done) break;
           accumulated += decoder.decode(value, { stream: true });
-
-          // Capture accumulated in a stable closure variable for the setter
           const snapshot = accumulated;
           setMessages((prev) => {
             const updated = [...prev];
@@ -274,15 +254,10 @@ export default function Home() {
           });
         }
       } catch (err: unknown) {
-        // Don't show an error if the user manually aborted
         if (err instanceof Error && err.name === 'AbortError') return;
-
         setMessages((prev) => {
           const updated = [...prev];
-          updated[updated.length - 1] = {
-            role: 'assistant',
-            content: 'Something went wrong — please try again.',
-          };
+          updated[updated.length - 1] = { role: 'assistant', content: 'Something went wrong — please try again.' };
           return updated;
         });
       } finally {
@@ -290,7 +265,7 @@ export default function Home() {
         abortControllerRef.current = null;
       }
     },
-    [messages, isStreaming]
+    [messages, isStreaming, activeCategory, activeGeo]
   );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -302,7 +277,6 @@ export default function Home() {
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
-    // Auto-resize up to 200px
     e.target.style.height = 'auto';
     e.target.style.height = `${Math.min(e.target.scrollHeight, 200)}px`;
   };
@@ -312,7 +286,38 @@ export default function Home() {
     setMessages([]);
     setInput('');
     setIsStreaming(false);
+    setActiveCategory(null);
+    setActiveGeo(null);
+    setGeoExpanded(false);
   };
+
+  const selectCategory = (cat: MainCategory) => {
+    setActiveCategory(cat);
+    setActiveGeo(null);
+    setGeoExpanded(false);
+    setMessages([]);
+  };
+
+  const selectGeo = (geo: GeoRegion) => {
+    setActiveGeo(geo);
+    setActiveCategory(null);
+    setMessages([]);
+  };
+
+  // Active badge info for header
+  const badgeLabel = activeGeo
+    ? `${activeGeo.flag} ${activeGeo.label}`
+    : activeCategory
+    ? `${activeCategory.icon} ${activeCategory.label}`
+    : null;
+
+  const badgeStyle = activeGeo
+    ? COLOR_STYLES.geo.badge
+    : activeCategory
+    ? COLOR_STYLES[activeCategory.color].badge
+    : '';
+
+  const inChat = messages.length > 0;
 
   return (
     <div className="flex flex-col h-screen bg-gray-50 font-sans">
@@ -327,9 +332,14 @@ export default function Home() {
             <h1 className="font-semibold text-base leading-tight">BDS Sales Copilot</h1>
             <p className="text-slate-400 text-xs">Backdropsource</p>
           </div>
+          {badgeLabel && (
+            <span className={`ml-1 px-2.5 py-1 rounded-full text-xs font-medium ${badgeStyle}`}>
+              {badgeLabel}
+            </span>
+          )}
         </div>
 
-        {messages.length > 0 && (
+        {(inChat || activeCategory || activeGeo) && (
           <button
             onClick={handleNewChat}
             className="text-slate-400 hover:text-white text-sm transition-colors px-3 py-1.5 rounded-lg hover:bg-slate-800"
@@ -339,57 +349,117 @@ export default function Home() {
         )}
       </header>
 
-      {/* ── Message area ──────────────────────────────────────────────── */}
+      {/* ── Message / Home area ───────────────────────────────────────── */}
       <div ref={messagesContainerRef} className="flex-1 overflow-y-auto">
 
-        {/* Empty state */}
-        {messages.length === 0 && (
-          <div className="max-w-2xl mx-auto px-4 py-12">
+        {/* ── Home screen (no category selected yet) ─────────────────── */}
+        {!activeCategory && !activeGeo && !inChat && (
+          <div className="max-w-2xl mx-auto px-4 py-10">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 select-none">
                 B
               </div>
               <h2 className="text-2xl font-semibold text-gray-900 mb-2">BDS Sales Copilot</h2>
-              <p className="text-gray-500 text-base leading-relaxed max-w-md mx-auto">
-                Product recommendations, email drafts, client intel, and UK playbooks —
-                everything you need during or between client calls.
+              <p className="text-gray-500 text-sm max-w-sm mx-auto">
+                Select a category to get started
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {QUICK_PROMPTS.map((p) => (
-                <button
-                  key={p.label}
-                  onClick={() => sendMessage(p.prompt)}
-                  className="text-left p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-sm transition-all group cursor-pointer"
-                >
-                  <div className="text-xl mb-1.5">{p.icon}</div>
-                  <div className="font-medium text-gray-900 text-sm group-hover:text-blue-700 transition-colors">
-                    {p.label}
+            {/* Main 4 categories — 2×2 grid */}
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              {MAIN_CATEGORIES.map((cat) => {
+                const s = COLOR_STYLES[cat.color];
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => selectCategory(cat)}
+                    className={`text-left p-4 bg-white rounded-xl border border-gray-200 hover:shadow-md transition-all group cursor-pointer ${s.card}`}
+                  >
+                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-lg mb-3 ${s.icon}`}>
+                      {cat.icon}
+                    </div>
+                    <div className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-gray-700">
+                      {cat.label}
+                    </div>
+                    <div className="text-gray-400 text-xs leading-relaxed">
+                      {cat.description}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Geo-Based Inquiry — full-width expandable */}
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+              <button
+                onClick={() => setGeoExpanded((v) => !v)}
+                className="w-full text-left p-4 hover:bg-gray-50 transition-colors group flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">
+                    🌍
                   </div>
-                  <div className="text-gray-400 text-xs mt-0.5">{p.description}</div>
-                </button>
-              ))}
+                  <div>
+                    <div className="font-semibold text-gray-900 text-sm">Geo-Based Inquiry</div>
+                    <div className="text-gray-400 text-xs mt-0.5">Look up orders and client info by region</div>
+                  </div>
+                </div>
+                <svg
+                  className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ${geoExpanded ? 'rotate-180' : ''}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {geoExpanded && (
+                <div className="px-4 pb-4 grid grid-cols-5 gap-2 border-t border-gray-100 pt-3">
+                  {GEO_REGIONS.map((geo) => (
+                    <button
+                      key={geo.code}
+                      onClick={() => selectGeo(geo)}
+                      className="flex flex-col items-center gap-1.5 p-3 rounded-xl border border-gray-200 hover:border-slate-400 hover:bg-slate-50 hover:shadow-sm transition-all cursor-pointer"
+                    >
+                      <span className="text-2xl">{geo.flag}</span>
+                      <span className="text-xs font-semibold text-gray-700">{geo.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* Message list */}
-        {messages.length > 0 && (
+        {/* ── Category selected, no messages yet — show empty chat state ─ */}
+        {(activeCategory || activeGeo) && !inChat && (
+          <div className="max-w-3xl mx-auto px-4 py-12 text-center">
+            <div className="text-4xl mb-3">
+              {activeGeo ? activeGeo.flag : activeCategory!.icon}
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-1">
+              {activeGeo ? `${activeGeo.label} Inquiry` : activeCategory!.label}
+            </h3>
+            <p className="text-gray-400 text-sm">
+              {activeGeo
+                ? `Ask about ${activeGeo.label} clients, orders, or quotes below`
+                : activeCategory!.description}
+            </p>
+          </div>
+        )}
+
+        {/* ── Message list ───────────────────────────────────────────── */}
+        {inChat && (
           <div className="max-w-3xl mx-auto px-4 py-6 space-y-4">
             {messages.map((msg, i) => (
               <div
                 key={i}
                 className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {/* Assistant avatar */}
                 {msg.role === 'assistant' && (
                   <div className="w-7 h-7 bg-slate-900 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 select-none">
                     B
                   </div>
                 )}
-
-                {/* Bubble */}
                 <div
                   className={`rounded-2xl px-4 py-3 ${
                     msg.role === 'user'
@@ -405,8 +475,6 @@ export default function Home() {
                     <MessageContent content={msg.content} />
                   )}
                 </div>
-
-                {/* User avatar */}
                 {msg.role === 'user' && (
                   <div className="w-7 h-7 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">
                     R
@@ -414,41 +482,41 @@ export default function Home() {
                 )}
               </div>
             ))}
-
-            {/* Scroll anchor */}
             <div ref={messagesEndRef} />
           </div>
         )}
       </div>
 
-      {/* ── Input area ────────────────────────────────────────────────── */}
-      <div className="border-t border-gray-200 bg-white px-4 py-4 flex-shrink-0">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex gap-3 items-end">
-            <textarea
-              ref={textareaRef}
-              value={input}
-              onChange={handleTextareaChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask anything — products, email drafts, client prep, UK questions…"
-              rows={1}
-              disabled={isStreaming}
-              className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400 min-h-[48px] max-h-[200px] overflow-y-auto leading-relaxed"
-            />
-            <button
-              onClick={() => sendMessage(input)}
-              disabled={!input.trim() || isStreaming}
-              aria-label="Send message"
-              className="h-12 w-12 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-            >
-              <SendIcon />
-            </button>
+      {/* ── Input bar (only shown when a category is active) ──────────── */}
+      {(activeCategory || activeGeo) && (
+        <div className="border-t border-gray-200 bg-white px-4 py-4 flex-shrink-0">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex gap-3 items-end">
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={handleTextareaChange}
+                onKeyDown={handleKeyDown}
+                placeholder={currentPlaceholder}
+                rows={1}
+                disabled={isStreaming}
+                className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400 min-h-[48px] max-h-[200px] overflow-y-auto leading-relaxed"
+              />
+              <button
+                onClick={() => sendMessage(input)}
+                disabled={!input.trim() || isStreaming}
+                aria-label="Send message"
+                className="h-12 w-12 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+              >
+                <SendIcon />
+              </button>
+            </div>
+            <p className="text-center text-gray-400 text-xs mt-2.5">
+              Enter to send · Shift+Enter for new line
+            </p>
           </div>
-          <p className="text-center text-gray-400 text-xs mt-2.5">
-            Enter to send · Shift+Enter for new line
-          </p>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -154,11 +154,25 @@ const ALWAYS_LOAD = ['core/sales_playbook.md'];
 
 type Message = { role: string; content: string };
 
-function detectFilesToLoad(messages: Message[]): string[] {
-  const recentText = messages
+function detectFilesToLoad(messages: Message[], category?: string, geo?: string): string[] {
+  // Build detection text from recent messages + category/geo hints from the UI
+  const categoryHint = [
+    category === 'product'  ? 'product recommend catalog' : '',
+    category === 'email'    ? 'draft email write' : '',
+    category === 'training' ? 'train explain how product' : '',
+    category === 'callprep' ? 'client customer account history call prep' : '',
+    category === 'geo'      ? 'client order' : '',
+    geo === 'uk'  ? 'uk client email' : '',
+    geo === 'us'  ? 'us order client' : '',
+    geo === 'aus' ? 'australia order client' : '',
+    geo === 'nz'  ? 'new zealand order client' : '',
+    geo === 'ca'  ? 'canada order client' : '',
+  ].filter(Boolean).join(' ');
+
+  const recentText = (messages
     .slice(-4)
     .map((m) => m.content)
-    .join(' ')
+    .join(' ') + ' ' + categoryHint)
     .toLowerCase();
 
   const files = new Set<string>(ALWAYS_LOAD);
@@ -318,13 +332,13 @@ Custom pricing, discounts over 10%, order exceptions, complaints requiring refun
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json();
+    const { messages, category, geo } = await req.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return new Response('Invalid request: messages array required', { status: 400 });
     }
 
-    const selectedFiles = detectFilesToLoad(messages as Message[]);
+    const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
     const orderContext = lookupOrders(messages as Message[]);
     const systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
 
