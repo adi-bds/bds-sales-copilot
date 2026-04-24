@@ -336,15 +336,8 @@ export default function Home() {
           {/* Welcome — no category selected */}
           {!activeNav && !activeGeo && (
             <div className="flex flex-col items-center justify-center h-full px-8 text-center">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 mb-5">
-                <circle cx="50" cy="50" r="50" fill="#111"/>
-                <clipPath id="bsTop"><polygon points="0,0 100,0 100,100 0,0"/></clipPath>
-                <clipPath id="bsBot"><polygon points="0,0 100,100 0,100 0,0"/></clipPath>
-                <circle cx="50" cy="50" r="47" fill="#1B2D6E" clipPath="url(#bsTop)"/>
-                <circle cx="50" cy="50" r="47" fill="#9B1B3B" clipPath="url(#bsBot)"/>
-                <text x="27" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">B</text>
-                <text x="54" y="65" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="42" fill="white">S</text>
-              </svg>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/bs-logo.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
               <p className="text-slate-400 text-sm max-w-xs leading-relaxed">
                 Select a category from the sidebar to get started with product lookups, email drafts, training, or client prep.
