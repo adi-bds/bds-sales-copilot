@@ -336,7 +336,7 @@ Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or
 // Rule of thumb: if the rep is going to send this output directly to a client
 // → Sonnet. If they're just looking something up → Haiku.
 
-const SONNET = 'claude-sonnet-4-5';
+const SONNET = 'claude-sonnet-4-6';
 const HAIKU  = 'claude-haiku-4-5-20251001';
 
 function selectModel(messages: Message[], category?: string, geo?: string): string {
