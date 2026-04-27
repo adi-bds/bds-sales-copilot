@@ -182,29 +182,25 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   const files = new Set<string>(ALWAYS_LOAD);
 
   // ── Situation-based playbooks — apply to ALL geos ────────────────────────
-  // Built from UK email threads but the rules are universal across all markets.
-  let playbookCount = 0;
+  // Only load when a specific situation is detected — never as a default.
+  // The sales_playbook.md already covers general guidance.
   if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem/.test(recentText)) {
-    files.add('uk/uk_complaints_playbook.md'); playbookCount++;
+    files.add('uk/uk_complaints_playbook.md');
   }
   if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better/.test(recentText)) {
-    files.add('uk/uk_objection_playbook.md'); playbookCount++;
+    files.add('uk/uk_objection_playbook.md');
   }
   if (/mockup|artwork|proof|design|approve|approval|2d|visual/.test(recentText)) {
-    files.add('uk/uk_mockup_design_playbook.md'); playbookCount++;
+    files.add('uk/uk_mockup_design_playbook.md');
   }
   if (/quote|pricing|cost|how much|invoice/.test(recentText)) {
-    files.add('uk/uk_quote_playbook.md'); playbookCount++;
+    files.add('uk/uk_quote_playbook.md');
   }
   if (/follow.?up|check.?in|reorder|repeat.?order|coming back|haven.t heard/.test(recentText)) {
-    files.add('uk/uk_followup_reorder_playbook.md'); playbookCount++;
+    files.add('uk/uk_followup_reorder_playbook.md');
   }
   if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch|just reached out|just emailed/.test(recentText)) {
-    files.add('uk/uk_initial_inquiry_playbook.md'); playbookCount++;
-  }
-  // No specific stage detected → load master summary as general guidance
-  if (playbookCount === 0) {
-    files.add('uk/uk_sales_master_summary.md');
+    files.add('uk/uk_initial_inquiry_playbook.md');
   }
 
   // ── Customization rules ───────────────────────────────────────────────────
