@@ -3,6 +3,9 @@ import { NextRequest } from 'next/server';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
+export const runtime = 'nodejs';
+export const maxDuration = 30;
+
 const client = new Anthropic();
 
 // ─── Knowledge File Loader ─────────────────────────────────────────────────
@@ -400,7 +403,11 @@ export async function POST(req: NextRequest) {
               controller.enqueue(new TextEncoder().encode(chunk.delta.text));
             }
           }
-        } finally {
+          controller.close();
+        } catch (streamErr) {
+          console.error('[BDS Copilot] Stream error:', streamErr);
+          const msg = streamErr instanceof Error ? streamErr.message : 'Unknown stream error';
+          controller.enqueue(new TextEncoder().encode(`⚠️ Error: ${msg}. Please try again.`));
           controller.close();
         }
       },
