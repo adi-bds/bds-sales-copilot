@@ -403,6 +403,15 @@ export async function POST(req: NextRequest) {
               controller.enqueue(new TextEncoder().encode(chunk.delta.text));
             }
           }
+          // Append token usage as a hidden JSON block the frontend can parse
+          const final = await stream.finalMessage();
+          const usage = final.usage;
+          const tokenBlock = `\n\n__USAGE__${JSON.stringify({
+            input: usage.input_tokens,
+            output: usage.output_tokens,
+            model,
+          })}__END__`;
+          controller.enqueue(new TextEncoder().encode(tokenBlock));
           controller.close();
         } catch (streamErr) {
           console.error('[BDS Copilot] Stream error:', streamErr);

@@ -4,7 +4,33 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
-type Message = { role: 'user' | 'assistant'; content: string };
+type TokenUsage = { input: number; output: number; model: string };
+type Message = { role: 'user' | 'assistant'; content: string; usage?: TokenUsage };
+
+// ─── Token cost calculator ─────────────────────────────────────────────────
+// Prices per million tokens (as of 2025)
+const MODEL_PRICES: Record<string, { input: number; output: number }> = {
+  'claude-sonnet-4-6':        { input: 3.00,  output: 15.00 },
+  'claude-haiku-4-5-20251001': { input: 0.80,  output: 4.00  },
+};
+
+function calcCost(usage: TokenUsage): number {
+  const prices = MODEL_PRICES[usage.model] ?? { input: 3.00, output: 15.00 };
+  return (usage.input / 1_000_000) * prices.input +
+         (usage.output / 1_000_000) * prices.output;
+}
+
+const USAGE_RE = /\n\n__USAGE__(.+?)__END__/s;
+
+function parseUsage(raw: string): { text: string; usage?: TokenUsage } {
+  const m = raw.match(USAGE_RE);
+  if (!m) return { text: raw };
+  try {
+    return { text: raw.replace(USAGE_RE, ''), usage: JSON.parse(m[1]) };
+  } catch {
+    return { text: raw.replace(USAGE_RE, '') };
+  }
+}
 
 type NavItem = {
   id: string;
@@ -192,9 +218,13 @@ export default function Home() {
         const { done, value } = await reader.read();
         if (done) break;
         acc += dec.decode(value, { stream: true });
-        const snap = acc;
-        setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: snap }; return u; });
+        // Strip the usage block during streaming so it doesn't flash on screen
+        const displayText = acc.replace(USAGE_RE, '');
+        setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: displayText }; return u; });
       }
+      // Parse usage from the final accumulated buffer
+      const { text: finalText, usage } = parseUsage(acc);
+      setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: finalText, usage }; return u; });
     } catch (e: unknown) {
       if (e instanceof Error && e.name === 'AbortError') return;
       setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: 'Something went wrong — please try again.' }; return u; });
@@ -362,17 +392,35 @@ export default function Home() {
                       B
                     </div>
                   )}
-                  <div className={`rounded-2xl px-4 py-3 ${
-                    msg.role === 'user'
-                      ? 'text-white rounded-br-sm max-w-[72%]'
-                      : 'bg-white text-slate-700 rounded-bl-sm border border-slate-200 shadow-sm flex-1 min-w-0'
-                  }`} style={msg.role === 'user' ? {background:'#1B3A6B'} : {}}>
-                    {msg.role === 'user'
-                      ? <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                      : msg.content === '' && isStreaming
-                      ? <TypingDots />
-                      : <MessageContent content={msg.content} />
-                    }
+                  <div className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end max-w-[72%]' : 'flex-1 min-w-0'}`}>
+                    <div className={`rounded-2xl px-4 py-3 w-full ${
+                      msg.role === 'user'
+                        ? 'text-white rounded-br-sm'
+                        : 'bg-white text-slate-700 rounded-bl-sm border border-slate-200 shadow-sm'
+                    }`} style={msg.role === 'user' ? {background:'#1B3A6B'} : {}}>
+                      {msg.role === 'user'
+                        ? <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                        : msg.content === '' && isStreaming
+                        ? <TypingDots />
+                        : <MessageContent content={msg.content} />
+                      }
+                    </div>
+                    {/* Token usage badge — only on completed assistant messages */}
+                    {msg.role === 'assistant' && msg.usage && (
+                      <div className="flex items-center gap-2 px-1">
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          ↑{msg.usage.input.toLocaleString()} ↓{msg.usage.output.toLocaleString()} tokens
+                        </span>
+                        <span className="text-[10px] text-slate-300">·</span>
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          ${calcCost(msg.usage).toFixed(4)}
+                        </span>
+                        <span className="text-[10px] text-slate-300">·</span>
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          {msg.usage.model.replace('claude-', '').replace('-20251001', '')}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   {msg.role === 'user' && (
                     <div className="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">
