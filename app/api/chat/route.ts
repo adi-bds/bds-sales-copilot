@@ -374,8 +374,9 @@ function selectModel(messages: Message[], category?: string, geo?: string): stri
   if (/draft|write.*email|email.*write|follow.?up email|reply to/.test(recentText))                return SONNET;
   if (/train|explain|how does|walk me through|why do|what is the difference/.test(recentText))     return SONNET;
 
-  // Haiku for fast lookups — order history, product info, call prep, geo queries
-  if (category === 'product')  return HAIKU;
+  // Product lookup now loads 72k tokens (full catalog) — Sonnet handles large
+  // context retrieval much better than Haiku. Haiku only for order/geo lookups.
+  if (category === 'product')  return SONNET;
   if (category === 'callprep') return HAIKU;
   if (category === 'geo')      return HAIKU;
 
