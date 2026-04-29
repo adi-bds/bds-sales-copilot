@@ -359,31 +359,8 @@ Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or
 // → Sonnet. If they're just looking something up → Haiku.
 
 const SONNET = 'claude-sonnet-4-6';
-const HAIKU  = 'claude-haiku-4-5-20251001';
 
-function selectModel(messages: Message[], category?: string, geo?: string): string {
-  const recentText = messages.slice(-2).map((m) => m.content).join(' ').toLowerCase();
-
-  // Always use Sonnet for these categories — output goes to clients
-  if (category === 'email')    return SONNET;
-  if (category === 'training') return SONNET;
-
-  // Sonnet for sensitive or nuanced situations regardless of category
-  if (/complaint|damaged|wrong item|missing|refund|furious|angry|upset|escalat/.test(recentText)) return SONNET;
-  if (/objection|too expensive|cheaper|competitor|price.?match/.test(recentText))                  return SONNET;
-  if (/draft|write.*email|email.*write|follow.?up email|reply to/.test(recentText))                return SONNET;
-  if (/train|explain|how does|walk me through|why do|what is the difference/.test(recentText))     return SONNET;
-
-  // Product lookup now loads 72k tokens (full catalog) — Sonnet handles large
-  // context retrieval much better than Haiku. Haiku only for order/geo lookups.
-  if (category === 'product')  return SONNET;
-  if (category === 'callprep') return HAIKU;
-  if (category === 'geo')      return HAIKU;
-
-  // Haiku for straightforward lookup signals
-  if (/order|#\d{4,}|previous|what did|who is|look up|find|how much|price|stock/.test(recentText)) return HAIKU;
-
-  // Default to Sonnet for anything ambiguous
+function selectModel(): string {
   return SONNET;
 }
 
@@ -400,7 +377,7 @@ export async function POST(req: NextRequest) {
     const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
     const orderContext = lookupOrders(messages as Message[]);
     const systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
-    const model = selectModel(messages as Message[], category, geo);
+    const model = selectModel();
 
     const stream = await client.messages.stream({
       model,
