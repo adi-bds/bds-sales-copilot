@@ -414,6 +414,9 @@ export async function POST(req: NextRequest) {
     const readableStream = new ReadableStream({
       async start(controller) {
         try {
+          let inputTokens = 0;
+          let outputTokens = 0;
+
           for await (const chunk of stream) {
             if (
               chunk.type === 'content_block_delta' &&
@@ -421,13 +424,19 @@ export async function POST(req: NextRequest) {
             ) {
               controller.enqueue(new TextEncoder().encode(chunk.delta.text));
             }
+            // Capture token counts from the usage events the SDK emits
+            if (chunk.type === 'message_start' && chunk.message.usage) {
+              inputTokens = chunk.message.usage.input_tokens;
+            }
+            if (chunk.type === 'message_delta' && chunk.usage) {
+              outputTokens = chunk.usage.output_tokens;
+            }
           }
+
           // Append token usage as a hidden JSON block the frontend can parse
-          const final = await stream.finalMessage();
-          const usage = final.usage;
           const tokenBlock = `\n\n__USAGE__${JSON.stringify({
-            input: usage.input_tokens,
-            output: usage.output_tokens,
+            input: inputTokens,
+            output: outputTokens,
             model,
           })}__END__`;
           controller.enqueue(new TextEncoder().encode(tokenBlock));
