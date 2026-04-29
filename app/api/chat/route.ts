@@ -216,58 +216,56 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('core/order_patterns.md');
   }
 
-  // ── Product catalog ───────────────────────────────────────────────────────
-  // When the rep is in Product Lookup mode, load the FULL catalog — no routing
-  // gaps, no missed products. All 7 files = ~52k tokens, worth it for accuracy.
-  if (category === 'product') {
+  // ── Product catalog — keyword routing ────────────────────────────────────
+  // Always load the TOC for product queries so Claude knows what files exist.
+  // Then load only the specific file(s) relevant to the query.
+  if (category === 'product' || /\bproduct\b|recommend|what.?do.?we.?have|what.?do.?we.?sell|catalog|our.?range|what.?options/.test(recentText)) {
     files.add('products/products_toc.md');
+  }
+
+  // Booth kits
+  if (/\bbooth\b|exhibit|trade.?show|10.?x.?10|20.?x.?10|popup booth|seg.?booth|booth kit/.test(recentText)) {
     files.add('products/products_booth_kits.md');
+  }
+  // Media walls & fabric backdrops
+  if (/media.?wall|tension.?fabric|archway|step.?repeat|seamwall|photo wall/.test(recentText)) {
     files.add('products/products_media_walls_backdrops.md');
+  }
+  // Banners & printing (includes scaffolding banners, mesh, vinyl, flags)
+  if (/\bbanner\b|roll.?up|flag|hanging|retractable|pull.?up|scaffold|mesh|vinyl print|feather|teardrop/.test(recentText)) {
     files.add('products/products_banners_printing.md');
+  }
+  // Counters, lightboxes, displays
+  if (/\bcounter\b|lightbox|light.?box|snap.?frame|display.?case|podium/.test(recentText)) {
     files.add('products/products_counters_displays.md');
+  }
+  // Photo studio & table covers
+  if (/photo.?booth|photo.?studio|table.?cover|table cloth|table skirt/.test(recentText)) {
     files.add('products/products_photo_studio.md');
+  }
+  // Outdoor — canopies, tents, flags
+  if (/outdoor|canopy|tent|umbrella|inflat|gazebo/.test(recentText)) {
     files.add('products/products_outdoor_events.md');
+  }
+  // Floral walls, stands, cases, accessories
+  if (/floral|flower|botanical|artificial.*wall|event.*wall|flower.*wall|led.*light|backdrop.*stand|stand.*backdrop|carry.?case|hard.?case|storage.?case|spare.?part|carry.?bag|accessory|accessories|tote|podium.?case/.test(recentText)) {
     files.add('products/products_other.md');
-  } else {
-    // For other categories, use keyword routing to load only what's needed
-    if (/\bbooth\b|exhibit|trade.?show|10.?x.?10|20.?x.?10|popup booth|seg.?booth|booth kit/.test(recentText)) {
+  }
+  // "backdrop" alone → could be fabric media wall OR floral wall
+  if (/\bbackdrop\b/.test(recentText)) {
+    files.add('products/products_media_walls_backdrops.md');
+    files.add('products/products_other.md');
+  }
+  // Broad product question with no specific match → load top 3 + other
+  if (category === 'product') {
+    const hasSpecific = [...files].some(
+      (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
+    );
+    if (!hasSpecific) {
       files.add('products/products_booth_kits.md');
-    }
-    if (/media.?wall|tension.?fabric|archway|step.?repeat|seamwall|photo wall/.test(recentText)) {
       files.add('products/products_media_walls_backdrops.md');
-    }
-    if (/\bbanner\b|roll.?up|flag.?banner|hanging.?banner|retractable|pull.?up/.test(recentText)) {
       files.add('products/products_banners_printing.md');
-    }
-    if (/\bcounter\b|lightbox|light.?box|snap.?frame|display.?case/.test(recentText)) {
-      files.add('products/products_counters_displays.md');
-    }
-    if (/photo.?booth|photo.?studio|table.?cover/.test(recentText)) {
-      files.add('products/products_photo_studio.md');
-    }
-    if (/outdoor|canopy|tent|umbrella|inflat/.test(recentText)) {
-      files.add('products/products_outdoor_events.md');
-    }
-    if (/floral|flower|botanical|artificial.*wall|event.*wall|flower.*wall|led.*light|backdrop.*stand|stand.*backdrop|carry.?case|hard.?case|storage.?case|spare.?part|carry.?bag|accessory|accessories|misc|tote|podium.?case/.test(recentText)) {
       files.add('products/products_other.md');
-    }
-    // "backdrop" alone could mean fabric media wall OR floral wall — load both
-    if (/\bbackdrop\b/.test(recentText)) {
-      files.add('products/products_media_walls_backdrops.md');
-      files.add('products/products_other.md');
-    }
-    // Generic product request with no specific category → load TOC + main files
-    if (/\bproduct\b|recommend|what.?do.?we.?have|what.?do.?we.?sell|catalog|our.?range|what.?options/.test(recentText)) {
-      const hasSpecific = [...files].some(
-        (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
-      );
-      if (!hasSpecific) {
-        files.add('products/products_toc.md');
-        files.add('products/products_booth_kits.md');
-        files.add('products/products_media_walls_backdrops.md');
-        files.add('products/products_banners_printing.md');
-        files.add('products/products_other.md');
-      }
     }
   }
 
