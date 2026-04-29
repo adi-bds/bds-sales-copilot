@@ -235,11 +235,11 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   if (/outdoor|canopy|tent|umbrella|inflat/.test(recentText)) {
     files.add('products/products_outdoor_events.md');
   }
-  if (/accessory|accessories|storage.?case|spare.?part|carry.?bag|misc/.test(recentText)) {
+  if (/floral|flower|botanical|artificial.*wall|event.*wall|flower.*wall|led.*light|backdrop.*stand|stand.*backdrop|carry.?case|hard.?case|storage.?case|spare.?part|carry.?bag|accessory|accessories|misc|tote|podium.?case/.test(recentText)) {
     files.add('products/products_other.md');
   }
 
-  // Generic product request with no specific category
+  // Generic product request with no specific category → load TOC + top 3 categories
   if (/\bproduct\b|recommend|what.?do.?we.?have|what.?do.?we.?sell|catalog|our.?range|what.?options/.test(recentText)) {
     const hasSpecific = [...files].some(
       (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
@@ -249,7 +249,14 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
       files.add('products/products_booth_kits.md');
       files.add('products/products_media_walls_backdrops.md');
       files.add('products/products_banners_printing.md');
+      files.add('products/products_other.md');
     }
+  }
+
+  // "backdrop" alone could mean fabric media wall OR floral wall — load both
+  if (/\bbackdrop\b/.test(recentText)) {
+    files.add('products/products_media_walls_backdrops.md');
+    files.add('products/products_other.md');
   }
 
   // ── Client intelligence ───────────────────────────────────────────────────
