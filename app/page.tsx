@@ -20,7 +20,7 @@ function calcCost(usage: TokenUsage): number {
          (usage.output / 1_000_000) * prices.output;
 }
 
-const USAGE_RE = /\n\n__USAGE__(.+?)__END__/s;
+const USAGE_RE = /\n\n__USAGE__([\s\S]+?)__END__/;
 
 function parseUsage(raw: string): { text: string; usage?: TokenUsage } {
   const m = raw.match(USAGE_RE);
