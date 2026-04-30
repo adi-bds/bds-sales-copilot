@@ -251,6 +251,10 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   if (/floral|flower|botanical|artificial.*wall|event.*wall|flower.*wall|led.*light|backdrop.*stand|stand.*backdrop|carry.?case|hard.?case|storage.?case|spare.?part|carry.?bag|accessory|accessories|tote|podium.?case/.test(recentText)) {
     files.add('products/products_other.md');
   }
+  // FIFA World Cup 2026 collection
+  if (/fifa|world.?cup|soccer|football.*event|fan.?zone|tifo|stadium.*banner|selfie.*frame|country.*flag/.test(recentText)) {
+    files.add('products/products_fifa_2026.md');
+  }
   // "backdrop" alone → could be fabric media wall OR floral wall
   if (/\bbackdrop\b/.test(recentText)) {
     files.add('products/products_media_walls_backdrops.md');
