@@ -220,7 +220,7 @@ function RatingButtons({ onRate }: { onRate: (r: FeedbackRating, comment: string
 }
 
 // ─── Feedback panel ───────────────────────────────────────────────────────
-function FeedbackPanel({ entries, onClear }: { entries: FeedbackEntry[]; onClear: () => void }) {
+function FeedbackPanel({ entries, onClear, onDelete }: { entries: FeedbackEntry[]; onClear: () => void; onDelete: (id: string) => void }) {
   const [filter, setFilter] = useState<'all' | FeedbackRating>('all');
 
   const total   = entries.length;
@@ -313,7 +313,16 @@ function FeedbackPanel({ entries, onClear }: { entries: FeedbackEntry[]; onClear
                 <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full">{e.category}{e.geo ? ` · ${e.geo}` : ''}</span>
                 <span className="text-[10px] text-slate-400">{new Date(e.timestamp).toLocaleString()}</span>
               </div>
-              <span className="text-[10px] text-slate-400 font-mono whitespace-nowrap">${e.cost.toFixed(4)}</span>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <span className="text-[10px] text-slate-400 font-mono">${e.cost.toFixed(4)}</span>
+                <button
+                  onClick={() => onDelete(e.id)}
+                  title="Delete this entry"
+                  className="text-slate-300 hover:text-red-500 transition-colors"
+                >
+                  <IconTrash />
+                </button>
+              </div>
             </div>
 
             <div>
@@ -541,6 +550,11 @@ export default function Home() {
           <FeedbackPanel
             entries={feedbackEntries}
             onClear={() => { setFeedbackEntries([]); saveFeedback([]); }}
+            onDelete={(id) => {
+              const updated = feedbackEntries.filter(e => e.id !== id);
+              setFeedbackEntries(updated);
+              saveFeedback(updated);
+            }}
           />
         ) : (
           <>
