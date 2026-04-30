@@ -264,16 +264,15 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('products/products_media_walls_backdrops.md');
     files.add('products/products_other.md');
   }
-  // Broad product question with no specific match → load top 3 + other
+  // Ambiguous product query → load TOC only so the agent can ask one
+  // clarifying question. The rep's follow-up will have specific keywords
+  // that route to the right file on the next turn.
   if (category === 'product') {
     const hasSpecific = [...files].some(
       (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
     );
     if (!hasSpecific) {
-      files.add('products/products_booth_kits.md');
-      files.add('products/products_media_walls_backdrops.md');
-      files.add('products/products_banners_printing.md');
-      files.add('products/products_other.md');
+      files.add('products/products_toc.md');
     }
   }
 
@@ -353,6 +352,23 @@ The playbooks in the knowledge base apply to ALL markets, not just UK. They are 
 3. Never promise a specific dispatch date or delivery window until production has confirmed the slot. Use: "5–7 working days from dispatch" only — never "dispatched within 2 days" or similar hard commitments.
 4. Subject lines must never promise a resolution that hasn't been confirmed (e.g. never "Replacement Arranged Today" on the first email).
 5. Complaint replies must be at least 3–4 sentences. One-line responses signal the client isn't being taken seriously.
+
+## Product queries — clarify before answering
+When a product question is vague and the KNOWLEDGE BASE only contains the product TOC (not full product files), ask ONE short clarifying question to identify the right category. Use the TOC categories to frame it naturally.
+
+When to ask:
+- "what backdrops do you have?" → "Are you looking for fabric media walls, floral event walls, or backdrop stands?"
+- "do you have anything for outdoor events?" → "Is this for a canopy tent, feather flags, or outdoor banners?"
+- "what displays do you sell?" → "Are you after a trade show booth kit, a media wall, or a counter display?"
+- "do you have flags?" → "Feather/teardrop flags for outdoor use, or country flags for fan events?"
+
+When NOT to ask — answer directly if the type is already clear:
+- "floral backdrop" → load and answer (specific)
+- "10x10 booth kit" → load and answer (specific)
+- "scaffolding banner" → load and answer (specific)
+- "FIFA 2026 products" → load and answer (specific)
+
+Keep the clarifying question to one line. Don't list every possible option — pick the 2–3 most likely ones based on the query.
 
 ## Escalate to manager
 Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or involving safety issues, clients threatening chargebacks or legal action.`;
