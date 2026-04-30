@@ -105,3 +105,48 @@ Collection URL: https://www.backdropsource.com/collections/fifa-world-cup-2026
 - **Price:** $373.00
 - **URL:** https://www.backdropsource.com/products/fifa-2026-rectangle-fabric-counter-display
 - **Notes:** Rectangle fabric counter display for sponsor booths, merchandise, and info desks.
+
+### FIFA 2026 Standard Table Covers
+- **Price:** $104.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-standard-table-covers
+- **Notes:** Standard fitted table covers for event tables and sponsor displays.
+
+### FIFA 2026 N-Frame Fabric Archway
+- **Price:** $1,757.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-n-frame-fabric-archway
+- **Notes:** Large N-frame fabric archway for grand entrances, tunnel walk-throughs, and stadium activations.
+
+### FIFA 2026 Square Fabric Display Arch
+- **Price:** $525.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-square-fabric-display-arch
+- **Notes:** Square fabric display arch for event entrances and sponsor photo opportunities.
+
+### FIFA 2026 Curved Velcro Media Wall
+- **Price:** $332.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-curved-velcro-media-wall
+- **Notes:** Curved velcro media wall for press conferences, photo backdrops, and sponsor branding.
+
+### FIFA 2026 Straight Pop-Up Wall
+- **Price:** $332.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-straight-pop-up-wall
+- **Notes:** Straight pop-up display wall for quick setup at fan zones and sponsor booths.
+
+### FIFA 2026 Wall-Mounted SEG Light Box
+- **Price:** $423.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-wall-mounted-seg-light-box
+- **Notes:** Wall-mounted SEG backlit light box for indoor stadium concourses, VIP areas, and sponsor displays.
+
+### FIFA 2026 Trade Show Banner Stands
+- **Price:** $249.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-trade-show-banner-stands
+- **Notes:** Retractable banner stands with FIFA 2026 branding for trade shows and fan events.
+
+### FIFA 2026 Curved Tension Display
+- **Price:** $326.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-curved-tension-display
+- **Notes:** Curved tension fabric display for sponsor booths, fan zones, and event backdrops.
+
+### FIFA 2026 Straight Backdrop Display
+- **Price:** $336.00
+- **URL:** https://www.backdropsource.com/products/fifa-2026-straight-backdrop-display
+- **Notes:** Straight tension fabric backdrop display for press areas, photo ops, and sponsor walls.
