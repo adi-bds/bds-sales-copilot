@@ -5,50 +5,75 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 // ─── Types ────────────────────────────────────────────────────────────────
 
 type TokenUsage = { input: number; output: number; model: string };
-type Message = { role: 'user' | 'assistant'; content: string; usage?: TokenUsage };
+type Message = { role: 'user' | 'assistant'; content: string; usage?: TokenUsage; id?: string };
 
-// ─── Token cost calculator ─────────────────────────────────────────────────
-// Prices per million tokens (as of 2025)
-const MODEL_PRICES: Record<string, { input: number; output: number }> = {
-  'claude-sonnet-4-6':        { input: 3.00,  output: 15.00 },
-  'claude-haiku-4-5-20251001': { input: 0.80,  output: 4.00  },
+type FeedbackRating = 'correct' | 'needs_work' | 'wrong';
+type FeedbackEntry = {
+  id: string;
+  timestamp: string;
+  category: string;
+  geo: string;
+  question: string;
+  response: string;
+  rating: FeedbackRating;
+  comment: string;
+  inputTokens: number;
+  outputTokens: number;
+  cost: number;
+  model: string;
 };
 
+// ─── Token cost calculator ─────────────────────────────────────────────────
+const MODEL_PRICES: Record<string, { input: number; output: number }> = {
+  'claude-sonnet-4-6':         { input: 3.00, output: 15.00 },
+  'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00  },
+};
 function calcCost(usage: TokenUsage): number {
-  const prices = MODEL_PRICES[usage.model] ?? { input: 3.00, output: 15.00 };
-  return (usage.input / 1_000_000) * prices.input +
-         (usage.output / 1_000_000) * prices.output;
+  const p = MODEL_PRICES[usage.model] ?? { input: 3.00, output: 15.00 };
+  return (usage.input / 1_000_000) * p.input + (usage.output / 1_000_000) * p.output;
 }
 
 const USAGE_RE = /\n\n__USAGE__([\s\S]+?)__END__/;
-
 function parseUsage(raw: string): { text: string; usage?: TokenUsage } {
   const m = raw.match(USAGE_RE);
   if (!m) return { text: raw };
-  try {
-    return { text: raw.replace(USAGE_RE, ''), usage: JSON.parse(m[1]) };
-  } catch {
-    return { text: raw.replace(USAGE_RE, '') };
-  }
+  try { return { text: raw.replace(USAGE_RE, ''), usage: JSON.parse(m[1]) }; }
+  catch { return { text: raw.replace(USAGE_RE, '') }; }
 }
 
-type NavItem = {
-  id: string;
-  icon: React.ReactNode;
-  label: string;
-  placeholder: string;
-  geo?: boolean;
-};
+// ─── Feedback localStorage helpers ────────────────────────────────────────
+const FB_KEY = 'bds_feedback_v1';
 
-type GeoRegion = {
-  code: string;
-  flag: string;
-  label: string;
-  placeholder: string;
-};
+function loadFeedback(): FeedbackEntry[] {
+  try { return JSON.parse(localStorage.getItem(FB_KEY) ?? '[]'); }
+  catch { return []; }
+}
+function saveFeedback(entries: FeedbackEntry[]) {
+  try { localStorage.setItem(FB_KEY, JSON.stringify(entries)); } catch {}
+}
+function exportCSV(entries: FeedbackEntry[]) {
+  const headers = ['timestamp','category','geo','rating','comment','question','response','input_tokens','output_tokens','cost','model'];
+  const escape = (s: string) => `"${String(s).replace(/"/g, '""')}"`;
+  const rows = entries.map(e => [
+    e.timestamp, e.category, e.geo, e.rating, e.comment,
+    e.question, e.response,
+    e.inputTokens, e.outputTokens, e.cost.toFixed(4), e.model,
+  ].map(v => escape(String(v))).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bds-feedback-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── Nav types ────────────────────────────────────────────────────────────
+type NavItem   = { id: string; icon: React.ReactNode; label: string; placeholder: string; geo?: boolean };
+type GeoRegion = { code: string; flag: string; label: string; placeholder: string };
 
 // ─── Icons ────────────────────────────────────────────────────────────────
-
 const IconBox      = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"/></svg>;
 const IconMail     = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>;
 const IconAcademic = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>;
@@ -57,27 +82,26 @@ const IconGlobe    = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 
 const IconChevron  = ({ open }: { open: boolean }) => <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>;
 const IconPlus     = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/></svg>;
 const IconSend     = () => <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>;
+const IconChart    = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>;
+const IconTrash    = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>;
 
 // ─── Navigation config ─────────────────────────────────────────────────────
-
 const NAV_ITEMS: NavItem[] = [
-  { id: 'product',  icon: <IconBox />,      label: 'Product Lookup',     placeholder: 'Ask about a product, spec, size, or price…' },
-  { id: 'email',    icon: <IconMail />,     label: 'Email Draft',        placeholder: 'Describe the client situation and email goal…' },
-  { id: 'training', icon: <IconAcademic />, label: 'Rep Training',       placeholder: 'Ask anything — products, process, objections…' },
-  { id: 'callprep', icon: <IconPhone />,    label: 'Client Call Prep',   placeholder: 'Enter a client name, email, or order number…' },
-  { id: 'geo',      icon: <IconGlobe />,    label: 'Geo-Based Inquiry',  placeholder: 'Select a region below…', geo: true },
+  { id: 'product',  icon: <IconBox />,      label: 'Product Lookup',   placeholder: 'Ask about a product, spec, size, or price…' },
+  { id: 'email',    icon: <IconMail />,     label: 'Email Draft',      placeholder: 'Describe the client situation and email goal…' },
+  { id: 'training', icon: <IconAcademic />, label: 'Rep Training',     placeholder: 'Ask anything — products, process, objections…' },
+  { id: 'callprep', icon: <IconPhone />,    label: 'Client Call Prep', placeholder: 'Enter a client name, email, or order number…' },
+  { id: 'geo',      icon: <IconGlobe />,    label: 'Geo-Based Inquiry',placeholder: 'Select a region below…', geo: true },
 ];
-
 const GEO_REGIONS: GeoRegion[] = [
-  { code: 'uk',  flag: '🇬🇧', label: 'UK',        placeholder: 'Ask about a UK client, quote, order, or email…' },
-  { code: 'us',  flag: '🇺🇸', label: 'US',        placeholder: 'Ask about a US client, order, or inquiry…' },
-  { code: 'aus', flag: '🇦🇺', label: 'Australia', placeholder: 'Ask about an AU client, order, or inquiry…' },
+  { code: 'uk',  flag: '🇬🇧', label: 'UK',          placeholder: 'Ask about a UK client, quote, order, or email…' },
+  { code: 'us',  flag: '🇺🇸', label: 'US',          placeholder: 'Ask about a US client, order, or inquiry…' },
+  { code: 'aus', flag: '🇦🇺', label: 'Australia',   placeholder: 'Ask about an AU client, order, or inquiry…' },
   { code: 'nz',  flag: '🇳🇿', label: 'New Zealand', placeholder: 'Ask about a NZ client, order, or inquiry…' },
-  { code: 'ca',  flag: '🇨🇦', label: 'Canada',    placeholder: 'Ask about a CA client, order, or inquiry…' },
+  { code: 'ca',  flag: '🇨🇦', label: 'Canada',      placeholder: 'Ask about a CA client, order, or inquiry…' },
 ];
 
 // ─── Markdown renderer ────────────────────────────────────────────────────
-
 function formatInline(text: string): React.ReactNode[] {
   return text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**') && part.length > 4)
@@ -87,15 +111,13 @@ function formatInline(text: string): React.ReactNode[] {
     return <span key={i}>{part}</span>;
   });
 }
-
 function MessageContent({ content }: { content: string }) {
   if (!content) return null;
   return (
     <div className="space-y-0.5">
       {content.split(/(```[\s\S]*?```)/g).map((seg, si) => {
         if (seg.startsWith('```') && seg.endsWith('```')) {
-          const inner = seg.slice(3, -3);
-          const nl = inner.indexOf('\n');
+          const inner = seg.slice(3, -3); const nl = inner.indexOf('\n');
           return <pre key={si} className="bg-slate-950 text-emerald-400 rounded-xl p-4 text-xs overflow-x-auto font-mono my-3 leading-relaxed">{nl === -1 ? inner : inner.slice(nl + 1)}</pre>;
         }
         return (
@@ -129,7 +151,6 @@ function MessageContent({ content }: { content: string }) {
     </div>
   );
 }
-
 function TypingDots() {
   return (
     <div className="flex gap-1.5 py-1">
@@ -140,20 +161,199 @@ function TypingDots() {
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────
+// ─── Rating buttons ───────────────────────────────────────────────────────
+function RatingButtons({ onRate }: { onRate: (r: FeedbackRating, comment: string) => void }) {
+  const [selected, setSelected] = useState<FeedbackRating | null>(null);
+  const [comment, setComment]   = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
+  if (submitted) return (
+    <div className="flex items-center gap-1.5 px-1 mt-1">
+      <span className="text-[10px] text-slate-400">
+        {selected === 'correct' ? '✅ Marked correct' : selected === 'needs_work' ? '⚠️ Feedback saved' : '❌ Flagged for review'}
+      </span>
+    </div>
+  );
+
+  const submit = (r: FeedbackRating) => {
+    onRate(r, comment);
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="px-1 mt-1 space-y-1.5">
+      <div className="flex items-center gap-1.5">
+        <span className="text-[10px] text-slate-400 mr-1">Rate:</span>
+        {([['correct','✅ Correct','text-emerald-600 border-emerald-200 hover:bg-emerald-50'],
+           ['needs_work','⚠️ Needs work','text-amber-600 border-amber-200 hover:bg-amber-50'],
+           ['wrong','❌ Wrong','text-red-600 border-red-200 hover:bg-red-50']] as const).map(([r, label, cls]) => (
+          <button
+            key={r}
+            onClick={() => { setSelected(r); if (r === 'correct') submit(r); }}
+            className={`text-[10px] px-2 py-0.5 rounded-full border font-medium transition-all ${cls} ${selected === r ? 'opacity-100 ring-1 ring-offset-1' : 'opacity-70 hover:opacity-100'}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {selected && selected !== 'correct' && (
+        <div className="flex gap-1.5">
+          <input
+            type="text"
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') submit(selected); }}
+            placeholder="What was wrong? (optional)"
+            autoFocus
+            className="flex-1 text-[11px] px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:border-red-300"
+          />
+          <button
+            onClick={() => submit(selected)}
+            className="text-[11px] px-2.5 py-1 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors"
+          >
+            Save
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Feedback panel ───────────────────────────────────────────────────────
+function FeedbackPanel({ entries, onClear }: { entries: FeedbackEntry[]; onClear: () => void }) {
+  const [filter, setFilter] = useState<'all' | FeedbackRating>('all');
+
+  const total   = entries.length;
+  const correct = entries.filter(e => e.rating === 'correct').length;
+  const needs   = entries.filter(e => e.rating === 'needs_work').length;
+  const wrong   = entries.filter(e => e.rating === 'wrong').length;
+  const pct     = (n: number) => total ? Math.round((n / total) * 100) : 0;
+
+  const filtered = filter === 'all' ? entries : entries.filter(e => e.rating === filter);
+  const sorted   = [...filtered].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+
+  const ratingBadge = (r: FeedbackRating) =>
+    r === 'correct'    ? <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 font-medium">✅ Correct</span>
+    : r === 'needs_work' ? <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-100 font-medium">⚠️ Needs work</span>
+    : <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-100 font-medium">❌ Wrong</span>;
+
+  return (
+    <div className="flex flex-col h-full bg-slate-50">
+      {/* Header */}
+      <div className="bg-white border-b border-slate-200 px-6 py-4 flex-shrink-0">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-semibold text-slate-900 text-base">Response Feedback</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={() => exportCSV(entries)}
+              disabled={total === 0}
+              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-white hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              Export CSV
+            </button>
+            <button
+              onClick={() => { if (confirm('Clear all feedback? This cannot be undone.')) onClear(); }}
+              disabled={total === 0}
+              className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 text-slate-500 hover:text-red-600 hover:border-red-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <IconTrash />
+            </button>
+          </div>
+        </div>
+
+        {/* Stats */}
+        {total === 0 ? (
+          <p className="text-sm text-slate-400">No feedback yet. Rate responses using the buttons below each reply.</p>
+        ) : (
+          <div className="grid grid-cols-4 gap-3">
+            {[
+              { label: 'Total', value: total, color: 'text-slate-900', bg: 'bg-slate-50 border-slate-200' },
+              { label: 'Correct', value: `${correct} (${pct(correct)}%)`, color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-100' },
+              { label: 'Needs work', value: `${needs} (${pct(needs)}%)`, color: 'text-amber-700', bg: 'bg-amber-50 border-amber-100' },
+              { label: 'Wrong', value: `${wrong} (${pct(wrong)}%)`, color: 'text-red-700', bg: 'bg-red-50 border-red-100' },
+            ].map(s => (
+              <div key={s.label} className={`rounded-xl border p-3 ${s.bg}`}>
+                <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Filter tabs */}
+      {total > 0 && (
+        <div className="bg-white border-b border-slate-200 px-6 flex gap-1 flex-shrink-0">
+          {(['all','correct','needs_work','wrong'] as const).map(f => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`text-xs px-3 py-2.5 border-b-2 transition-colors ${
+                filter === f
+                  ? 'border-red-500 text-red-600 font-medium'
+                  : 'border-transparent text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              {f === 'all' ? `All (${total})` : f === 'correct' ? `✅ Correct (${correct})` : f === 'needs_work' ? `⚠️ Needs work (${needs})` : `❌ Wrong (${wrong})`}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Entries list */}
+      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3">
+        {sorted.length === 0 && total > 0 && (
+          <p className="text-sm text-slate-400 text-center pt-8">No entries match this filter.</p>
+        )}
+        {sorted.map(e => (
+          <div key={e.id} className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 space-y-2">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                {ratingBadge(e.rating)}
+                <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full">{e.category}{e.geo ? ` · ${e.geo}` : ''}</span>
+                <span className="text-[10px] text-slate-400">{new Date(e.timestamp).toLocaleString()}</span>
+              </div>
+              <span className="text-[10px] text-slate-400 font-mono whitespace-nowrap">${e.cost.toFixed(4)}</span>
+            </div>
+
+            <div>
+              <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Question</p>
+              <p className="text-xs text-slate-700 leading-relaxed line-clamp-2">{e.question}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Response</p>
+              <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">{e.response}</p>
+            </div>
+            {e.comment && (
+              <div className="bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+                <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wide mb-0.5">Note</p>
+                <p className="text-xs text-amber-800">{e.comment}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────
 export default function Home() {
-  const [messages, setMessages]     = useState<Message[]>([]);
-  const [input, setInput]           = useState('');
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [activeNav, setActiveNav]   = useState<NavItem | null>(null);
-  const [activeGeo, setActiveGeo]   = useState<GeoRegion | null>(null);
-  const [geoOpen, setGeoOpen]       = useState(false);
+  const [messages, setMessages]       = useState<Message[]>([]);
+  const [input, setInput]             = useState('');
+  const [isStreaming, setIsStreaming]  = useState(false);
+  const [activeNav, setActiveNav]     = useState<NavItem | null>(null);
+  const [activeGeo, setActiveGeo]     = useState<GeoRegion | null>(null);
+  const [geoOpen, setGeoOpen]         = useState(false);
+  const [activeView, setActiveView]   = useState<'chat' | 'feedback'>('chat');
+  const [feedbackEntries, setFeedbackEntries] = useState<FeedbackEntry[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef    = useRef<HTMLTextAreaElement>(null);
   const abortRef       = useRef<AbortController | null>(null);
 
+  // Load feedback from localStorage on mount
+  useEffect(() => { setFeedbackEntries(loadFeedback()); }, []);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
   useEffect(() => {
     if (activeNav && messages.length === 0) setTimeout(() => textareaRef.current?.focus(), 80);
@@ -162,43 +362,58 @@ export default function Home() {
   const placeholder = activeGeo?.placeholder ?? activeNav?.placeholder ?? 'Select a category to get started…';
 
   const selectNav = (item: NavItem) => {
-    if (item.geo) { setGeoOpen((v) => !v); return; }
-    setActiveNav(item);
-    setActiveGeo(null);
-    setMessages([]);
-    setInput('');
+    if (item.geo) { setGeoOpen(v => !v); return; }
+    setActiveNav(item); setActiveGeo(null); setMessages([]); setInput('');
+    setActiveView('chat');
   };
-
   const selectGeo = (geo: GeoRegion) => {
-    setActiveGeo(geo);
-    setActiveNav(NAV_ITEMS.find((n) => n.geo) ?? null);
-    setMessages([]);
-    setInput('');
+    setActiveGeo(geo); setActiveNav(NAV_ITEMS.find(n => n.geo) ?? null);
+    setMessages([]); setInput(''); setActiveView('chat');
   };
-
   const startNewChat = () => {
     abortRef.current?.abort();
-    setMessages([]);
-    setInput('');
-    setIsStreaming(false);
-    setActiveNav(null);
-    setActiveGeo(null);
+    setMessages([]); setInput(''); setIsStreaming(false);
+    setActiveNav(null); setActiveGeo(null); setActiveView('chat');
   };
+
+  // Save a rating for a specific message
+  const handleRate = useCallback((msgIndex: number, rating: FeedbackRating, comment: string) => {
+    const msg = messages[msgIndex];
+    if (!msg || msg.role !== 'assistant') return;
+    const question = messages[msgIndex - 1]?.content ?? '';
+    const entry: FeedbackEntry = {
+      id: msg.id ?? `${Date.now()}-${msgIndex}`,
+      timestamp: new Date().toISOString(),
+      category: activeGeo ? 'geo' : activeNav?.id ?? 'unknown',
+      geo: activeGeo?.code ?? '',
+      question,
+      response: msg.content,
+      rating,
+      comment,
+      inputTokens: msg.usage?.input ?? 0,
+      outputTokens: msg.usage?.output ?? 0,
+      cost: msg.usage ? calcCost(msg.usage) : 0,
+      model: msg.usage?.model ?? 'unknown',
+    };
+    const updated = [...feedbackEntries, entry];
+    setFeedbackEntries(updated);
+    saveFeedback(updated);
+  }, [messages, feedbackEntries, activeNav, activeGeo]);
 
   const sendMessage = useCallback(async (content: string) => {
     const trimmed = content.trim();
     if (!trimmed || isStreaming) return;
 
+    const msgId = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     const userMsg: Message = { role: 'user', content: trimmed };
     const updated = [...messages, userMsg];
-    setMessages([...updated, { role: 'assistant', content: '' }]);
+    setMessages([...updated, { role: 'assistant', content: '', id: msgId }]);
     setInput('');
     setIsStreaming(true);
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
 
     const ctrl = new AbortController();
     abortRef.current = ctrl;
-
     const category = activeGeo ? 'geo' : activeNav?.id ?? null;
     const geo = activeGeo?.code ?? null;
 
@@ -218,16 +433,14 @@ export default function Home() {
         const { done, value } = await reader.read();
         if (done) break;
         acc += dec.decode(value, { stream: true });
-        // Strip the usage block during streaming so it doesn't flash on screen
         const displayText = acc.replace(USAGE_RE, '');
-        setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: displayText }; return u; });
+        setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: displayText, id: msgId }; return u; });
       }
-      // Parse usage from the final accumulated buffer
       const { text: finalText, usage } = parseUsage(acc);
-      setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: finalText, usage }; return u; });
+      setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: finalText, usage, id: msgId }; return u; });
     } catch (e: unknown) {
       if (e instanceof Error && e.name === 'AbortError') return;
-      setMessages((prev) => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: 'Something went wrong — please try again.' }; return u; });
+      setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'assistant', content: 'Something went wrong — please try again.', id: msgId }; return u; });
     } finally {
       setIsStreaming(false);
       abortRef.current = null;
@@ -237,24 +450,23 @@ export default function Home() {
   const handleKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input); }
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
     e.target.style.height = 'auto';
     e.target.style.height = `${Math.min(e.target.scrollHeight, 180)}px`;
   };
 
-  const headerLabel = activeGeo
-    ? `${activeGeo.flag} ${activeGeo.label}`
-    : activeNav?.label ?? 'BDS Sales Copilot';
-
+  const headerLabel = activeView === 'feedback'
+    ? 'Response Feedback'
+    : activeGeo ? `${activeGeo.flag} ${activeGeo.label}` : activeNav?.label ?? 'BDS Sales Copilot';
   const isReady = !!(activeNav && (!activeNav.geo || activeGeo));
+  const flagged = feedbackEntries.filter(e => e.rating !== 'correct').length;
 
   return (
-    <div className="flex h-screen font-sans overflow-hidden" style={{background:'#0B1A2E'}}>
+    <div className="flex h-screen font-sans overflow-hidden" style={{ background: '#0B1A2E' }}>
 
       {/* ── Sidebar ───────────────────────────────────────────────────── */}
-      <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{background:'#0B1A2E'}}>
+      <aside className="w-56 flex-shrink-0 flex flex-col border-r border-white/5" style={{ background: '#0B1A2E' }}>
 
         {/* Logo */}
         <div className="px-4 pt-5 pb-4">
@@ -265,53 +477,28 @@ export default function Home() {
 
         {/* New chat */}
         <div className="px-3 mb-4">
-          <button
-            onClick={startNewChat}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all text-sm"
-          >
-            <IconPlus />
-            <span>New chat</span>
+          <button onClick={startNewChat} className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all text-sm">
+            <IconPlus /><span>New chat</span>
           </button>
         </div>
 
         {/* Nav items */}
         <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto">
           <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Categories</p>
-
-          {NAV_ITEMS.map((item) => {
+          {NAV_ITEMS.map(item => {
             const isGeoParent = item.geo;
-            const isActive = !isGeoParent
-              ? activeNav?.id === item.id
-              : !!activeGeo;
-
+            const isActive = activeView === 'chat' && (!isGeoParent ? activeNav?.id === item.id : !!activeGeo);
             return (
               <div key={item.id}>
-                <button
-                  onClick={() => selectNav(item)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${
-                    isActive
-                      ? 'bg-red-600/15 text-red-400 font-medium'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
-                  }`}
-                >
+                <button onClick={() => selectNav(item)} className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${isActive ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}>
                   <span className={isActive ? 'text-red-400' : 'text-slate-500'}>{item.icon}</span>
                   <span className="flex-1 text-left">{item.label}</span>
                   {isGeoParent && <IconChevron open={geoOpen} />}
                 </button>
-
-                {/* Geo sub-items */}
                 {isGeoParent && geoOpen && (
                   <div className="ml-3 mt-0.5 space-y-0.5 border-l border-white/10 pl-3">
-                    {GEO_REGIONS.map((geo) => (
-                      <button
-                        key={geo.code}
-                        onClick={() => selectGeo(geo)}
-                        className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-all ${
-                          activeGeo?.code === geo.code
-                            ? 'bg-red-600/15 text-red-400 font-medium'
-                            : 'text-slate-500 hover:text-slate-200 hover:bg-white/5'
-                        }`}
-                      >
+                    {GEO_REGIONS.map(geo => (
+                      <button key={geo.code} onClick={() => selectGeo(geo)} className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-all ${activeGeo?.code === geo.code && activeView === 'chat' ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-500 hover:text-slate-200 hover:bg-white/5'}`}>
                         <span className="text-base leading-none">{geo.flag}</span>
                         <span>{geo.label}</span>
                       </button>
@@ -321,13 +508,28 @@ export default function Home() {
               </div>
             );
           })}
+
+          {/* Feedback nav item */}
+          <div className="mt-4 pt-3 border-t border-white/5">
+            <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Quality</p>
+            <button
+              onClick={() => setActiveView('feedback')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${activeView === 'feedback' ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
+            >
+              <span className={activeView === 'feedback' ? 'text-red-400' : 'text-slate-500'}><IconChart /></span>
+              <span className="flex-1 text-left">Feedback</span>
+              {flagged > 0 && (
+                <span className="bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">{flagged}</span>
+              )}
+            </button>
+          </div>
         </nav>
 
-        {/* Bottom */}
+        {/* Bottom card */}
         <div className="p-3 border-t border-white/5">
           <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-3">
             <div className="text-white font-semibold text-xs mb-0.5">Sales Copilot</div>
-            <div className="text-red-200 text-xs leading-relaxed">17,771 orders across all regions</div>
+            <div className="text-red-200 text-xs leading-relaxed">17,771 orders · {feedbackEntries.length} rated</div>
           </div>
         </div>
       </aside>
@@ -335,137 +537,118 @@ export default function Home() {
       {/* ── Main area ─────────────────────────────────────────────────── */}
       <main className="flex-1 flex flex-col bg-slate-50 overflow-hidden">
 
-        {/* Header */}
-        <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-3">
-            <h2 className="font-semibold text-slate-900 text-base">{headerLabel}</h2>
-            {isReady && messages.length > 0 && (
-              <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded-full border border-red-100">
-                Active
-              </span>
-            )}
-          </div>
-          {messages.length > 0 && (
-            <button
-              onClick={startNewChat}
-              className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-700 transition-colors"
-            >
-              <IconPlus />
-              <span>New chat</span>
-            </button>
-          )}
-        </header>
-
-        {/* Messages / empty state */}
-        <div className="flex-1 overflow-y-auto">
-
-          {/* Welcome — no category selected */}
-          {!activeNav && !activeGeo && (
-            <div className="flex flex-col items-center justify-center h-full px-8 text-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/serviceorg-medium.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
-              <p className="text-slate-400 text-sm max-w-xs leading-relaxed">
-                Select a category from the sidebar to get started with product lookups, email drafts, training, or client prep.
-              </p>
-            </div>
-          )}
-
-          {/* Category selected, no messages */}
-          {isReady && messages.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-full px-8 text-center">
-              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-sm border border-slate-200 mb-4 select-none">
-                {activeGeo ? activeGeo.flag : activeNav?.id === 'product' ? '📦' : activeNav?.id === 'email' ? '✉️' : activeNav?.id === 'training' ? '🎓' : '📞'}
+        {activeView === 'feedback' ? (
+          <FeedbackPanel
+            entries={feedbackEntries}
+            onClear={() => { setFeedbackEntries([]); saveFeedback([]); }}
+          />
+        ) : (
+          <>
+            {/* Header */}
+            <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <h2 className="font-semibold text-slate-900 text-base">{headerLabel}</h2>
+                {isReady && messages.length > 0 && (
+                  <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded-full border border-red-100">Active</span>
+                )}
               </div>
-              <h3 className="text-base font-semibold text-slate-800 mb-1">{headerLabel}</h3>
-              <p className="text-slate-400 text-sm">{placeholder}</p>
-            </div>
-          )}
+              {messages.length > 0 && (
+                <button onClick={startNewChat} className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-700 transition-colors">
+                  <IconPlus /><span>New chat</span>
+                </button>
+              )}
+            </header>
 
-          {/* Messages */}
-          {messages.length > 0 && (
-            <div className="max-w-3xl mx-auto px-6 py-6 space-y-5">
-              {messages.map((msg, i) => (
-                <div key={i} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  {msg.role === 'assistant' && (
-                    <div className="w-7 h-7 bg-red-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 select-none">
-                      B
-                    </div>
-                  )}
-                  <div className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end max-w-[72%]' : 'flex-1 min-w-0'}`}>
-                    <div className={`rounded-2xl px-4 py-3 w-full ${
-                      msg.role === 'user'
-                        ? 'text-white rounded-br-sm'
-                        : 'bg-white text-slate-700 rounded-bl-sm border border-slate-200 shadow-sm'
-                    }`} style={msg.role === 'user' ? {background:'#1B3A6B'} : {}}>
-                      {msg.role === 'user'
-                        ? <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                        : msg.content === '' && isStreaming
-                        ? <TypingDots />
-                        : <MessageContent content={msg.content} />
-                      }
-                    </div>
-                    {/* Token usage badge — only on completed assistant messages */}
-                    {msg.role === 'assistant' && msg.usage && (
-                      <div className="flex items-center gap-2 px-1">
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          ↑{msg.usage.input.toLocaleString()} ↓{msg.usage.output.toLocaleString()} tokens
-                        </span>
-                        <span className="text-[10px] text-slate-300">·</span>
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          ${calcCost(msg.usage).toFixed(4)}
-                        </span>
-                        <span className="text-[10px] text-slate-300">·</span>
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          {msg.usage.model.replace('claude-', '').replace('-20251001', '')}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  {msg.role === 'user' && (
-                    <div className="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">
-                      R
-                    </div>
-                  )}
+            {/* Messages / empty state */}
+            <div className="flex-1 overflow-y-auto">
+              {!activeNav && !activeGeo && (
+                <div className="flex flex-col items-center justify-center h-full px-8 text-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/serviceorg-medium.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
+                  <p className="text-slate-400 text-sm max-w-xs leading-relaxed">Select a category from the sidebar to get started.</p>
                 </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
-          )}
-        </div>
+              )}
+              {isReady && messages.length === 0 && (
+                <div className="flex flex-col items-center justify-center h-full px-8 text-center">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-sm border border-slate-200 mb-4 select-none">
+                    {activeGeo ? activeGeo.flag : activeNav?.id === 'product' ? '📦' : activeNav?.id === 'email' ? '✉️' : activeNav?.id === 'training' ? '🎓' : '📞'}
+                  </div>
+                  <h3 className="text-base font-semibold text-slate-800 mb-1">{headerLabel}</h3>
+                  <p className="text-slate-400 text-sm">{placeholder}</p>
+                </div>
+              )}
+              {messages.length > 0 && (
+                <div className="max-w-3xl mx-auto px-6 py-6 space-y-5">
+                  {messages.map((msg, i) => (
+                    <div key={i} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      {msg.role === 'assistant' && (
+                        <div className="w-7 h-7 bg-red-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 select-none">B</div>
+                      )}
+                      <div className={`flex flex-col gap-1 ${msg.role === 'user' ? 'items-end max-w-[72%]' : 'flex-1 min-w-0'}`}>
+                        <div className={`rounded-2xl px-4 py-3 w-full ${
+                          msg.role === 'user'
+                            ? 'text-white rounded-br-sm'
+                            : 'bg-white text-slate-700 rounded-bl-sm border border-slate-200 shadow-sm'
+                        }`} style={msg.role === 'user' ? { background: '#1B3A6B' } : {}}>
+                          {msg.role === 'user'
+                            ? <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                            : msg.content === '' && isStreaming
+                            ? <TypingDots />
+                            : <MessageContent content={msg.content} />
+                          }
+                        </div>
 
-        {/* Input bar */}
-        <div className="bg-white border-t border-slate-200 px-6 py-4 flex-shrink-0">
-          <div className="max-w-3xl mx-auto">
-            <div className={`flex gap-3 items-end bg-slate-50 rounded-2xl border transition-all px-4 py-3 ${
-              isReady
-                ? 'border-slate-300 focus-within:border-red-400 focus-within:ring-2 focus-within:ring-red-100'
-                : 'border-slate-200 opacity-50'
-            }`}>
-              <textarea
-                ref={textareaRef}
-                value={input}
-                onChange={handleChange}
-                onKeyDown={handleKey}
-                placeholder={placeholder}
-                rows={1}
-                disabled={isStreaming || !isReady}
-                className="flex-1 resize-none bg-transparent text-sm text-slate-900 placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed min-h-[24px] max-h-[180px] overflow-y-auto leading-relaxed"
-              />
-              <button
-                onClick={() => sendMessage(input)}
-                disabled={!input.trim() || isStreaming || !isReady}
-                aria-label="Send"
-                className="w-8 h-8 bg-red-600 text-white rounded-xl flex items-center justify-center hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-              >
-                <IconSend />
-              </button>
+                        {/* Token badge + rating — only on completed assistant messages */}
+                        {msg.role === 'assistant' && msg.content && !isStreaming && (
+                          <div className="space-y-1 w-full">
+                            {msg.usage && (
+                              <div className="flex items-center gap-2 px-1">
+                                <span className="text-[10px] text-slate-400 font-mono">↑{msg.usage.input.toLocaleString()} ↓{msg.usage.output.toLocaleString()} tokens</span>
+                                <span className="text-[10px] text-slate-300">·</span>
+                                <span className="text-[10px] text-slate-400 font-mono">${calcCost(msg.usage).toFixed(4)}</span>
+                                <span className="text-[10px] text-slate-300">·</span>
+                                <span className="text-[10px] text-slate-400 font-mono">{msg.usage.model.replace('claude-', '').replace('-20251001', '')}</span>
+                              </div>
+                            )}
+                            <RatingButtons onRate={(r, c) => handleRate(i, r, c)} />
+                          </div>
+                        )}
+                      </div>
+                      {msg.role === 'user' && (
+                        <div className="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs font-bold flex-shrink-0 mt-0.5 select-none">R</div>
+                      )}
+                    </div>
+                  ))}
+                  <div ref={messagesEndRef} />
+                </div>
+              )}
             </div>
-            <p className="text-center text-slate-400 text-xs mt-2">
-              Enter to send · Shift+Enter for new line
-            </p>
-          </div>
-        </div>
+
+            {/* Input bar */}
+            <div className="bg-white border-t border-slate-200 px-6 py-4 flex-shrink-0">
+              <div className="max-w-3xl mx-auto">
+                <div className={`flex gap-3 items-end bg-slate-50 rounded-2xl border transition-all px-4 py-3 ${isReady ? 'border-slate-300 focus-within:border-red-400 focus-within:ring-2 focus-within:ring-red-100' : 'border-slate-200 opacity-50'}`}>
+                  <textarea
+                    ref={textareaRef}
+                    value={input}
+                    onChange={handleChange}
+                    onKeyDown={handleKey}
+                    placeholder={placeholder}
+                    rows={1}
+                    disabled={isStreaming || !isReady}
+                    className="flex-1 resize-none bg-transparent text-sm text-slate-900 placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed min-h-[24px] max-h-[180px] overflow-y-auto leading-relaxed"
+                  />
+                  <button onClick={() => sendMessage(input)} disabled={!input.trim() || isStreaming || !isReady} aria-label="Send"
+                    className="w-8 h-8 bg-red-600 text-white rounded-xl flex items-center justify-center hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0">
+                    <IconSend />
+                  </button>
+                </div>
+                <p className="text-center text-slate-400 text-xs mt-2">Enter to send · Shift+Enter for new line</p>
+              </div>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
