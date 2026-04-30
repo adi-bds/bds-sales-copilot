@@ -255,8 +255,12 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   if (/fifa|world.?cup|soccer|football.*event|fan.?zone|tifo|stadium.*banner|selfie.*frame|country.*flag/.test(recentText)) {
     files.add('products/products_fifa_2026.md');
   }
-  // "backdrop" alone → could be fabric media wall OR floral wall
-  if (/\bbackdrop\b/.test(recentText)) {
+  // "backdrop" + stand/frame → only load stand/accessory files, NOT the 54KB media walls file
+  if (/\bbackdrop\b/.test(recentText) && /\bstand\b|frame.?only|just.?the.?frame|no.?fabric/.test(recentText)) {
+    files.add('products/products_other.md');
+    files.add('products/products_banners_printing.md');
+  } else if (/\bbackdrop\b/.test(recentText)) {
+    // Generic "backdrop" → could be fabric media wall OR floral wall
     files.add('products/products_media_walls_backdrops.md');
     files.add('products/products_other.md');
   }
