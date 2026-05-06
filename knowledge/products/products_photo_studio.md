@@ -1,319 +1,229 @@
-# BDS Products: Photo Studio
+# Photo Studio & Table Covers — 44 Products
 
-**47 products**
+All prices are base USD. Format: name, price range, URL, available options.
 
+---
 
-
-## Backdrop Accessories
-
-### ADJUSTABLE BACKDROP STAND (10' W x 8' H)
-- **Price:** $259
-- **URL:** https://www.backdropsource.com/products/adjustable-backdrop-stand-10ft-x-8ft
-- **Title:** Default Title
-
-
-## Circle Backdrop Stand
-
-### Round Frame High Leg Stand
-- **Price:** $391
-- **URL:** https://www.backdropsource.com/products/round-frame-with-high-leg-stand
-- **Frame Size:** Diameter 1.5m
-- **Printed fabric:** Single side graphic printed
-- **Hardware:** with aluminum frame
-
-
-## Photobooth Enclosure
+## Photobooth Enclosure (26 products)
 
 ### 360 Spinner Booth Enclosure
-- **Price:** $963
+- **Price:** $394–$1,703
 - **URL:** https://www.backdropsource.com/products/360-spinner-booth-enclosure
-- **Choose Size (W x H):** 10ft W x 7.5ft H * 2panels
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### 360 View 4 Panel Photo Booth Enclosure
-- **Price:** $1580
+- **Price:** $512–$2,467
 - **URL:** https://www.backdropsource.com/products/360-view-4-panel-photobooth-enclosure-exhibition-display
-- **Choose Size (Dia x H):** 10ft Dia x 9ft H x 4.3ft Doorway
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (Dia x H) · Choose Printing Option · Choose Hardware Option
 
 ### 360° Custom Printed Exhibition Booth
-- **Price:** $1773
+- **Price:** $749–$1,871
 - **URL:** https://www.backdropsource.com/products/360-custom-printed-photo-booth-backdrop-wall
-- **Choose Size (W x H):** 13ft W x 9ft H x 3.3ft Doorway
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### 360° Custom Printed Exhibition Booth with LED lights
-- **Price:** $2755
+- **Price:** $782–$2,853
 - **URL:** https://www.backdropsource.com/products/360-custom-printed-exhibition-booth-with-led-lights
-- **Choose Size (W x H):** 13ft W x 9ft H x 3.3ft Doorway
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame + LED strips
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### 360° Signature Capture Booth
-- **Price:** $731
+- **Price:** $321–$1,251
 - **URL:** https://www.backdropsource.com/products/360-signature-capture-booth
-- **Choose Size (Dia x H):** 10ft Dia x 8.2ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (Dia x H) · Choose Printing Option · Choose Hardware Option
 
 ### Cube Tent- Full Doorway Photo Booth
-- **Price:** $1822
+- **Price:** $682–$2,905
 - **URL:** https://www.backdropsource.com/products/the-rectangle-tent-photobooth
-- **Choose Size (W x H x D):** 10ft W x 8ft H x 10ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Cube Tent- Semi Doorway Photo Booth
-- **Price:** $1952
+- **Price:** $776–$3,056
 - **URL:** https://www.backdropsource.com/products/the-square-cube-tent-photobooth
-- **Choose Size (W x H x D):** 10ft W x 8ft H x 10ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Cube Tent- Wide Doorway Photo Booth
-- **Price:** $1772
+- **Price:** $725–$2,833
 - **URL:** https://www.backdropsource.com/products/rectangular-closed-photobooth-enclosure-displays
-- **Choose Size (W x H x D):** 10ft W x 8ft H x 10ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Custom 180° Curved Enclosure Wall
-- **Price:** $892
+- **Price:** $356–$927
 - **URL:** https://www.backdropsource.com/products/custom-180-degree-curved-enclosure-wall
-- **Choose Size (W x H x D):** 10ft W x 8ft H x 5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Custom Printed 2 Sided Photo booth Enclosure
-- **Price:** $666
+- **Price:** $214–$815
 - **URL:** https://www.backdropsource.com/products/custom-printed-2-sided-photo-booth-enclosure
-- **Choose Size (W x H):** 6.6ft W x 6.6ft H * 2panels
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Custom Printed 3 Sided Photo Booth Enclosure
-- **Price:** $902
+- **Price:** $356–$1,191
 - **URL:** https://www.backdropsource.com/products/custom-printed-3-sided-photobooth-enclosure
-- **Choose Size (W x H x D):** 6.5ft W x 6.5ft H x 6.5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Custom Printed L - Shaped Exhibition Booth
-- **Price:** $767
+- **Price:** $307–$805
 - **URL:** https://www.backdropsource.com/products/custom-printed-l-shaped-exhibition-booth
-- **Choose Size (W x H x D):** 7.8ft W x 7.8ft H x 6.5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Custom Printed Trade Show Corner Booth (2 Walls)
-- **Price:** $1013
+- **Price:** $446–$1,065
 - **URL:** https://www.backdropsource.com/products/custom-printed-photo-booth-covers-2-walls
-- **Choose Size (W x H x D):** 7.8ft W x 7.8ft H x 7.8ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Custom Tension Fabric U-Shape Booth Backdrop
-- **Price:** $1250
+- **Price:** $557–$1,319
 - **URL:** https://www.backdropsource.com/products/custom-printed-u-shaped-photo-booth-covers-3-walls-sides
-- **Choose Size (W x H x D):** 7.8ft W x 7.8ft H x 7.8ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### DJ Table Facade Booth
-- **Price:** $317
+- **Price:** $123–$384
 - **URL:** https://www.backdropsource.com/products/dj-table-facade-booth
-- **Choose Size (W x H x D):** 6ft W x 4ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Entrance Arc Display Media Wall for Exhibition Booth
-- **Price:** $1045
+- **Price:** $472–$1,110
 - **URL:** https://www.backdropsource.com/products/entrance-arc-display-media-wall-for-exhibition
-- **Choose Size (L x W x H):** 6.5ft L x 3ft W1 x 8ft W2 x 8ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (L x W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Fabric Vogue Booth
-- **Price:** $900
+- **Price:** $456–$1,520
 - **URL:** https://www.backdropsource.com/products/fabric-vogue-booth
-- **Choose Size (W x H x D):** 7.5ft W x 7.5ft H x 7.5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Half Circle Photo Booth Enclosure
-- **Price:** $1893
+- **Price:** $530–$1,946
 - **URL:** https://www.backdropsource.com/products/half-circle-photo-booth-enclosure
-- **Choose Size (Dia x height):** 9ft Dia x 8ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame + LED strips
+- **Options:** Choose Size (Dia x height) · Choose Printing Option · Choose Hardware Option
 
 ### Hexagon Photo Booth Enclosure
-- **Price:** $1740
+- **Price:** $902–$2,723
 - **URL:** https://www.backdropsource.com/products/hexagon-photobooth-enclosure
-- **Choose Size (Dia x H):** 10ft Dia x 8ft H x 5ft Doorway
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (Dia x H) · Choose Printing Option · Choose Hardware Option
 
 ### Hexagonal Vogue Booth Enclosure
-- **Price:** $1923
+- **Price:** $552–$1,983
 - **URL:** https://www.backdropsource.com/products/hexagonal-vogue-booth-enclosure
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
-- **Choose LED Light Strips:** With LED light strips
+- **Options:** Choose Printing Option · Choose Hardware Option · Choose LED Light Strips
 
 ### Oval Wide Doorway Enclosure
-- **Price:** $1691
+- **Price:** $394–$1,733
 - **URL:** https://www.backdropsource.com/products/oval-wide-doorway-enclosure
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
-- **Choose LED Light Strips:** With LED light strips
+- **Options:** Choose Printing Option · Choose Hardware Option · Choose LED Light Strips
 
 ### Panoramic Foldable Media Wall with Shape-Shifting Design
-- **Price:** $625
+- **Price:** $233–$625
 - **URL:** https://www.backdropsource.com/products/photography-studio-background-stand-photo-frame-background
-- **Choose Size (W x H):** 13ft W x 8ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Round Enclosure Photo Booth Tent
-- **Price:** $1822
+- **Price:** $697–$2,905
 - **URL:** https://www.backdropsource.com/products/the-round-tent-photobooth
-- **Choose Size (Dia x H):** 10ft Dia x 8ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (Dia x H) · Choose Printing Option · Choose Hardware Option
 
 ### Spiral Backdrop for Photo Booths
-- **Price:** $713
+- **Price:** $414–$758
 - **URL:** https://www.backdropsource.com/products/spiral-backdrop-for-photo-booths
-- **Choose Size (W x H):** 10ft W x 8ft H1 | 4ft H2
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### The Oval C Photobooth Enclosure
-- **Price:** $1750
+- **Price:** $704–$2,812
 - **URL:** https://www.backdropsource.com/products/oval-c-photobooth-enclosure-display
-- **Choose Size (Dia x H):** 10ft Dia x 8ft H x 3.3ft Doorway
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (Dia x H) · Choose Printing Option · Choose Hardware Option
 
 ### U Shape Wide Photo Booth
-- **Price:** $860
+- **Price:** $387–$905
 - **URL:** https://www.backdropsource.com/products/u-shape-wide-photo-booth
-- **Choose Size (W x H x D):** 12ft W x 8ft H x 4ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
-
-## Table Covers
+## Table Covers (18 products)
 
 ### Convertible Table Covers
-- **Price:** $143
+- **Price:** $123–$254
 - **URL:** https://www.backdropsource.com/products/convertible-table-covers
-- **Choose Size:** 8ft (Fits 6ft Table – Fitted Style)
-- **Choose Style:** 4sided
+- **Options:** Choose Size · Choose Style
 
 ### Cross-over Stretch Table Covers
-- **Price:** $125
+- **Price:** $125–$192
 - **URL:** https://www.backdropsource.com/products/cross-over-stretch-table-covers
-- **Choose Size (L x W x H):** 4ft L x 2.5ft W x 2.4ft H
+- **Options:** Choose Size (L x W x H)
 
 ### Custom Fitted Table Skirts with Top
-- **Price:** $161
+- **Price:** $161–$211
 - **URL:** https://www.backdropsource.com/products/custom-fitted-table-skirts-with-top
-- **Choose Size (L x W x H):** 6ft L x 2.5ft W x 2.4ft H
-- **Choose Style:** 4 sided
-- **Choose Color:** black
+- **Options:** Choose Size (L x W x H) · Choose Style · Choose Color
 
 ### Custom Fitted Table Skirts without Top
-- **Price:** $138
+- **Price:** $138–$165
 - **URL:** https://www.backdropsource.com/products/custom-fitted-table-skirts-without-top
-- **Choose Size (L x W x H):** 6ft L x 2.5ft W x 2.4ft H
-- **Choose Style:** 4 sided
+- **Options:** Choose Size (L x W x H) · Choose Style
 
 ### Fitted Table Cover
-- **Price:** $104
+- **Price:** $104–$154
 - **URL:** https://www.backdropsource.com/products/custom-fitted-table-covers
-- **Choose Size (L x W x H):** 4ft L x 2.5ft W x 2.4ft H
-- **Choose Style:** 3 sided-open back
+- **Options:** Choose Size (L x W x H) · Choose Style
 
 ### Pleated Banquet Chair Cover
 - **Price:** $161
 - **URL:** https://www.backdropsource.com/products/pleated-banquet-chair-cover
-- **Choose Size (W x L x H):** 1.25ft W x 1.6ft L x 2.75ft H
+- **Options:** Choose Size (W x L x H)
 
 ### Pleated Table Covers
-- **Price:** $109
+- **Price:** $109–$146
 - **URL:** https://www.backdropsource.com/products/pleated-table-covers
-- **Choose Size (L x W x H):** 4ft L x 2.5ft W x 2.4ft H
+- **Options:** Choose Size (L x W x H)
 
 ### Round Fitted Table Covers
-- **Price:** $77
+- **Price:** $77–$101
 - **URL:** https://www.backdropsource.com/products/round-fitted-table-covers
-- **Choose Size (Dia x H):** 2ft Dia x 2.4ft Height
+- **Options:** Choose Size (Dia x H)
 
 ### Round Stretch Table Covers
-- **Price:** $82
+- **Price:** $82–$142
 - **URL:** https://www.backdropsource.com/products/round-stretch-table-covers
-- **Choose Size (Dia x H):** 2ft Dia x 2.5ft Height
+- **Options:** Choose Size (Dia x H)
 
 ### Round Stretch Table Topper
-- **Price:** $58
+- **Price:** $58–$62
 - **URL:** https://www.backdropsource.com/products/round-stretch-table-topper
-- **Choose Size - Dia:** 2ft Diameter
+- **Options:** Choose Size - Dia
 
 ### Round Table Covers
-- **Price:** $85
+- **Price:** $79–$169
 - **URL:** https://www.backdropsource.com/products/round-table-covers
-- **Choose Size (Dia):** 5ft Diameter
+- **Options:** Choose Size (Dia)
 
 ### Square Stretch Table Topper
-- **Price:** $62
+- **Price:** $62–$86
 - **URL:** https://www.backdropsource.com/products/square-stretch-table-topper
-- **Choose Size(W x D):** 4ft W x 4ft D
+- **Options:** Choose Size(W x D)
 
 ### Square Table Covers
-- **Price:** $62
+- **Price:** $62–$86
 - **URL:** https://www.backdropsource.com/products/square-table-covers
-- **Choose Size (W x H):** 4ft Table (48" W x 48" H)
+- **Options:** Choose Size (W x H)
 
 ### Standard Table Covers
-- **Price:** $104
+- **Price:** $104–$178
 - **URL:** https://www.backdropsource.com/products/full-color-table-covers-for-standard-tables
-- **Choose Size (L x W x H):** 4ft L x 2.5ft W x 2.4ft H
-- **Choose Style:** 3 sided
+- **Options:** Choose Size (L x W x H) · Choose Style
 
 ### Stretch Banquet Chair Cover
 - **Price:** $44
 - **URL:** https://www.backdropsource.com/products/banquet-chair-cover
-- **Choose Size (W x L x H):** 1.25ft W x 1.6ft L x 2.75ft H
+- **Options:** Choose Size (W x L x H)
 
 ### Stretched Table Covers
-- **Price:** $112
+- **Price:** $112–$150
 - **URL:** https://www.backdropsource.com/products/stretched-table-covers-for-customized-tables
-- **Choose Size (L x W x H):** 4ft L x 2.5ft W x 2.4ft H
-- **Choose Style:** 3 sided-open back
+- **Options:** Choose Size (L x W x H) · Choose Style
 
 ### Table Runner
-- **Price:** $60
+- **Price:** $60–$480
 - **URL:** https://www.backdropsource.com/products/table-runner
-- **Choose Size (W x H):** Small - 2ft W x 7ft H
-- **Choose Quantity:** 1 unit
+- **Options:** Choose Size (W x H) · Choose Quantity
 
 ### Table Top Banner - Half Display
-- **Price:** $244
+- **Price:** $220–$317
 - **URL:** https://www.backdropsource.com/products/table-top-banner-half-display
-- **Choose Size (W x H):** 4ft W x 1.6ft H
-- **Choose Printing Option:** Single side graphic printed
-
-
-## Tunnel Arches
-
-### Tunnel Shaped Fabric Display
-- **Price:** $1999
-- **URL:** https://www.backdropsource.com/products/tunnel-shaped-fabric-display
-- **Choose Size (W x H x D):** 18ft W x 8ft H x 14.5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option

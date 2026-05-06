@@ -1,152 +1,158 @@
-# FIFA World Cup 2026 — Product Collection
+# FIFA World Cup 2026 — 30 Products
 
-Special collection for FIFA World Cup 2026 events. All products are custom-branded and available for soccer/football fan events, stadium activations, sponsor booths, and fan zones.
-
-Collection URL: https://www.backdropsource.com/collections/fifa-world-cup-2026
+All prices are base USD. Format: name, price range, URL, available options.
 
 ---
 
-### Custom Printed Country Flags
-- **Price:** $51.00
-- **URL:** https://www.backdropsource.com/products/custom-printed-country-flags
-- **Notes:** Custom printed flags representing any country, ideal for fan zones and stadium displays.
+## FIFA World Cup 2026 (28 products)
 
-### Large-Format TIFO Stadium Banner
-- **Price:** $71.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-large-tifo-stadium-banners
-- **Notes:** Large-format TIFO banners designed for stadium display, fan sections, and supporter groups.
-
-### FIFA 2026 3D Slanted Arch Display Wall
-- **Price:** $513.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-3d-slanted-arch-display-wall
-- **Notes:** Eye-catching 3D slanted arch display wall for event entrances, sponsor activations, and photo opportunities.
-
-### FIFA 2026 Square Table Covers
-- **Price:** $62.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-square-table-covers
-- **Notes:** Custom-branded square table covers for event tables, merchandise stands, and fan zones.
-
-### FIFA 2026 Round Table Covers
-- **Price:** $79.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-round-table-covers
-- **Notes:** Custom-branded round table covers for cocktail tables and event displays.
-
-### FIFA 2026 Stretched Table Covers
-- **Price:** $112.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-stretched-table-covers
-- **Notes:** Stretch-fit table covers with a clean, professional finish for sponsor tables.
-
-### FIFA 2026 Round Fabric Display Counter
-- **Price:** $371.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-round-fabric-display-counter
-- **Notes:** Round fabric display counter for sponsor booths, merchandise sales, and registration desks.
-
-### FIFA 2026 Table Pop Up Fabric Display Counter
-- **Price:** $353.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-table-pop-up-fabric-display-counter
-- **Notes:** Compact pop-up fabric counter that sits on a table, ideal for smaller activations.
-
-### FIFA 2026 Event Reception Counter – 7ft Wide
-- **Price:** $1,032.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-event-reception-counter-7ft-wide
-- **Notes:** Large 7ft wide reception counter for event entrances, VIP areas, and sponsor lounges.
+### FIFA 2026 - Custom Themed Selfie Frames for Events
+- **Price:** $203–$374
+- **URL:** https://www.backdropsource.com/products/custom-fifa-themed-selfie-frames-for-events
+- **Options:** Choose Size (W x H) · Choose Printing Option
 
 ### FIFA 2026 3D Curved Wave Arch Backdrop
-- **Price:** $754.00
+- **Price:** $247–$754
 - **URL:** https://www.backdropsource.com/products/fifa-2026-3d-curved-wave-arch-backdrop
-- **Notes:** Dramatic 3D curved wave arch backdrop for photo ops, media walls, and event entrances.
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
-### FIFA 2026 Custom Themed Selfie Frames for Events
-- **Price:** $227.00
-- **URL:** https://www.backdropsource.com/products/custom-fifa-themed-selfie-frames-for-events
-- **Notes:** Custom FIFA-themed selfie frames — great for fan engagement and social media activations.
-
-### FIFA 2026 Teardrop Flag
-- **Price:** $147.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-teardrop-flag
-- **Notes:** Teardrop-shaped flag banner for outdoor event entrances, fan zones, and sponsor areas.
-
-### FIFA 2026 Rectangle Flag
-- **Price:** $147.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-rectangle-flag
-- **Notes:** Rectangle flag banner for outdoor use at stadiums, fan parks, and sponsor activations.
-
-### FIFA 2026 Convex Feather Flag
-- **Price:** $146.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-convex-feather-flag
-- **Notes:** Convex-shaped feather flag for high-visibility outdoor branding.
+### FIFA 2026 3D Slanted Arch Display Wall
+- **Price:** $170–$641
+- **URL:** https://www.backdropsource.com/products/fifa-2026-3d-slanted-arch-display-wall
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### FIFA 2026 Concave Feather Flag
-- **Price:** $146.00
+- **Price:** $68–$255
 - **URL:** https://www.backdropsource.com/products/fifa-2026-concave-feather-flag
-- **Notes:** Concave-shaped feather flag for outdoor event and sponsor branding.
+- **Options:** Choose Size · Choose Printing Option · Choose Hardware Option
 
-### FIFA 2026 Heavy Duty Custom Canopy Tent (20ft x 10ft)
-- **Price:** $1,355.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-20ft-x-10ft
-- **Notes:** Large 20x10ft heavy-duty custom canopy tent for major sponsor activations and fan zones.
-
-### FIFA 2026 Heavy Duty Custom Canopy Tent (15ft x 10ft)
-- **Price:** $1,063.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-15ft-x-10ft
-- **Notes:** 15x10ft heavy-duty canopy tent for mid-size outdoor activations.
-
-### FIFA 2026 Heavy Duty Custom Canopy Tent (10ft x 10ft)
-- **Price:** $788.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-10ft-x-10ft
-- **Notes:** Standard 10x10ft heavy-duty canopy tent, the most popular size for sponsor booths.
-
-### FIFA 2026 Heavy Duty Custom Canopy Tent (6.5ft x 10ft)
-- **Price:** $978.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-6-5ft-x-10ft
-- **Notes:** Compact 6.5x10ft canopy tent for tighter spaces and smaller activations.
-
-### FIFA 2026 Rectangle Fabric Counter Display
-- **Price:** $373.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-rectangle-fabric-counter-display
-- **Notes:** Rectangle fabric counter display for sponsor booths, merchandise, and info desks.
-
-### FIFA 2026 Standard Table Covers
-- **Price:** $104.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-standard-table-covers
-- **Notes:** Standard fitted table covers for event tables and sponsor displays.
-
-### FIFA 2026 N-Frame Fabric Archway
-- **Price:** $1,757.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-n-frame-fabric-archway
-- **Notes:** Large N-frame fabric archway for grand entrances, tunnel walk-throughs, and stadium activations.
-
-### FIFA 2026 Square Fabric Display Arch
-- **Price:** $525.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-square-fabric-display-arch
-- **Notes:** Square fabric display arch for event entrances and sponsor photo opportunities.
-
-### FIFA 2026 Curved Velcro Media Wall
-- **Price:** $332.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-curved-velcro-media-wall
-- **Notes:** Curved velcro media wall for press conferences, photo backdrops, and sponsor branding.
-
-### FIFA 2026 Straight Pop-Up Wall
-- **Price:** $332.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-straight-pop-up-wall
-- **Notes:** Straight pop-up display wall for quick setup at fan zones and sponsor booths.
-
-### FIFA 2026 Wall-Mounted SEG Light Box
-- **Price:** $423.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-wall-mounted-seg-light-box
-- **Notes:** Wall-mounted SEG backlit light box for indoor stadium concourses, VIP areas, and sponsor displays.
-
-### FIFA 2026 Trade Show Banner Stands
-- **Price:** $249.00
-- **URL:** https://www.backdropsource.com/products/fifa-2026-trade-show-banner-stands
-- **Notes:** Retractable banner stands with FIFA 2026 branding for trade shows and fan events.
+### FIFA 2026 Convex Feather Flag
+- **Price:** $68–$255
+- **URL:** https://www.backdropsource.com/products/fifa-2026-convex-feather-flag
+- **Options:** Choose Size · Choose Printing Option · Choose Hardware Option
 
 ### FIFA 2026 Curved Tension Display
-- **Price:** $326.00
+- **Price:** $167–$724
 - **URL:** https://www.backdropsource.com/products/fifa-2026-curved-tension-display
-- **Notes:** Curved tension fabric display for sponsor booths, fan zones, and event backdrops.
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Curved Velcro Media Wall
+- **Price:** $118–$850
+- **URL:** https://www.backdropsource.com/products/fifa-2026-curved-velcro-media-wall
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Event Reception Counter – 7ft Wide
+- **Price:** $177–$1,032
+- **URL:** https://www.backdropsource.com/products/fifa-2026-event-reception-counter-7ft-wide
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Heavy Duty Custom Canopy Tent (10ft x 10ft)
+- **Price:** $322–$1,339
+- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-10ft-x-10ft
+- **Options:** Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Heavy Duty Custom Canopy Tent (15ft x 10ft)
+- **Price:** $413–$1,750
+- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-15ft-x-10ft
+- **Options:** Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Heavy Duty Custom Canopy Tent (20ft x 10ft)
+- **Price:** $560–$2,264
+- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-20ft-x-10ft
+- **Options:** Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Heavy Duty Custom Canopy Tent (6.5ft x 10ft)
+- **Price:** $494–$1,519
+- **URL:** https://www.backdropsource.com/products/fifa-2026-heavy-duty-custom-canopy-tent-6-5ft-x-10ft
+- **Options:** Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 N-Frame Fabric Archway
+- **Price:** $845–$2,749
+- **URL:** https://www.backdropsource.com/products/fifa-2026-n-frame-fabric-archway
+- **Options:** Choose Printing Option · Choose Hardware Option · Choose Light Option
+
+### FIFA 2026 Rectangle Fabric Counter Display
+- **Price:** $123–$373
+- **URL:** https://www.backdropsource.com/products/fifa-2026-rectangle-fabric-counter-display
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Rectangle Flag
+- **Price:** $69–$223
+- **URL:** https://www.backdropsource.com/products/fifa-2026-rectangle-flag
+- **Options:** Choose Size · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Round Fabric Display Counter
+- **Price:** $118–$371
+- **URL:** https://www.backdropsource.com/products/fifa-2026-round-fabric-display-counter
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Round Table Covers
+- **Price:** $79–$169
+- **URL:** https://www.backdropsource.com/products/fifa-2026-round-table-covers
+- **Options:** Choose Size (Dia)
+
+### FIFA 2026 Square Fabric Display Arch
+- **Price:** $176–$961
+- **URL:** https://www.backdropsource.com/products/fifa-2026-square-fabric-display-arch
+- **Options:** Choose Size (L x W x H) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Square Table Covers
+- **Price:** $62–$86
+- **URL:** https://www.backdropsource.com/products/fifa-2026-square-table-covers
+- **Options:** Choose Size (W x H)
+
+### FIFA 2026 Standard Table Covers
+- **Price:** $104–$178
+- **URL:** https://www.backdropsource.com/products/fifa-2026-standard-table-covers
+- **Options:** Choose Size (L x W x H) · Choose Style
 
 ### FIFA 2026 Straight Backdrop Display
-- **Price:** $336.00
+- **Price:** $162–$734
 - **URL:** https://www.backdropsource.com/products/fifa-2026-straight-backdrop-display
-- **Notes:** Straight tension fabric backdrop display for press areas, photo ops, and sponsor walls.
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Straight Pop-Up Wall
+- **Price:** $118–$850
+- **URL:** https://www.backdropsource.com/products/fifa-2026-straight-pop-up-wall
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Stretched Table Covers
+- **Price:** $112–$150
+- **URL:** https://www.backdropsource.com/products/fifa-2026-stretched-table-covers
+- **Options:** Choose Size (L x W x H) · Choose Style
+
+### FIFA 2026 Table Pop Up Fabric Display Counter
+- **Price:** $75–$353
+- **URL:** https://www.backdropsource.com/products/fifa-2026-table-pop-up-fabric-display-counter
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Teardrop Flag
+- **Price:** $69–$255
+- **URL:** https://www.backdropsource.com/products/fifa-2026-teardrop-flag
+- **Options:** Choose Size · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Trade Show Banner Stands
+- **Price:** $105–$395
+- **URL:** https://www.backdropsource.com/products/fifa-2026-trade-show-banner-stands
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### FIFA 2026 Wall-Mounted SEG Light Box
+- **Price:** $82–$4,062
+- **URL:** https://www.backdropsource.com/products/fifa-2026-wall-mounted-seg-light-box
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
+
+### Large-format TIFO stadium banner
+- **Price:** $71–$101,645
+- **URL:** https://www.backdropsource.com/products/fifa-2026-large-tifo-stadium-banners
+- **Options:** Choose Fabric Option · Choose Size (W x H)
+
+## Floral & Accessories (2 products)
+
+### Cicadafest 2026 – Media Wall Sponsor Slot
+- **Price:** $0
+- **URL:** https://www.backdropsource.com/products/cicadafest-2026-media-wall-sponsor-slot
+
+### Custom Printed Country Flags
+- **Price:** $51–$252
+- **URL:** https://www.backdropsource.com/products/custom-printed-country-flags
+- **Options:** Choose Size (W x H) · Choose Printing Option

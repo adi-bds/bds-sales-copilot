@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest } from 'next/server';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { retrieveKnowledge } from '@/lib/milvus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
@@ -70,9 +71,10 @@ function lookupOrders(messages: Message[]): string {
   const recentRaw = messages.slice(-4).map((m) => m.content).join(' ');
   const recentLow = recentRaw.toLowerCase();
 
-  // Only run order lookup when the conversation hints at order/customer history
+  // Only run order lookup when the conversation hints at order/customer history.
+  // Keep this broad — reps phrase things many ways.
   if (
-    !/order|#\d{4,}|us#|au#|eu#|nz#|ca#|previously|reorder|last order|same order|what did|who is|who'?s|history|i ordered|i bought/.test(
+    !/order|purchase|bought|#\d{4,}|us#|au#|eu#|nz#|ca#|previously|reorder|last order|same order|what did|who is|who'?s|history|look.?up|pull.?up|find.*client|find.*customer|account for|call prep|their history|past orders|previous orders|has.*ordered|have.*ordered|they.?ve ordered|@[\w.-]+\.\w/.test(
       recentLow
     )
   ) {
@@ -107,15 +109,23 @@ function lookupOrders(messages: Message[]): string {
     });
   }
 
-  // 3. Match by name — check all two-word combinations from recent text
-  // against the name index (case-insensitive). Works regardless of how
-  // the rep types the name (all lower, Title Case, ALL CAPS, etc.)
+  // 3. Match by name — try 2-word AND 3-word consecutive combinations.
+  // The index has ~500 three-word names (e.g. "John Paul Linton") so
+  // pair-only matching silently misses them.
   const wordTokens = recentRaw.toLowerCase().match(/\b[a-z]{2,}\b/g) || [];
   for (let wi = 0; wi < wordTokens.length - 1; wi++) {
-    const key = `${wordTokens[wi]} ${wordTokens[wi + 1]}`;
-    (index.by_name[key] || []).forEach((n) => {
+    // 2-word pair
+    const pair = `${wordTokens[wi]} ${wordTokens[wi + 1]}`;
+    (index.by_name[pair] || []).forEach((n) => {
       if (index.orders[n]) found.set(n, index.orders[n]);
     });
+    // 3-word triplet
+    if (wi + 2 < wordTokens.length) {
+      const triplet = `${wordTokens[wi]} ${wordTokens[wi + 1]} ${wordTokens[wi + 2]}`;
+      (index.by_name[triplet] || []).forEach((n) => {
+        if (index.orders[n]) found.set(n, index.orders[n]);
+      });
+    }
   }
 
   if (found.size === 0) return '';
@@ -162,27 +172,36 @@ const ALWAYS_LOAD = ['core/sales_playbook.md'];
 type Message = { role: string; content: string };
 
 function detectFilesToLoad(messages: Message[], category?: string, geo?: string): string[] {
-  // Build detection text from recent messages + category/geo hints from the UI
-  const categoryHint = [
-    category === 'product'  ? 'product recommend catalog' : '',
-    category === 'email'    ? 'draft email write' : '',
-    category === 'training' ? 'train explain how product' : '',
-    category === 'callprep' ? 'client customer account history call prep' : '',
-    category === 'geo'      ? 'client order' : '',
-    geo === 'uk'  ? 'uk client email' : '',
-    geo === 'us'  ? 'us order client' : '',
-    geo === 'aus' ? 'australia order client' : '',
-    geo === 'nz'  ? 'new zealand order client' : '',
-    geo === 'ca'  ? 'canada order client' : '',
-  ].filter(Boolean).join(' ');
-
-  const recentText = (messages
+  // Build detection text from recent messages ONLY — no category/geo hints injected.
+  // Category and geo drive explicit file loads below; injecting their keywords into
+  // recentText caused expensive files (blog_posts.md, b2b_customers.md) to load on
+  // every "hello" typed in the wrong category tab.
+  const recentText = messages
     .slice(-4)
     .map((m) => m.content)
-    .join(' ') + ' ' + categoryHint)
+    .join(' ')
     .toLowerCase();
 
   const files = new Set<string>(ALWAYS_LOAD);
+
+  // ── Category-driven loads (explicit — no regex matching) ──────────────────
+  // Load the most useful file for the chosen category even when the message
+  // text alone wouldn't trigger it.  This replaces the old keyword-hint system.
+  if (category === 'training') {
+    // Rep is in training mode — give them pitch angles and product context
+    files.add('core/blog_posts.md');
+    // Always include the full sales & order workflow for training sessions
+    files.add('core/rep_workflow.md');
+  }
+  if (category === 'callprep') {
+    // Rep is prepping for a call — load the B2B customer history file
+    files.add('core/b2b_customers.md');
+  }
+  if (category === 'product') {
+    // Product category — TOC is added further below after keyword checks
+  }
+  // Geo-specific order patterns only when the message actually mentions them
+  // (geo hint alone is not enough — we don't want to load 20KB for a "hello")
 
   // ── Situation-based playbooks — apply to ALL geos ────────────────────────
   // Only load when a specific situation is detected — never as a default.
@@ -204,6 +223,26 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   }
   if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch|just reached out|just emailed/.test(recentText)) {
     files.add('uk/uk_initial_inquiry_playbook.md');
+  }
+
+  // ── Rep workflow & process guide ──────────────────────────────────────────
+  // Load the full order workflow doc whenever a rep asks about how the process
+  // works — delivery times, artwork specs, payments, mockup steps, EORI, etc.
+  // Also loads for general "how do I" / "what's the process" training questions.
+  if (
+    /workflow|process|how.?do.?(?:i|we)|step.?by.?step|onboard|new.?rep|train|training|delivery.?time|lead.?time|business.?day|turnaround|artwork.?spec|dpi|resolution|print.?template|wetransfer|dropbox|draft.?order|payment.?method|remittance|purchase.?order|\bpo\b|payment.?proof|eori|international.?ship|confirmed.?order|goes.?to.?production|mockup.?approved|how.?long.?does.?it.?take|when.?will.*ship|what.?happens.?after|next.?step/.test(
+      recentText
+    )
+  ) {
+    files.add('core/rep_workflow.md');
+  }
+
+  // ── Discount codes ────────────────────────────────────────────────────────
+  // Only load when a client is explicitly pushing back on price or asking for
+  // a discount. Never loaded proactively — the AI is instructed not to suggest
+  // codes unless the client asks.
+  if (/discount|promo|coupon|cheaper|price.?match|better.?price|do.{0,10}better|reduce.{0,10}price|lower.?price|any.?deal|any.?offer|negotiate|best.?price|take.?off|knock.?off/.test(recentText)) {
+    files.add('core/discounts.md');
   }
 
   // ── Customization rules ───────────────────────────────────────────────────
@@ -228,7 +267,7 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('products/products_booth_kits.md');
   }
   // Media walls & fabric backdrops
-  if (/media.?wall|tension.?fabric|archway|step.?repeat|seamwall|photo wall/.test(recentText)) {
+  if (/media.?wall|tension.?fabric|archway|step.?repeat|seamwall|photo wall|\bseg\b|\bsego\b|seg.?wall|sego.?display/.test(recentText)) {
     files.add('products/products_media_walls_backdrops.md');
   }
   // Banners & printing (includes scaffolding banners, mesh, vinyl, flags)
@@ -236,7 +275,7 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('products/products_banners_printing.md');
   }
   // Counters, lightboxes, displays
-  if (/\bcounter\b|lightbox|light.?box|snap.?frame|display.?case|podium/.test(recentText)) {
+  if (/\bcounter\b|lightbox|light.?box|snap.?frame|display.?case|podium|\bseg\b|\bsego\b|backlit|led.?box|fabric.?display|modular.?display/.test(recentText)) {
     files.add('products/products_counters_displays.md');
   }
   // Photo studio & table covers
@@ -276,10 +315,19 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     }
   }
 
-  // ── Client intelligence ───────────────────────────────────────────────────
-  if (/\bclient\b|\bcustomer\b|\baccount\b|call.?prep|who.?is|before.?the.?call|their.?history|b2b|previously ordered|same as (before|last time|my last)|reorder|order again|same order|my (last|previous) order|i (ordered|bought) before/.test(recentText)) {
-    files.add('core/b2b_customers.md');
-  }
+  // ── B2B client intelligence (Top 200 summary — call prep only) ───────────
+  // b2b_customers.md is a strategic summary (revenue tier, discount level,
+  // best month) for the top 200 companies. It is NOT order history and must
+  // NOT load for general order lookups — those come from orders_index.json
+  // via lookupOrders() and are injected as the ORDER HISTORY section.
+  // Only load this file when the rep is doing strategic call prep, not when
+  // they're asking "what did this customer order?" (which is 99% of queries).
+  //
+  // Keyword-based loading was removed — it caused b2b_customers.md to load
+  // on any message containing "client", "customer", or "account", which made
+  // the AI answer from the Top 200 list instead of the 17k-order Shopify index.
+  //
+  // It loads via explicit category: `callprep` (handled at the top of this fn).
 
   // ── Product knowledge / pitch angles ──────────────────────────────────────
   if (/\bpitch\b|selling.?point|benefit|feature|why.?choose|use.?case|industry|explain.?how|how.?does/.test(recentText)) {
@@ -320,6 +368,17 @@ Use these as your primary source of truth — cite directly, never guess.
 ${knowledgeSections}${orderSection}`;
 }
 
+// ─── Milvus System Prompt Builder ─────────────────────────────────────────
+// Used when MILVUS_ADDRESS is configured — replaces file-based system prompt
+
+function buildSystemPromptMilvus(knowledgeContext: string, orderContext: string): string {
+  const knowledgeSection = knowledgeContext
+    ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nKNOWLEDGE BASE — retrieved for this query\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nUse these as your primary source of truth — cite directly, never guess.\n\n${knowledgeContext}`
+    : '';
+  const orderSection = orderContext ? `\n\n---\n\n${orderContext}` : '';
+  return `${CORE_INSTRUCTIONS}${knowledgeSection}${orderSection}`;
+}
+
 // ─── Core Instructions ────────────────────────────────────────────────────
 
 const CORE_INSTRUCTIONS = `You are the BDS Sales Copilot for Backdropsource (backdropsource.com) — a senior sales specialist helping reps close deals faster.
@@ -331,7 +390,9 @@ const CORE_INSTRUCTIONS = `You are the BDS Sales Copilot for Backdropsource (bac
 - Products: name, price, URL, one-line reason. Max 3 options.
 - Unknown spec or price: say "Check Shopify admin." Nothing more.
 - Never fabricate product names, prices, or order history.
-- Order history: if ORDER HISTORY section is present, use it. If not, say "I don't have that order on file — check Shopify admin."
+- Product name matching: product names in the catalog may differ slightly from what the rep types (e.g. "SEG" vs "SEGO", "LED Light Box" vs "Backlit Lightbox", "Model 1" vs "– Model 1"). If you find a close match, present it directly and confidently as the likely product — never say "that exact product isn't in my catalog" when you have a near-identical match. Just say "Here's what I have:" and show it. Only say "Check Shopify admin" if you genuinely have nothing close.
+- Discounts: never volunteer a discount code or suggest a lower price unless the client explicitly asks for one. When they do ask, use the DISCOUNTS section only — do not invent codes.
+- Order history: the ORDER HISTORY (SHOPIFY) section is the authoritative source for all individual orders — always use it when present. The B2B CUSTOMERS section is a strategic summary only (revenue tier, top product, best month) and must never be used to answer "what did they order?" questions. If no ORDER HISTORY section is present, say "I don't have that order on file — check Shopify admin."
 
 ## Company
 - HQ: Dallas TX | India office: Coimbatore
@@ -370,6 +431,9 @@ When NOT to ask — answer directly if the type is already clear:
 
 Keep the clarifying question to one line. Don't list every possible option — pick the 2–3 most likely ones based on the query.
 
+## Order & workflow process (REP WORKFLOW section)
+When the REP WORKFLOW section is loaded, use it as the authoritative source for: delivery timelines, artwork requirements, payment methods (Shopify / PO / remittance), when production starts (payment + approval both required), EORI numbers, mockup/revision process, and tool usage (Streak/Shopify/Trello). Quote specifics directly — e.g. "minimum 150 DPI at full size", "5–7 business days from payment and mockup approval."
+
 ## Escalate to manager
 Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or involving safety issues, clients threatening chargebacks or legal action.`;
 
@@ -396,10 +460,28 @@ export async function POST(req: NextRequest) {
       return new Response('Invalid request: messages array required', { status: 400 });
     }
 
-    const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
     const orderContext = lookupOrders(messages as Message[]);
-    const systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
     const model = selectModel();
+
+    // ── System prompt: Milvus RAG if configured, else file-based routing ──
+    const useMilvus = !!(process.env.MILVUS_ADDRESS && process.env.MILVUS_TOKEN && process.env.OPENAI_API_KEY);
+    let systemPrompt: string;
+
+    if (useMilvus) {
+      // Build a rich query from the last 4 messages for semantic retrieval
+      const recentQuery = (messages as Message[])
+        .slice(-4)
+        .map((m) => m.content)
+        .join(' ');
+      const knowledgeContext = await retrieveKnowledge(recentQuery, category);
+      systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext);
+      console.log(`[BDS Copilot] Mode: Milvus RAG | category=${category ?? 'none'}`);
+    } else {
+      // Fallback: keyword-based file routing (works without Milvus configured)
+      const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
+      systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
+      console.log(`[BDS Copilot] Mode: file routing | category=${category ?? 'none'}`);
+    }
 
     const stream = await client.messages.stream({
       model,

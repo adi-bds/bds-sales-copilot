@@ -69,6 +69,29 @@ function exportCSV(entries: FeedbackEntry[]) {
   URL.revokeObjectURL(url);
 }
 
+// ─── Chat history localStorage helpers ───────────────────────────────────
+const CHAT_PREFIX = 'bds_chat_v1_';
+
+function chatStorageKey(navId: string | null, geoCode: string | null): string {
+  if (geoCode) return `${CHAT_PREFIX}geo_${geoCode}`;
+  if (navId)   return `${CHAT_PREFIX}${navId}`;
+  return '';
+}
+function loadChat(navId: string | null, geoCode: string | null): Message[] {
+  const key = chatStorageKey(navId, geoCode);
+  if (!key) return [];
+  try { return JSON.parse(localStorage.getItem(key) ?? '[]'); }
+  catch { return []; }
+}
+function saveChat(navId: string | null, geoCode: string | null, msgs: Message[]) {
+  const key = chatStorageKey(navId, geoCode);
+  if (!key) return;
+  try {
+    if (msgs.length === 0) localStorage.removeItem(key);
+    else localStorage.setItem(key, JSON.stringify(msgs));
+  } catch {}
+}
+
 // ─── Nav types ────────────────────────────────────────────────────────────
 type NavItem   = { id: string; icon: React.ReactNode; label: string; placeholder: string; geo?: boolean };
 type GeoRegion = { code: string; flag: string; label: string; placeholder: string };
@@ -84,6 +107,7 @@ const IconPlus     = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 
 const IconSend     = () => <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>;
 const IconChart    = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>;
 const IconTrash    = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>;
+const IconEdit     = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>;
 
 // ─── Navigation config ─────────────────────────────────────────────────────
 const NAV_ITEMS: NavItem[] = [
@@ -220,8 +244,16 @@ function RatingButtons({ onRate }: { onRate: (r: FeedbackRating, comment: string
 }
 
 // ─── Feedback panel ───────────────────────────────────────────────────────
-function FeedbackPanel({ entries, onClear, onDelete }: { entries: FeedbackEntry[]; onClear: () => void; onDelete: (id: string) => void }) {
-  const [filter, setFilter] = useState<'all' | FeedbackRating>('all');
+function FeedbackPanel({ entries, onClear, onDelete, onEdit }: {
+  entries: FeedbackEntry[];
+  onClear: () => void;
+  onDelete: (id: string) => void;
+  onEdit: (id: string, rating: FeedbackRating, comment: string) => void;
+}) {
+  const [filter, setFilter]       = useState<'all' | FeedbackRating>('all');
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editRating, setEditRating] = useState<FeedbackRating>('correct');
+  const [editComment, setEditComment] = useState('');
 
   const total   = entries.length;
   const correct = entries.filter(e => e.rating === 'correct').length;
@@ -305,42 +337,97 @@ function FeedbackPanel({ entries, onClear, onDelete }: { entries: FeedbackEntry[
         {sorted.length === 0 && total > 0 && (
           <p className="text-sm text-slate-400 text-center pt-8">No entries match this filter.</p>
         )}
-        {sorted.map(e => (
-          <div key={e.id} className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 space-y-2">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-center gap-2 flex-wrap">
-                {ratingBadge(e.rating)}
-                <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full">{e.category}{e.geo ? ` · ${e.geo}` : ''}</span>
-                <span className="text-[10px] text-slate-400">{new Date(e.timestamp).toLocaleString()}</span>
+        {sorted.map(e => {
+          const isEditing = editingId === e.id;
+          return (
+            <div key={e.id} className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 space-y-2">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {ratingBadge(e.rating)}
+                  <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full">{e.category}{e.geo ? ` · ${e.geo}` : ''}</span>
+                  <span className="text-[10px] text-slate-400">{new Date(e.timestamp).toLocaleString()}</span>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-[10px] text-slate-400 font-mono">${e.cost.toFixed(4)}</span>
+                  <button
+                    onClick={() => {
+                      if (isEditing) { setEditingId(null); }
+                      else { setEditingId(e.id); setEditRating(e.rating); setEditComment(e.comment); }
+                    }}
+                    title={isEditing ? 'Cancel edit' : 'Edit this entry'}
+                    className={`transition-colors ${isEditing ? 'text-blue-500' : 'text-slate-300 hover:text-blue-500'}`}
+                  >
+                    <IconEdit />
+                  </button>
+                  <button
+                    onClick={() => onDelete(e.id)}
+                    title="Delete this entry"
+                    className="text-slate-300 hover:text-red-500 transition-colors"
+                  >
+                    <IconTrash />
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <span className="text-[10px] text-slate-400 font-mono">${e.cost.toFixed(4)}</span>
-                <button
-                  onClick={() => onDelete(e.id)}
-                  title="Delete this entry"
-                  className="text-slate-300 hover:text-red-500 transition-colors"
-                >
-                  <IconTrash />
-                </button>
-              </div>
-            </div>
 
-            <div>
-              <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Question</p>
-              <p className="text-xs text-slate-700 leading-relaxed line-clamp-2">{e.question}</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Response</p>
-              <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">{e.response}</p>
-            </div>
-            {e.comment && (
-              <div className="bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wide mb-0.5">Note</p>
-                <p className="text-xs text-amber-800">{e.comment}</p>
+              <div>
+                <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Question</p>
+                <p className="text-xs text-slate-700 leading-relaxed line-clamp-2">{e.question}</p>
               </div>
-            )}
-          </div>
-        ))}
+              <div>
+                <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Response</p>
+                <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">{e.response}</p>
+              </div>
+
+              {/* Inline edit form */}
+              {isEditing ? (
+                <div className="border border-blue-100 bg-blue-50 rounded-lg px-3 py-2.5 space-y-2">
+                  <p className="text-[10px] font-semibold text-blue-700 uppercase tracking-wide">Edit Rating</p>
+                  <div className="flex gap-1.5">
+                    {([['correct','✅ Correct','emerald'], ['needs_work','⚠️ Needs work','amber'], ['wrong','❌ Wrong','red']] as const).map(([r, label, c]) => (
+                      <button
+                        key={r}
+                        onClick={() => setEditRating(r)}
+                        className={`text-[10px] px-2 py-0.5 rounded-full border font-medium transition-all
+                          ${editRating === r
+                            ? c === 'emerald' ? 'bg-emerald-100 text-emerald-700 border-emerald-300' : c === 'amber' ? 'bg-amber-100 text-amber-700 border-amber-300' : 'bg-red-100 text-red-700 border-red-300'
+                            : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'
+                          }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="text"
+                    value={editComment}
+                    onChange={e => setEditComment(e.target.value)}
+                    placeholder="Add or edit a note (optional)"
+                    className="w-full text-[11px] px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:border-blue-300"
+                  />
+                  <div className="flex gap-1.5 justify-end">
+                    <button
+                      onClick={() => setEditingId(null)}
+                      className="text-[11px] px-2.5 py-1 rounded-lg border border-slate-200 text-slate-500 hover:text-slate-700 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => { onEdit(e.id, editRating, editComment); setEditingId(null); }}
+                      className="text-[11px] px-2.5 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              ) : e.comment ? (
+                <div className="bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+                  <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wide mb-0.5">Note</p>
+                  <p className="text-xs text-amber-800">{e.comment}</p>
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -368,22 +455,42 @@ export default function Home() {
     if (activeNav && messages.length === 0) setTimeout(() => textareaRef.current?.focus(), 80);
   }, [activeNav, messages.length]);
 
+  // Persist messages to localStorage whenever they change (but not mid-stream)
+  useEffect(() => {
+    if (!isStreaming) {
+      saveChat(activeNav?.id ?? null, activeGeo?.code ?? null, messages);
+    }
+  }, [messages, isStreaming, activeNav, activeGeo]);
+
   const placeholder = activeGeo?.placeholder ?? activeNav?.placeholder ?? 'Select a category to get started…';
 
   const selectNav = (item: NavItem) => {
     if (item.geo) { setGeoOpen(v => !v); return; }
-    setActiveNav(item); setActiveGeo(null); setMessages([]); setInput('');
+    // Restore this category's saved conversation (empty array if none)
+    const saved = loadChat(item.id, null);
+    setActiveNav(item); setActiveGeo(null); setMessages(saved); setInput('');
     setActiveView('chat');
   };
   const selectGeo = (geo: GeoRegion) => {
-    setActiveGeo(geo); setActiveNav(NAV_ITEMS.find(n => n.geo) ?? null);
-    setMessages([]); setInput(''); setActiveView('chat');
+    const geoNav = NAV_ITEMS.find(n => n.geo) ?? null;
+    const saved = loadChat(geoNav?.id ?? null, geo.code);
+    setActiveGeo(geo); setActiveNav(geoNav);
+    setMessages(saved); setInput(''); setActiveView('chat');
   };
   const startNewChat = () => {
     abortRef.current?.abort();
+    // Clear the saved history for the current category
+    saveChat(activeNav?.id ?? null, activeGeo?.code ?? null, []);
     setMessages([]); setInput(''); setIsStreaming(false);
     setActiveNav(null); setActiveGeo(null); setActiveView('chat');
   };
+
+  // Edit an existing feedback entry
+  const handleEditFeedback = useCallback((id: string, rating: FeedbackRating, comment: string) => {
+    const updated = feedbackEntries.map(e => e.id === id ? { ...e, rating, comment } : e);
+    setFeedbackEntries(updated);
+    saveFeedback(updated);
+  }, [feedbackEntries]);
 
   // Save a rating for a specific message
   const handleRate = useCallback((msgIndex: number, rating: FeedbackRating, comment: string) => {
@@ -426,11 +533,17 @@ export default function Home() {
     const category = activeGeo ? 'geo' : activeNav?.id ?? null;
     const geo = activeGeo?.code ?? null;
 
+    // Cap context sent to the API at the last 20 messages (10 turns).
+    // Full history is still displayed in the UI — this only limits what
+    // the model sees, keeping costs low when a category has a long history.
+    const MAX_API_MESSAGES = 20;
+    const apiMessages = updated.slice(-MAX_API_MESSAGES);
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: updated, category, geo }),
+        body: JSON.stringify({ messages: apiMessages, category, geo }),
         signal: ctrl.signal,
       });
       if (!res.ok) throw new Error(`${res.status}`);
@@ -555,6 +668,7 @@ export default function Home() {
               setFeedbackEntries(updated);
               saveFeedback(updated);
             }}
+            onEdit={handleEditFeedback}
           />
         ) : (
           <>

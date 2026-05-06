@@ -1,415 +1,343 @@
-# BDS Products: Counters Displays
+# Counters & Displays — 65 Products
 
-**58 products**
+All prices are base USD. Format: name, price range, URL, available options.
 
+---
 
-
-## Counter Displays
+## Counter Displays (35 products)
 
 ### Backlit Oval Popup Counter
-- **Price:** $374
+- **Price:** $80–$374
 - **URL:** https://www.backdropsource.com/products/backlit-oval-popup-counter
-- **Choose Size (W x H x D):** 2.3ft W x 3.3ft H x 1.3ft D
-- **Choose LED Option ::** With LED Backlighting
-- **Choose Printing Option:** Single side fabric printing + Frame
+- **Options:** Choose Size (W x H x D) · Choose LED Option : · Choose Printing Option
 
 ### Backlit Rectangle Popup Counter
-- **Price:** $451
+- **Price:** $104–$451
 - **URL:** https://www.backdropsource.com/products/backlit-rectangle-popup-counter
-- **Choose Size (W x H x D):** 2.3ft W x 3.3ft H x 1.3ft D
-- **Choose LED Option ::** With LED Backlighting
-- **Choose Printing Option:** Single side fabric printing + Frame
+- **Options:** Choose Size (W x H x D) · Choose LED Option : · Choose Printing Option
 
 ### Backlit Round Popup Counter
-- **Price:** $451
+- **Price:** $104–$451
 - **URL:** https://www.backdropsource.com/products/backlit-round-popup-counter
-- **Choose Size (Dia x H):** 2ft Dia x 3.3ft H
-- **Choose LED Option ::** With LED Backlighting
-- **Choose Printing Option:** Single side fabric printing + Frame
+- **Options:** Choose Size (Dia x H) · Choose LED Option : · Choose Printing Option
 
 ### Backlit Rounded Square Popup Counter
-- **Price:** $451
+- **Price:** $104–$451
 - **URL:** https://www.backdropsource.com/products/backlit-rounded-square-popup-counter
-- **Choose Size (W x H x D):** 2.3ft W x 3.3ft H x 1.3ft D
-- **Choose LED Option ::** With LED Backlighting
-- **Choose Printing Option:** Single side fabric printing + Frame
+- **Options:** Choose Size (W x H x D) · Choose LED Option : · Choose Printing Option
 
 ### Convertible Podium Case with Header
-- **Price:** $832
+- **Price:** $131–$832
 - **URL:** https://www.backdropsource.com/products/convertible-podium-case-with-header
-- **Frame Size (W x H x D):** 3.3ft W x 7ft H x 1.7ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Event Reception Counter - 7ft Wide
-- **Price:** $1032
+- **Price:** $177–$1,032
 - **URL:** https://www.backdropsource.com/products/event-reception-counter-7ft-wide
-- **Choose Size (W x H x D):** 7ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Griffin Modular Reception Stand
-- **Price:** $1670
+- **Price:** $1,670
 - **URL:** https://www.backdropsource.com/products/griffin-modular-reception-stand
-- **Choose Size (W x H x D):** 7.4ft W x 3.3ft H x 3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With griffin case
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Griffin Trade Show Podium
 - **Price:** $870
 - **URL:** https://www.backdropsource.com/products/griffin-trade-show-podium
-- **Choose Size (W x H x D):** 4.8ft W x 3.3ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With griffin case
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Integrated Monitor Table Display
-- **Price:** $617
+- **Price:** $146–$617
 - **URL:** https://www.backdropsource.com/products/integrated-monitor-table-display
-- **Frame Size (W x H x D):** 2.6ft W x 7.5ft H x 2ft D
-- **Choose Printing Option:** Double side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Promotional Fabric Counter
-- **Price:** $494
+- **Price:** $113–$654
 - **URL:** https://www.backdropsource.com/products/magnetic-promotional-fabric-counter
-- **Choose Size (W x H x D):** 2.6ft W x 3.3ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed+ Frame
-- **Choose Shelves Option:** No shelf
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Shelves Option
 
 ### Oval Counter with Acrylic Triple Shelves
-- **Price:** $557
+- **Price:** $88–$557
 - **URL:** https://www.backdropsource.com/products/oval-counter-with-acrylic-triple-shelves
-- **Frame Size (W x H x D):** 2ft W x 6ft H x 1.3ft D(overall size)
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Oval Counter with Header Panel
-- **Price:** $365
+- **Price:** $109–$365
 - **URL:** https://www.backdropsource.com/products/oval-counter-with-header-panel
-- **Overall Size (W x H x D):** 2ft W x 6.6ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Overall Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Oval Fabric Display Counter (For Podium & Booth Exhibitions)
-- **Price:** $281
+- **Price:** $112–$281
 - **URL:** https://www.backdropsource.com/products/oval-fabric-display-counter-for-podium-booth-exhibitions
-- **Choose Size (W x H x D):** 2ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Pop Up Podium Counter
-- **Price:** $677
+- **Price:** $143–$677
 - **URL:** https://www.backdropsource.com/products/pop-up-podium-counter
-- **Choose Size (W x H x D):** 2.3ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Popup SEG Backlit Counter
-- **Price:** $990
+- **Price:** $124–$990
 - **URL:** https://www.backdropsource.com/products/popup-seg-backlit-counter
-- **Frame Size (W x H x D):** 3.3ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Four side graphics printed
-- **Choose Hardware Option:** With frame & LED lights
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Premium Fabric Counter Display - 10ft W
-- **Price:** $1255
+- **Price:** $221–$1,255
 - **URL:** https://www.backdropsource.com/products/premium-fabric-counter-display-10ft-wide
-- **Choose Size (W x H x D):** 10ft W x 3ft H x 2ft D
-- **Choose LED Option:** With LED Backlighting
-- **Choose Printing Option:** Single fabric printing + Frame
+- **Options:** Choose Size (W x H x D) · Choose LED Option · Choose Printing Option
 
 ### Premium Fabric Counter Display – 3ft/4ft/6ft W
-- **Price:** $545
+- **Price:** $113–$800
 - **URL:** https://www.backdropsource.com/products/premium-fabric-counter-display-3ft-4ft-6ft-wide
-- **Choose Size (W x H x D):** 3ft W x  3.3ft H x 1.3ft D
-- **Choose LED Option:** With LED Backlighting
-- **Choose Printing Option:** Single fabric printing + Frame
+- **Options:** Choose Size (W x H x D) · Choose LED Option · Choose Printing Option
 
 ### Rectangle Counter with Header Panel
-- **Price:** $416
+- **Price:** $133–$416
 - **URL:** https://www.backdropsource.com/products/rectangle-counter-with-header-panel
-- **Overall Size (W x H x D):** 2.6ft W x 6.6ft H x 1.7ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Overall Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Rectangle Fabric Display Counter (For Podium & Booth Exhibitions)
-- **Price:** $373
+- **Price:** $123–$373
 - **URL:** https://www.backdropsource.com/products/rectangle-fabric-display-counter-for-podium-booth-exhibitions
-- **Choose Size (W x H x D):** 2.6ft W x 3.3ft H x 1.7ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Rectangular Counter with Acrylic Triple Shelves
-- **Price:** $678
+- **Price:** $107–$678
 - **URL:** https://www.backdropsource.com/products/rectangular-counter-with-acrylic-triple-shelves
-- **Frame Size (W x H x D):** 2ft W x 6ft H x 1.3ft D(overall size)
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Round Fabric Display Counter (For Podium & Booth Exhibitions)
-- **Price:** $371
+- **Price:** $118–$371
 - **URL:** https://www.backdropsource.com/products/round-fabric-display-counter-for-podium-booth-exhibitions
-- **Choose Size (W x H x D):** 2.3ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Display Counter - 3.3ft H
-- **Price:** $519
+- **Price:** $77–$530
 - **URL:** https://www.backdropsource.com/products/seg-display-counter-3-3ft-h
-- **Choose Size (W x H x D):** 2.8ft W x 3.3ft H x 3.14inch D
-- **Choose Printing Option:** Double side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Foldable Display Counter
-- **Price:** $611
+- **Price:** $105–$611
 - **URL:** https://www.backdropsource.com/products/seg-foldable-display-counter
-- **Frame Size (W x H x D):** 3.3ft W x 3.3ft H x 3.14 inch D
-- **Choose Printing Option:** Double side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Folding Light Box Counter
-- **Price:** $691
+- **Price:** $114–$691
 - **URL:** https://www.backdropsource.com/products/seg-folding-light-box-counter
-- **Frame Size (W x H x D):** 3.3ft W x 3.3ft H x 3.14 inch D
-- **Choose Printing Option:** Double side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Light Box Display Counter - 3.3ft H
-- **Price:** $689
+- **Price:** $84–$725
 - **URL:** https://www.backdropsource.com/products/seg-light-box-display-counter-3-3ft-h
-- **Choose Size (W x H x D):** 2.8ft W x 3.3ft H x 3.14inch D
-- **Choose Printing Option:** Double side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Popup Counter
-- **Price:** $746
+- **Price:** $124–$1,132
 - **URL:** https://www.backdropsource.com/products/seg-popup-counter
-- **Frame Size (W x H x D):** 3.3ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Four side graphics printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEGO Lightbox Counters - 3.3ft W x 3.3ft H
-- **Price:** $573
+- **Price:** $115–$573
 - **URL:** https://www.backdropsource.com/products/sego-lightbox-counters-3-3ft-x-3-3ft
-- **Frame Size (W x H x D):** 3.3ft W x 3.3ft H x 0.4ft D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Table Pop Up Fabric Display Counter (For Podium & Booth Exhibitions)
-- **Price:** $353
+- **Price:** $75–$353
 - **URL:** https://www.backdropsource.com/products/table-pop-up-fabric-display-counter-for-podium-booth-exhibitions
-- **Choose Size (W x H x D):** 3.3ft W x 3.3ft H x 1ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Tabletop Tower Display with Shelves
-- **Price:** $980
+- **Price:** $155–$980
 - **URL:** https://www.backdropsource.com/products/tabletop-branding-tower-display
-- **Choose Size (W x H x D):** 3ft W x 6.5ft H x 1.5ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Trade Show Reception Desk - 5ft Wide
-- **Price:** $708
+- **Price:** $150–$708
 - **URL:** https://www.backdropsource.com/products/trade-show-reception-desk-5ft-wide
-- **Choose Size (W x H x D):** 5ft W x 3.3ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Triangle Counter with Header Panel
-- **Price:** $382
+- **Price:** $119–$382
 - **URL:** https://www.backdropsource.com/products/triangle-counter-with-header-panel
-- **Overall Size (W x H x D):** 2ft W x 6.8ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Overall Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Triangle Fabric Display Counter (For Podium & Booth Exhibitions)
-- **Price:** $364
+- **Price:** $122–$364
 - **URL:** https://www.backdropsource.com/products/triangle-fabric-display-counter-for-podium-booth-exhibitions
-- **Frame Size (W x H x D):** 2ft W x 3.3ft H x 2ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Triangular Counter with Acrylic Triple Shelves
-- **Price:** $610
+- **Price:** $100–$610
 - **URL:** https://www.backdropsource.com/products/triangle-counter-display-with-triple-shelves
-- **Frame Size (W x H x D):** 2ft W x 6ft H x 2ft D(overall size)
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Velcro Popup Counter 1 x 2
-- **Price:** $403
+- **Price:** $80–$403
 - **URL:** https://www.backdropsource.com/products/velcro-popup-counter-1-x-2
-- **Choose Size (W x H x D):** 2.6ft W x 2.8ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Velcro Popup Counter 2 x 2
-- **Price:** $504
+- **Price:** $111–$504
 - **URL:** https://www.backdropsource.com/products/velcro-popup-counter-2-x-2
-- **Choose Size (W x H x D):** 4ft W x 2.8ft H x 1.3ft D
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
-
-## Foldable Lightbox
+## Foldable Lightbox (1 products)
 
 ### SEG Light Box Folding Display
-- **Price:** $721
+- **Price:** $111–$744
 - **URL:** https://www.backdropsource.com/products/seg-light-box-folding-stand
-- **Frame Size (W x H x D):** 2.8ft W x 6.6ft H x 3.14inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
+## Magnetic Partition Displays (10 products)
 
-## Retail Displays
+### Magnetic Partition  Displays - 7 Panel
+- **Price:** $813–$2,192
+- **URL:** https://www.backdropsource.com/products/magnetic-partition-displays-7-panel
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Magnetic Partition Displays - 2 Panel
+- **Price:** $131–$750
+- **URL:** https://www.backdropsource.com/products/magnetic-partition-displays-2-panel
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Magnetic Partition Displays - 3 Panel
+- **Price:** $201–$1,046
+- **URL:** https://www.backdropsource.com/products/magnetic-partition-display-3-panel
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Magnetic Partition Displays - 4 Panel
+- **Price:** $253–$739
+- **URL:** https://www.backdropsource.com/products/magnetic-partition-4-panel
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Magnetic Partition Displays - 5 Panel
+- **Price:** $697–$1,759
+- **URL:** https://www.backdropsource.com/products/magnetic-displays-5-panel
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Portable Magnetic Curved Fabric Stand
+- **Price:** $86–$368
+- **URL:** https://www.backdropsource.com/products/portable-magnetic-curved-fabric-stand
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Portable Magnetic Inclined Fabric Stand
+- **Price:** $104–$360
+- **URL:** https://www.backdropsource.com/products/portable-magnetic-inclined-fabric-stand
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Portable Magnetic Rampant Fabric Stand
+- **Price:** $104–$363
+- **URL:** https://www.backdropsource.com/products/portable-magnetic-rampant-fabric-stand
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Portable Magnetic Slope Fabric Stand
+- **Price:** $104–$363
+- **URL:** https://www.backdropsource.com/products/portable-magnetic-slope-fabric-stand
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
+
+### Portable Magnetic Straight Fabric Stand
+- **Price:** $94–$410
+- **URL:** https://www.backdropsource.com/products/portable-magnetic-straight-fabric-stand
+- **Options:** Frame Size (W x H ) · Choose Printing Option · Choose Hardware Option
+
+## Retail Displays (10 products)
 
 ### Apparel Display Frame with Dual Hanger Bars
 - **Price:** $414
 - **URL:** https://www.backdropsource.com/products/apparel-display-frame-with-dual-hanger-bars
-- **Choose Frame Size (W x H):** 2.5ft W x 7.5ft H
-- **Frame Type:** Aluminum Frame
+- **Options:** Choose Frame Size (W x H) · Frame Type
 
 ### Brochure Stand for SEG Frames
-- **Price:** $99
+- **Price:** $99–$254
 - **URL:** https://www.backdropsource.com/products/brochure-stand-for-seg-frames
-- **Quantity:** 1
-- **Size:** A4 Sheet size - 210mm x 297mm
+- **Options:** Quantity · Size
 
 ### Curved Top Header Display
-- **Price:** $165
+- **Price:** $78–$171
 - **URL:** https://www.backdropsource.com/products/curved-top-header-display
-- **Choose Size (W x H):** 3.3ft W x 1ft H
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Display Shelf Stand
-- **Price:** $440
+- **Price:** $440–$1,008
 - **URL:** https://www.backdropsource.com/products/display-shelf-stand
-- **Choose Quantity:** 1x3 Shelves
+- **Options:** Choose Quantity
 
 ### Modular Add-On Unit with TV Mount and 2 Shelves
 - **Price:** $440
 - **URL:** https://www.backdropsource.com/products/modular-add-on-unit-with-tv-mount-and-2-shelves
-- **Choose Size (W x H):** 2.5ft W x 7.5ft H
+- **Options:** Choose Size (W x H)
+
+### Portable Pop-Up Display Wall with Shelving (Dual-Side Print)
+- **Price:** $553–$2,163
+- **URL:** https://www.backdropsource.com/products/portable-pop-up-display-wall-with-shelving-dual-side-print
+- **Options:** Choose Size (W x H x D) · Choose Shelves · Choose Printing Option
 
 ### Portable Straight Pop-Up Wall with Shelves
-- **Price:** $503
+- **Price:** $503–$2,122
 - **URL:** https://www.backdropsource.com/products/portable-straight-pop-up-wall-with-shelves
-- **Choose Size (W x H x D):** 5ft W x 7.5ft H x 1ft D (2*3)
-- **Choose Shelves:** 3 shelves
-- **Choose Print Placement:** Printed Graphics and shelves on the same side
+- **Options:** Choose Size (W x H x D) · Choose Shelves · Choose Print Placement
 
 ### Retail Peg Board Display Panel
-- **Price:** $414
+- **Price:** $414–$488
 - **URL:** https://www.backdropsource.com/products/retail-peg-board-display-panel
-- **Choose Size (W x H):** 2.5ft W x 7.5ft H
-- **Choose Peg Board Panels:** 1 x Peg boards
+- **Options:** Choose Size (W x H) · Choose Peg Board Panels
 
 ### Retail Waterfall Display with TV Mount & Storage Shelves
 - **Price:** $494
 - **URL:** https://www.backdropsource.com/products/retail-waterfall-display-stand-with-tv-mount-storage-shelves
-- **Choose Size (W x H):** 2.5ft W x 7.5ft H
+- **Options:** Choose Size (W x H)
 
 ### TV Mount with Side Table
 - **Price:** $270
 - **URL:** https://www.backdropsource.com/products/tv-mount-with-side-table
-- **Title:** Default Title
 
-
-## SEG Popup Lightboxes
+## SEG Popup Lightboxes (1 products)
 
 ### Backlit SEG Pop-Up Straight Display
-- **Price:** $694
+- **Price:** $184–$1,668
 - **URL:** https://www.backdropsource.com/products/backlit-seg-pop-up-straight-display
-- **Choose Size (W x H x D):** 2.5ft W x 5ft H x 1.3ft D (1*2)
-- **Choose Printing Option:** Four side graphics printed
-- **Choose Hardware Option:** With frame & LED lights
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
+## Shell Scheme (6 products)
 
-## SEGO Display
+### Shell Scheme Exhibition Graphics for 10ft Wide x 10ft Depth Booth
+- **Price:** $206–$472
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-10ft-wide-x-10ft-depth-booth
+- **Options:** Choose Booth Layout · Choose Finishing Option
 
-### SEGO Backlit Booth 10ft x 10ft - Model 1
-- **Price:** $4295
-- **URL:** https://www.backdropsource.com/products/sego-backlit-booth-10ft-x-10ft-model-1
-- **Booth Size:** 10ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+### Shell Scheme Exhibition Graphics for 10ft Wide x 6.5ft Depth Booth
+- **Price:** $206–$387
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-10ft-wide-x-6-5ft-depth-booth
+- **Options:** Choose Booth Layout · Choose Finishing Option
 
-### SEGO Backlit Booth 10ft x 10ft - Model 2
-- **Price:** $1866
-- **URL:** https://www.backdropsource.com/products/sego-backlit-booth-10ft-x-10ft-model-2
-- **Booth Size:** 10ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+### Shell Scheme Exhibition Graphics for 13.2ft Wide x 10ft Depth Booth
+- **Price:** $263–$499
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-13-2ft-wide-x-10ft-depth-booth
+- **Options:** Choose Booth Layout · Choose Finishing Option
 
-### SEGO Backlit Booth 10ft x 10ft - Model 3
-- **Price:** $2858
-- **URL:** https://www.backdropsource.com/products/sego-backlit-booth-10ft-model-3
-- **Booth Size:** 10ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+### Shell Scheme Exhibition Graphics for 16.4ft Wide x 10ft Depth Booth
+- **Price:** $299–$549
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-16-4ft-wide-x-10ft-depth-booth
+- **Options:** Choose Booth Layout · Choose Finishing Option
 
-### SEGO Backlit Booth 10ft x 10ft - Model 4
-- **Price:** $3532
-- **URL:** https://www.backdropsource.com/products/sego-backlit-booth-10ft-x-10ft-model-4
-- **Booth Size:** 10ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+### Shell Scheme Exhibition Graphics for 20ft Wide x 10ft Depth Booth
+- **Price:** $335–$594
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-20ft-wide-x-10ft-depth-booth
+- **Options:** Choose Booth Layout · Choose Finishing Option
 
-### SEGO Backlit Lightbox - 3.3ft W x 7.4ft H
-- **Price:** $818
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-3-3ft-w-x-7-4ft-h
-- **Frame Size (W x H x D):** 3.3ft W x 7.4ft H x 0.4ft D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
+### Shell scheme Exhibition Graphics  ( Full Coverage Seamless)
+- **Price:** $169–$889
+- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-full-coverage-seamless
+- **Options:** Choose Booth Layout · Choose Finishing Option · Choose Booth Size
 
-### SEGO Backlit Lightbox - 6.5ft W x 7.4ft H
-- **Price:** $1378
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-6-5ft-w-x-7-4ft-h
-- **Frame Size (W x H x D):** 6.5ft W x 7.4ft H x 0.4ft D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
-
-### SEGO Backlit Lightbox - 9.8ft W x 7.4ft H
-- **Price:** $1866
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-9-8ft-w-x-7-4ft-h
-- **Frame Size (W x H x D):** 9.8ft W x 7.4ft H x 0.4ft D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
-
-### SEGO Backlit Lightbox 15ft x 10ft - Model 1
-- **Price:** $6061
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-15ft-x-10ft-model-1
-- **Booth Size:** 15ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
-
-### SEGO Backlit Lightbox 20ft x 10ft - Model 1
-- **Price:** $3532
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-20ft-x-10ft-model-1
-- **Booth Size:** 20ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
-
-### SEGO Backlit Lightbox 20ft x 10ft - Model 2
-- **Price:** $7023
-- **URL:** https://www.backdropsource.com/products/sego-backlit-lightbox-20ft-x-10ft-model-2
-- **Booth Size:** 20ft x 10ft
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEGO led light box
-
-
-## Snap frame
+## Snap frame (2 products)
 
 ### 25mm Aluminum Snap Frame
-- **Price:** $59
+- **Price:** $59–$159
 - **URL:** https://www.backdropsource.com/products/aluminum-25-snap-frame
-- **Corner Type:** Mitred Corner
-- **Frame Size:** A4
+- **Options:** Corner Type · Frame Size
 
 ### 32mm Aluminum Snap Frame
-- **Price:** $69
+- **Price:** $69–$179
 - **URL:** https://www.backdropsource.com/products/32mm-aluminum-snap-frame
-- **Corner Type:** Mitred Corner
-- **Frame Size:** A4
+- **Options:** Corner Type · Frame Size

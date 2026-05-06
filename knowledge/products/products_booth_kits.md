@@ -1,1250 +1,1021 @@
-# BDS Products: Booth Kits
+# Booth Kits — 200 Products
 
-**206 products**
+All prices are base USD. Format: name, price range, URL, available options.
 
+---
 
-
-## 10ft x 10ft Booth Kit
+## 10ft x 10ft Booth Kit (64 products)
 
 ### 10ft Exhibit Kit: Straight Back Wall & Waterfall Shelving Booth
-- **Price:** $1830
+- **Price:** $1,830–$1,940
 - **URL:** https://www.backdropsource.com/products/10ft-exhibit-kit-straight-back-wall-waterfall-display
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10ft Wide Premium Modular Exhibition Booth Kit with TV Display
-- **Price:** $1654
+- **Price:** $1,654–$1,764
 - **URL:** https://www.backdropsource.com/products/premium-tv-display-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10ft x 10ft Curved Exhibit Pro 3-in-1 Display Kit with Illume Lights
-- **Price:** $935
+- **Price:** $935–$1,045
 - **URL:** https://www.backdropsource.com/products/10ft-tradeshow-display-curved
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10ft x 10ft Curved Popup Exhibit Pro 3-in-1 Display Kit with Illume Lights
-- **Price:** $1033
+- **Price:** $967–$1,033
 - **URL:** https://www.backdropsource.com/products/10ft-tradeshow-display-popup-curved
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With LED lights
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### 10ft x 10ft Straight Exhibit Pro 3-in-1 Display Kit with Hard Podium Case
-- **Price:** $1628
+- **Price:** $1,628–$1,738
 - **URL:** https://www.backdropsource.com/products/10ft-tradeshow-display-straight-with-podium-case
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10ft x 10ft Straight Exhibit Pro 3-in-1 Display Kit with Illume Lights
-- **Price:** $935
+- **Price:** $935–$1,045
 - **URL:** https://www.backdropsource.com/products/10ft-tradeshow-display
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10ft x 10ft Straight Popup Exhibit Pro 3-in-1 Display Kit with Illume Lights
-- **Price:** $1033
+- **Price:** $1,033
 - **URL:** https://www.backdropsource.com/products/10ft-tradeshow-display-popup-straight
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 10x10 Trade Show Booth Kit with Backwall & Roll-Up Banner Stand
-- **Price:** $718
+- **Price:** $718–$828
 - **URL:** https://www.backdropsource.com/products/10x10-trade-show-booth-kit-with-backwall-roll-up-banner-stand
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Compact 10x10 Booth Kit with Backwall and Table Cover
-- **Price:** $701
+- **Price:** $701–$811
 - **URL:** https://www.backdropsource.com/products/10x10-booth-kit-with-backwall-table-cover
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### EZ Exhibit Essentials: 10x10 Booth Kit with Backwall and Banner Stand
-- **Price:** $835
+- **Price:** $835–$945
 - **URL:** https://www.backdropsource.com/products/straight-tension-with-ez-banner
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Economy L Arch TV Display Exhibition Kit for 10ft Wide Booths
-- **Price:** $1387
+- **Price:** $1,387–$1,497
 - **URL:** https://www.backdropsource.com/products/economy-l-arch-tv-display-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Inclined Exhibition Kit for 10ft Wide Booths
-- **Price:** $1471
+- **Price:** $1,471–$1,581
 - **URL:** https://www.backdropsource.com/products/inclined-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### L-Shaped Illuminated Media Wall Set with Counters for 10ft x 10ft Booths.
-- **Price:** $5264
+- **Price:** $5,264–$5,356
 - **URL:** https://www.backdropsource.com/products/backlit-l-shaped-corner-trade-show-booth
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Exhibition Kit for 10ft Wide Booths
-- **Price:** $1471
+- **Price:** $1,471–$1,581
 - **URL:** https://www.backdropsource.com/products/modular-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Horseshoe Arch Exhibition Kit for 10ft Wide Booths
-- **Price:** $2081
+- **Price:** $2,081–$2,191
 - **URL:** https://www.backdropsource.com/products/modular-l-shaped-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular L Arch TV Display Exhibition Kit for 10ft Wide Booths
-- **Price:** $1761
+- **Price:** $1,761–$1,871
 - **URL:** https://www.backdropsource.com/products/modular-l-arch-tv-display-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular U Shaped Exhibition Kit for 10ft Wide Booths
-- **Price:** $1879
+- **Price:** $1,879–$1,989
 - **URL:** https://www.backdropsource.com/products/modular-u-shaped-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 1
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-1
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 10
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-10
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 11
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-11
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 12
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-12
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 13
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-13
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 14
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-14
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 15
-- **Price:** $2243
+- **Price:** $2,243–$2,354
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-15
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 16
-- **Price:** $1554
+- **Price:** $1,554–$1,664
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-16
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 17
-- **Price:** $1578
+- **Price:** $327–$1,610
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-17
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 18
-- **Price:** $1773
+- **Price:** $1,773–$1,883
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-18
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 19
-- **Price:** $2422
+- **Price:** $2,422–$2,532
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-19
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 2
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-2
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 20
-- **Price:** $2827
+- **Price:** $2,827–$2,937
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-20
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 21
-- **Price:** $1937
+- **Price:** $1,937–$2,047
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-21
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 22
-- **Price:** $1463
+- **Price:** $1,463–$1,573
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-22
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 23
-- **Price:** $1455
+- **Price:** $1,455–$1,565
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-23
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 24
-- **Price:** $1468
+- **Price:** $1,468–$1,578
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-24
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 25
-- **Price:** $1064
+- **Price:** $1,064–$1,174
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-25
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 26
-- **Price:** $1389
+- **Price:** $1,389–$1,499
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-26
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 27
-- **Price:** $1389
+- **Price:** $1,389–$1,499
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-27
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 28
-- **Price:** $2163
+- **Price:** $2,163–$2,273
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-28
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 29
-- **Price:** $1619
+- **Price:** $411–$1,659
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-29
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 3
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-3
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 30
-- **Price:** $2332
+- **Price:** $710–$2,409
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-30
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 31
-- **Price:** $2170
+- **Price:** $484–$2,222
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-31
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 32
-- **Price:** $2232
+- **Price:** $583–$2,296
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-32
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 33
-- **Price:** $1339
+- **Price:** $366–$1,375
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-33
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 34
-- **Price:** $1779
+- **Price:** $525–$1,835
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-34
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 35
-- **Price:** $2001
+- **Price:** $411–$2,041
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-35
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 36
-- **Price:** $2426
+- **Price:** $570–$2,426
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-36
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 37
-- **Price:** $1493
+- **Price:** $338–$1,525
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-37
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 38
-- **Price:** $1527
+- **Price:** $365–$1,563
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-38
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 39
-- **Price:** $1019
+- **Price:** $267–$1,042
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-39
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 4
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-4
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 40
-- **Price:** $2601
+- **Price:** $655–$2,681
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-40
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 41
-- **Price:** $2714
+- **Price:** $1,757–$2,714
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-41
-- **Choose Size Option:** 10ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 42
-- **Price:** $3098
+- **Price:** $2,184–$3,098
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-42
-- **Choose Size Option:** 10ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 43
-- **Price:** $3339
+- **Price:** $2,163–$3,339
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-43
-- **Choose Size Option:** 10ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 5
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-5
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 6
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-6
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 7
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-7
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 8
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-8
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 10ft x 10ft - Model 9
-- **Price:** $1408
+- **Price:** $1,408–$1,463
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-10ft-model-9
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Premium Exhibition Kit for 10ft Wide Booths
-- **Price:** $2087
+- **Price:** $2,087–$2,197
 - **URL:** https://www.backdropsource.com/products/premium-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Premium Modular L Arch TV Display Exhibition Kit for 10ft Wide Booths
-- **Price:** $2028
+- **Price:** $2,028–$2,138
 - **URL:** https://www.backdropsource.com/products/premium-modular-l-arch-tv-display-exhibition-kit-for-10ft-wide-booths
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Trade Shows Booth Packages
-- **Price:** $825
+- **Price:** $389–$865
 - **URL:** https://www.backdropsource.com/products/trade-shows-booth-packages
-- **Choose Size:** 8ft W x 7.5ft H - Kit
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Size · Choose Printing Option · Choose Hardware Option
 
 ### Ultimate 10x10 Booth Kit with Backwall, Side Walls, Counter & LED Lights
-- **Price:** $1430
+- **Price:** $1,430–$1,540
 - **URL:** https://www.backdropsource.com/products/custom-trade-show-booth-10ft
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
-
-## 10ft x 20ft Booth Kit
+## 10ft x 20ft Booth Kit (17 products)
 
 ### Portable Exhibit Display 10ft x 20ft - Model 10
-- **Price:** $2156
+- **Price:** $465–$2,189
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-10
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 11
-- **Price:** $2519
+- **Price:** $611–$2,572
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-11
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 12
-- **Price:** $2030
+- **Price:** $608–$2,101
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-12
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 13
-- **Price:** $3502
+- **Price:** $905–$3,588
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-13
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 14
-- **Price:** $2347
+- **Price:** $493–$2,387
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-14
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 15
-- **Price:** $3092
+- **Price:** $798–$3,181
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-15
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 16
-- **Price:** $1797
+- **Price:** $443–$1,844
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-16
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 17
-- **Price:** $2293
+- **Price:** $536–$2,346
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-17
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 18
-- **Price:** $1753
+- **Price:** $440–$1,794
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-18
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 19
-- **Price:** $5280
+- **Price:** $2,906–$5,280
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-19
-- **Choose Size Option:** 20ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 2
-- **Price:** $2882
+- **Price:** $440–$2,950
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-2
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 20
-- **Price:** $5369
+- **Price:** $3,130–$5,369
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-20
-- **Choose Size Option:** 20ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 21
-- **Price:** $6177
+- **Price:** $3,656–$6,177
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-21
-- **Choose Size Option:** 20ft W x 10ft H
-- **Choose Lights Option:** With lights
+- **Options:** Choose Size Option · Choose Lights Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 3
-- **Price:** $1939
+- **Price:** $401–$2,003
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-3
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 4
-- **Price:** $3581
+- **Price:** $632–$3,680
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-4
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 8
-- **Price:** $2164
+- **Price:** $556–$2,250
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-8
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 10ft x 20ft - Model 9
-- **Price:** $2647
+- **Price:** $502–$2,727
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-10ft-x-20ft-model-9
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
-
-## 20ft x 10ft Booth Kit
+## 20ft x 10ft Booth Kit (33 products)
 
 ### 20x10 Inclined Straight Backdrop with 3D Wall & Arch Exhibition Kit
-- **Price:** $2938
+- **Price:** $2,938–$3,048
 - **URL:** https://www.backdropsource.com/products/20x10-inclined-straight-backdrop-with-3d-wall-arch-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Meeting Pod with Round Arch Exhibition Kit
-- **Price:** $5856
+- **Price:** $5,856–$5,966
 - **URL:** https://www.backdropsource.com/products/20x10-meeting-pod-with-round-arch-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Round Top with Inclined Straight Exhibition Kit
-- **Price:** $2460
+- **Price:** $2,460–$2,570
 - **URL:** https://www.backdropsource.com/products/20x10-round-top-with-inclined-straight-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Straight Backdrop with 3D Wall & Arch Exhibition Kit
-- **Price:** $3380
+- **Price:** $3,380–$3,490
 - **URL:** https://www.backdropsource.com/products/20x10-straight-backdrop-with-3d-wall-arch-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Straight Backdrop with Arch Exhibition Kit
-- **Price:** $2251
+- **Price:** $2,251–$2,361
 - **URL:** https://www.backdropsource.com/products/20x10-straight-backdrop-with-arch-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Straight Backdrop with Round Table Top Exhibition Kit
-- **Price:** $3628
+- **Price:** $3,628–$3,738
 - **URL:** https://www.backdropsource.com/products/20x10-straight-backdrop-with-round-table-top-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### 20x10 Straight Backdrop with Shelf Exhibition Kit
-- **Price:** $3325
+- **Price:** $3,325–$3,435
 - **URL:** https://www.backdropsource.com/products/20x10-straight-backdrop-with-shelf-exhibition-kit
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Illuminate Your Exhibit with SEG Panels- 20ft x 10ft
-- **Price:** $4325
+- **Price:** $4,325
 - **URL:** https://www.backdropsource.com/products/illuminate-your-exhibit-with-seg-panels-20ft-x-10ft
-- **Choose Printing Option:** Double side graphics printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 1
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-1
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 10
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-10
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 11
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-11
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 12
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-12
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 13
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-13
-- **Printed fabric:** Single side graphic printed
+- **Options:** Printed fabric
 
 ### Portable Exhibit Display 20ft x 10ft - Model 14
-- **Price:** $2949
+- **Price:** $952–$3,109
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-14
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 15
-- **Price:** $2838
+- **Price:** $700–$2,950
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-15
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 16
-- **Price:** $2970
+- **Price:** $605–$3,050
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-16
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 17
-- **Price:** $3531
+- **Price:** $695–$3,643
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-17
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 18
-- **Price:** $2470
+- **Price:** $605–$2,566
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-18
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 19
-- **Price:** $3350
+- **Price:** $683–$3,458
 - **URL:** https://www.backdropsource.com/products/20ft-x-10ft-portable-exhibit-display-model-19
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 2
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-2
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 20
-- **Price:** $3325
+- **Price:** $655–$3,405
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-20
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 21
-- **Price:** $2354
+- **Price:** $653–$2,434
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-21
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 22
-- **Price:** $2617
+- **Price:** $566–$2,705
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-22
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 3
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-3
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 4
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-4
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 5
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-5
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 6
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-6
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 7
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-7
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 8
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-8
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Portable Exhibit Display 20ft x 10ft - Model 9
-- **Price:** $2816
+- **Price:** $2,816–$2,926
 - **URL:** https://www.backdropsource.com/products/portable-exhibit-display-20ft-x-10ft-model-9
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Seamless Displays for Impactful Exhibitions
-- **Price:** $3023
+- **Price:** $3,023–$3,133
 - **URL:** https://www.backdropsource.com/products/seamless-displays-for-impactful-exhibitions
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### The Elegance of 3D Boxes and Square Arch
-- **Price:** $2728
+- **Price:** $2,728–$2,828
 - **URL:** https://www.backdropsource.com/products/the-elegance-of-3d-boxes-and-square-arch
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### The Ultimate Exhibition Ensemble -20ft x 10ft
-- **Price:** $2726
+- **Price:** $2,726–$2,836
 - **URL:** https://www.backdropsource.com/products/the-ultimate-exhibition-ensemble-20ft-x-10ft
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
-
-## 20ft x 20ft Booth Kit
+## 20ft x 20ft Booth Kit (16 products)
 
 ### Modular Booth Kits 20ft x 20ft - Model 01
-- **Price:** $3242
+- **Price:** $3,242–$3,352
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-01
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 02
-- **Price:** $6655
+- **Price:** $6,655–$6,765
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-02
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 03
-- **Price:** $4805
+- **Price:** $4,805–$4,915
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-03
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 04
-- **Price:** $6305
+- **Price:** $6,305–$6,415
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-04
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 05
-- **Price:** $3275
+- **Price:** $3,275–$3,385
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-05
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 06
-- **Price:** $6139
+- **Price:** $6,139–$6,249
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-06
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 07
-- **Price:** $4954
+- **Price:** $4,954–$5,064
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-07
-- **Choose Printing Option:** Single side graphic printed
+- **Options:** Choose Printing Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 11
-- **Price:** $5338
+- **Price:** $860–$5,478
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-11
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 12
-- **Price:** $6387
+- **Price:** $993–$6,539
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-12
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 13
-- **Price:** $5084
+- **Price:** $1,021–$5,254
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-13
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 14
-- **Price:** $6108
+- **Price:** $1,262–$6,319
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-14
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 20ft x 20ft - Model 15
-- **Price:** $3616
+- **Price:** $605–$3,712
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-20ft-x-20ft-model-15
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 30ft x 20ft - Model 1
-- **Price:** $4284
+- **Price:** $952–$4,444
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-30ft-x-20ft-model-1
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 30ft x 20ft - Model 2
-- **Price:** $4952
+- **Price:** $952–$5,086
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-30ft-x-20ft-model-2
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 30ft x 30ft - Model 1
-- **Price:** $6550
+- **Price:** $1,302–$6,766
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-30ft-x-30ft-model-1
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
 ### Modular Booth Kits 40ft x 20ft - Model 1
-- **Price:** $5720
+- **Price:** $1,530–$5,976
 - **URL:** https://www.backdropsource.com/products/modular-booth-kits-40ft-x-20ft-model-1
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Choose Printing Option · Choose Hardware Option
 
-
-## Folding SEG Booth Kits
+## Folding SEG Booth Kits (19 products)
 
 ### Foldable SEG Exhibition Display - Model 1
-- **Price:** $1413
+- **Price:** $280–$1,821
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-1
-- **Frame Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 10
-- **Price:** $3326
+- **Price:** $531–$3,962
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-10
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 11
-- **Price:** $3353
+- **Price:** $516–$3,969
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-11
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 12
-- **Price:** $1930
+- **Price:** $361–$2,303
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-12
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 13
-- **Price:** $2821
+- **Price:** $534–$3,241
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-13
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 14
-- **Price:** $3155
+- **Price:** $620–$3,584
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-14
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 15
-- **Price:** $2816
+- **Price:** $548–$3,238
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-15
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 16
-- **Price:** $1770
+- **Price:** $318–$2,174
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-16
-- **Choose Size (W x H x D):** 3.3ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 17
-- **Price:** $2548
+- **Price:** $518–$2,885
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-17
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 18
-- **Price:** $2516
+- **Price:** $511–$2,874
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-18
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 19
-- **Price:** $3162
+- **Price:** $408–$3,591
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-19
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 2
-- **Price:** $1816
+- **Price:** $335–$2,164
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-2
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 3
-- **Price:** $2220
+- **Price:** $268–$2,539
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-3
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 4
-- **Price:** $1523
+- **Price:** $274–$1,682
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-4
-- **Frame Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Frame Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 5
-- **Price:** $1761
+- **Price:** $298–$2,169
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-5
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 6
-- **Price:** $2121
+- **Price:** $454–$2,535
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-6
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 7
-- **Price:** $2483
+- **Price:** $353–$2,901
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-7
-- **Choose Size (W x H x D):** 10ft W x 8.2ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 8
-- **Price:** $1277
+- **Price:** $258–$1,462
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-8
-- **Choose Size (W x H x D):** 3.3ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### Foldable SEG Exhibition Display - Model 9
-- **Price:** $1179
+- **Price:** $220–$1,479
 - **URL:** https://www.backdropsource.com/products/foldable-seg-exhibition-display-model-9
-- **Choose Size (W x H x D):** 6.6ft W x 6.6ft H x 1.5inch D
-- **Choose Printing Option:** Single side graphics printed
-- **Choose Hardware Option:** With folding SEG aluminum frame
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
-
-## Magnetic Booth Kits
+## Magnetic Booth Kits (25 products)
 
 ### Magnetic Fabric Booth Display - Model 1 (10 x 10ft)
-- **Price:** $1121
+- **Price:** $396–$1,209
 - **URL:** https://www.backdropsource.com/products/10x10ft-magnetic-fabric-display-model-1
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 1 (13 x 10ft)
-- **Price:** $2003
+- **Price:** $632–$2,027
 - **URL:** https://www.backdropsource.com/products/13x10ft-magnetic-fabric-display-model-1
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 1 (16.4 x 10ft)
-- **Price:** $1976
+- **Price:** $681–$2,146
 - **URL:** https://www.backdropsource.com/products/16-4x10ft-magnetic-fabric-display-model-1
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 1 (20 x 20ft)
-- **Price:** $2295
+- **Price:** $712–$2,321
 - **URL:** https://www.backdropsource.com/products/20x10ft-magnetic-fabric-display-model-1
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 1 (6.5 x 6.5ft)
-- **Price:** $984
+- **Price:** $323–$1,065
 - **URL:** https://www.backdropsource.com/products/6-5x6-5ft-magnetic-fabric-display-model-1
-- **Frame Size (W x H):** 3ft W x 6.5ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 2 (10 x 10ft)
-- **Price:** $1675
+- **Price:** $581–$1,806
 - **URL:** https://www.backdropsource.com/products/10x10ft-magnetic-fabric-display-model-2
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 2 (13 x 10ft)
-- **Price:** $1611
+- **Price:** $556–$1,756
 - **URL:** https://www.backdropsource.com/products/13x10ft-magnetic-fabric-display-model-2
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 2 (16.4 x 10ft)
-- **Price:** $2369
+- **Price:** $759–$2,391
 - **URL:** https://www.backdropsource.com/products/16-4x10ft-magnetic-fabric-display-model-2
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 2 (20 x 20ft)
-- **Price:** $2604
+- **Price:** $821–$2,640
 - **URL:** https://www.backdropsource.com/products/20x10ft-magnetic-fabric-display-model-2
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 2 (6.5 x 6.5ft)
-- **Price:** $748
+- **Price:** $253–$816
 - **URL:** https://www.backdropsource.com/products/6-5x6-5ft-magnetic-fabric-display-model-2
-- **Frame Size (W x H):** 3ft W x 6.5ft H
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 3 (10 x 10ft)
-- **Price:** $2113
+- **Price:** $521–$2,137
 - **URL:** https://www.backdropsource.com/products/10x10ft-magnetic-fabric-display-model-3
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 3 (13 x 13ft)
-- **Price:** $1268
+- **Price:** $496–$1,390
 - **URL:** https://www.backdropsource.com/products/13x13ft-magnetic-fabric-display-model-3
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 3 (16.4 x 13ft)
-- **Price:** $2139
+- **Price:** $698–$2,163
 - **URL:** https://www.backdropsource.com/products/16-4x13ft-magnetic-fabric-display-model-3
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 3 (20 x 20ft)
-- **Price:** $3246
+- **Price:** $771–$3,272
 - **URL:** https://www.backdropsource.com/products/20x20ft-magnetic-fabric-display-model-3
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 3 (6.5 x 6.5ft)
-- **Price:** $1049
+- **Price:** $282–$1,069
 - **URL:** https://www.backdropsource.com/products/6-5x6-5ft-magnetic-fabric-display-model-3
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 4 (10 x 10ft)
-- **Price:** $1822
+- **Price:** $485–$1,844
 - **URL:** https://www.backdropsource.com/products/10x10ft-magnetic-fabric-display-model-4
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 4 (13 x 13ft)
-- **Price:** $3869
+- **Price:** $879–$3,890
 - **URL:** https://www.backdropsource.com/products/13x13ft-magnetic-fabric-display-model-4
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 4 (16.4 x 16.4ft)
-- **Price:** $5794
+- **Price:** $1,282–$5,830
 - **URL:** https://www.backdropsource.com/products/16-4x16-4ft-magnetic-fabric-display-model-4
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 4 (20 x 20ft)
-- **Price:** $2305
+- **Price:** $839–$2,346
 - **URL:** https://www.backdropsource.com/products/20x20ft-magnetic-fabric-display-model-4
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 4 (6.5 x 6.5ft)
-- **Price:** $935
+- **Price:** $281–$955
 - **URL:** https://www.backdropsource.com/products/6-5x6-5ft-magnetic-fabric-display-model-4
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 5 (10 x 10ft)
-- **Price:** $1789
+- **Price:** $542–$1,811
 - **URL:** https://www.backdropsource.com/products/10x10ft-magnetic-fabric-display-model-5
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 5 (13 x 13ft)
-- **Price:** $2198
+- **Price:** $641–$2,223
 - **URL:** https://www.backdropsource.com/products/13x13ft-magnetic-fabric-display-model-5
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 5 (16.4 x 16.4ft)
-- **Price:** $2611
+- **Price:** $812–$2,641
 - **URL:** https://www.backdropsource.com/products/16-4x16-4ft-magnetic-fabric-display-model-5
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 5 (20 x 20ft)
-- **Price:** $4688
+- **Price:** $979–$4,712
 - **URL:** https://www.backdropsource.com/products/20x20ft-magnetic-fabric-display-model-5
-- **Frame Size (W x H):** 8ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
 ### Magnetic Fabric Booth Display - Model 5 (6.5 x 6.5ft)
-- **Price:** $973
+- **Price:** $307–$1,030
 - **URL:** https://www.backdropsource.com/products/6-5x6-5ft-magnetic-fabric-display-model-5
-- **Frame Size (W x H):** 6.5ft H Kits
-- **Choose Printing Option:** Single side graphic printed
-- **Choose Hardware Option:** With aluminum frame
+- **Options:** Frame Size (W x H) · Choose Printing Option · Choose Hardware Option
 
-
-## SEG Backlit Booth Kits
+## SEG Backlit Booth Kits (18 products)
 
 ### SEG Modular Lightbox Display Kit - Model 1
-- **Price:** $3193
+- **Price:** $605–$4,643
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-1
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 10
-- **Price:** $4240
+- **Price:** $808–$4,930
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-10
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 11
-- **Price:** $4333
+- **Price:** $620–$5,802
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-11
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 12
-- **Price:** $4256
+- **Price:** $808–$4,946
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-12
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 13
-- **Price:** $3909
+- **Price:** $675–$5,453
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-13
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 14
-- **Price:** $5204
+- **Price:** $769–$6,862
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-14
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 15
-- **Price:** $15283
+- **Price:** $1,918–$16,934
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-15
-- **Choose Size (W x H x D):** 3.3ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 16
-- **Price:** $13214
+- **Price:** $2,067–$14,154
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-16
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 17
-- **Price:** $7930
+- **Price:** $1,525–$8,602
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-17
-- **Choose Size (W x H x D):** 20ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 18
-- **Price:** $10902
+- **Price:** $1,474–$10,902
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-18
-- **Choose Size (W x H x D):** 20ft W x 8.2ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 2
-- **Price:** $4413
+- **Price:** $813–$5,846
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-2
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 3
-- **Price:** $3257
+- **Price:** $624–$4,732
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-3
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 4
-- **Price:** $3151
+- **Price:** $658–$5,735
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-4
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 5
-- **Price:** $3803
+- **Price:** $688–$5,202
 - **URL:** https://www.backdropsource.com/products/tradeshow-seg-modular-lightbox-display-model-5
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 6
-- **Price:** $3216
+- **Price:** $579–$4,470
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-6
-- **Choose Size (W x H x D):** 10ft W x 7.4ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 7
-- **Price:** $3787
+- **Price:** $688–$3,965
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-7
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 8
-- **Price:** $3014
+- **Price:** $661–$3,014
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-8
-- **Choose Size (W x H x D):** 10ft W x 7.4ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
 ### SEG Modular Lightbox Display Kit - Model 9
-- **Price:** $4520
+- **Price:** $473–$6,065
 - **URL:** https://www.backdropsource.com/products/seg-modular-lightbox-display-kit-model-9
-- **Choose Size (W x H x D):** 10ft W x 6.6ft H x 4.7inch D
-- **Choose Printing Option:** Double side graphics printed
-- **Choose Hardware Option:** With SEG LED light box
+- **Options:** Choose Size (W x H x D) · Choose Printing Option · Choose Hardware Option
 
-
-## SEG Popup Booth Kits
+## SEG Popup Booth Kits (8 products)
 
 ### SEG Pro Popup Booth – Model 1 (10ft x 10ft)
-- **Price:** $4928
+- **Price:** $3,488–$4,928
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-1
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 2 (10ft x 10ft)
-- **Price:** $4462
+- **Price:** $3,019–$4,462
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-2
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 3 (10ft x 10ft)
-- **Price:** $4020
+- **Price:** $2,415–$4,020
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-3
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 4 (10ft x 10ft)
-- **Price:** $4020
+- **Price:** $2,415–$4,020
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-4
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 5 (20ft x 10ft)
-- **Price:** $7593
+- **Price:** $4,739–$7,593
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-5
-- **Choose Size:** 20ft W x 10ft H
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Size · Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 6 (20ft x 10ft)
-- **Price:** $5520
+- **Price:** $2,921–$5,520
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-6-20ft-x-10ft
-- **Choose Size:** 20ft W x 10ft H
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Size · Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 7 (20ft x 10ft)
-- **Price:** $5876
+- **Price:** $3,451–$5,876
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-7
-- **Choose Size:** 20ft W x 10ft H
-- **Choose Lights Option:** With LED Backlight
+- **Options:** Choose Size · Choose Lights Option
 
 ### SEG Pro Popup Booth – Model 8 (20ft x 10ft)
-- **Price:** $6076
+- **Price:** $3,651–$6,076
 - **URL:** https://www.backdropsource.com/products/seg-pro-popup-booth-model-8-20ft-x-10ft
-- **Choose Size:** 20ft W x 10ft H
-- **Choose Lights Option:** With LED Backlight
-
-
-## Shell Scheme
-
-### Shell Scheme Exhibition Graphics for 10ft Wide x 10ft Depth Booth
-- **Price:** $472
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-10ft-wide-x-10ft-depth-booth
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-
-### Shell Scheme Exhibition Graphics for 10ft Wide x 6.5ft Depth Booth
-- **Price:** $387
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-10ft-wide-x-6-5ft-depth-booth
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-
-### Shell Scheme Exhibition Graphics for 13.2ft Wide x 10ft Depth Booth
-- **Price:** $499
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-13-2ft-wide-x-10ft-depth-booth
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-
-### Shell Scheme Exhibition Graphics for 16.4ft Wide x 10ft Depth Booth
-- **Price:** $549
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-16-4ft-wide-x-10ft-depth-booth
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-
-### Shell Scheme Exhibition Graphics for 20ft Wide x 10ft Depth Booth
-- **Price:** $594
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-for-20ft-wide-x-10ft-depth-booth
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-
-### Shell scheme Exhibition Graphics  ( Full Coverage Seamless)
-- **Price:** $339
-- **URL:** https://www.backdropsource.com/products/shell-scheme-exhibition-graphics-full-coverage-seamless
-- **Choose Booth Layout:** Center booth - U shaped shell
-- **Choose Finishing Option:** With velcro loop stitched at all sides on the back
-- **Choose Booth Size:** 6.5ft W x 6.5ft D x 7.5ft H (Standard)
+- **Options:** Choose Size · Choose Lights Option
