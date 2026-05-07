@@ -5,9 +5,17 @@
 ### Custom Wall-Hanging Backdrop with Clamps
 - **Price:** $84–$135
 - **URL:** https://www.backdropsource.com/products/wall-hanging-backdrop-with-clamps-customized-options
-- **Options:**
-  - **Size (W x H):** 2ft W x 5ft H
-  - **Color Option or Customized:** White
+- **Size variants with pricing:**
+  - 2ft W x 5ft H — $84
+  - 2ft W x 7ft H — $87
+  - 2ft W x 9ft H — $99
+  - 2.5ft W x 5ft H — $97
+  - 2.5ft W x 7ft H — $114
+  - 2.5ft W x 9ft H — $130
+  - 3ft W x 5ft H — $114
+  - 3ft W x 7ft H — $130
+  - 3ft W x 9ft H — $135
+- **Color options:** White, Black, Gray, Chroma Green, Chroma Blue, Custom Design/Color
 
 
 ### Dye-Sub Tension Fabric Printing - Test
