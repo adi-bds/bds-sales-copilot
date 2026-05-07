@@ -84,3 +84,44 @@ export async function retrieveKnowledge(
     return ''; // Fail gracefully — copilot still works without RAG context
   }
 }
+
+/**
+ * Search call transcripts in Milvus for relevant examples.
+ * Only called when the query is about past calls, objections, rep behavior, etc.
+ *
+ * @param query  - The rep's question
+ * @param topK   - Number of transcript chunks to retrieve (default 4)
+ * @returns      - Formatted transcript excerpts with rep/date metadata
+ */
+export async function retrieveTranscripts(
+  query: string,
+  topK = 4
+): Promise<string> {
+  try {
+    const vector = await embed(query);
+
+    const results = await getMilvus().search({
+      collection_name: 'bds_transcripts',
+      data: [vector],
+      limit: topK,
+      metric_type: 'COSINE',
+      output_fields: ['text', 'rep', 'geo', 'date', 'duration'],
+    });
+
+    if (!results.results?.length) return '';
+
+    console.log(`[Milvus] Retrieved ${results.results.length} transcript chunks`);
+
+    return results.results
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((r: any) => {
+        const mins = Math.floor(r.duration / 60);
+        return `[Call: ${r.rep} | ${r.geo} | ${r.date} | ${mins}min]\n${r.text}`;
+      })
+      .join('\n\n---\n\n');
+
+  } catch (err) {
+    // Transcripts collection may not exist yet — fail silently
+    return '';
+  }
+}

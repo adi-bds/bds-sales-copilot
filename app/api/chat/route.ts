@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest } from 'next/server';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
-import { retrieveKnowledge } from '@/lib/milvus';
+import { retrieveKnowledge, retrieveTranscripts } from '@/lib/milvus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
@@ -371,12 +371,15 @@ ${knowledgeSections}${orderSection}`;
 // ─── Milvus System Prompt Builder ─────────────────────────────────────────
 // Used when MILVUS_ADDRESS is configured — replaces file-based system prompt
 
-function buildSystemPromptMilvus(knowledgeContext: string, orderContext: string): string {
+function buildSystemPromptMilvus(knowledgeContext: string, orderContext: string, transcriptContext = ''): string {
   const knowledgeSection = knowledgeContext
     ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nKNOWLEDGE BASE — retrieved for this query\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nUse these as your primary source of truth — cite directly, never guess.\n\n${knowledgeContext}`
     : '';
+  const transcriptSection = transcriptContext
+    ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCALL TRANSCRIPT EXAMPLES — real calls from BDS reps\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nThese are real call excerpts. Use them as examples of how reps handle situations in practice.\n\n${transcriptContext}`
+    : '';
   const orderSection = orderContext ? `\n\n---\n\n${orderContext}` : '';
-  return `${CORE_INSTRUCTIONS}${knowledgeSection}${orderSection}`;
+  return `${CORE_INSTRUCTIONS}${knowledgeSection}${transcriptSection}${orderSection}`;
 }
 
 // ─── Core Instructions ────────────────────────────────────────────────────
@@ -473,8 +476,13 @@ export async function POST(req: NextRequest) {
         .slice(-4)
         .map((m) => m.content)
         .join(' ');
-      const knowledgeContext = await retrieveKnowledge(recentQuery, category);
-      systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext);
+      // Run knowledge + transcript retrieval in parallel
+      const transcriptQuery = /call|transcript|example|how did|what did|rep said|client said|objection|handled|past call|previous call|real call|common|clients raise|on calls|in practice|real world|what do clients|how do reps|training|coaching/.test(recentQuery.toLowerCase());
+      const [knowledgeContext, transcriptContext] = await Promise.all([
+        retrieveKnowledge(recentQuery, category),
+        transcriptQuery ? retrieveTranscripts(recentQuery) : Promise.resolve(''),
+      ]);
+      systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext, transcriptContext);
       console.log(`[BDS Copilot] Mode: Milvus RAG | category=${category ?? 'none'}`);
     } else {
       // Fallback: keyword-based file routing (works without Milvus configured)
