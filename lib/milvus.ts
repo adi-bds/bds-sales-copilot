@@ -75,7 +75,8 @@ export async function retrieveKnowledge(
     console.log(`[Milvus] Retrieved ${results.results.length} chunks for category="${category ?? 'all'}"`);
 
     return results.results
-      .map((r: { text: string; source: string }) => `[${r.source}]\n${r.text}`)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((r: any) => `[${r.source}]\n${r.text}`)
       .join('\n\n---\n\n');
 
   } catch (err) {
