@@ -26,6 +26,7 @@ const EMBEDDING_DIM = 1536; // text-embedding-3-small
 const milvus = new MilvusClient({
   address: process.env.MILVUS_ADDRESS!,
   token: process.env.MILVUS_TOKEN!,
+  timeout: 60000, // 60s — needed for drop/create on slower connections
 });
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -75,12 +76,32 @@ async function embed(text: string): Promise<number[]> {
 
 // ── Collection setup ──────────────────────────────────────────────────────────
 
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+async function withRetry<T>(fn: () => Promise<T>, retries = 3, delayMs = 5000): Promise<T> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (err: unknown) {
+      const isTimeout = err instanceof Error && err.message.includes('DEADLINE_EXCEEDED');
+      if (isTimeout && attempt < retries) {
+        console.log(`  ⏳ Timeout — retrying in ${delayMs / 1000}s (attempt ${attempt}/${retries})...`);
+        await sleep(delayMs);
+      } else {
+        throw err;
+      }
+    }
+  }
+  throw new Error('Max retries exceeded');
+}
+
 async function ensureCollection(): Promise<void> {
-  const exists = await milvus.hasCollection({ collection_name: COLLECTION });
+  const exists = await withRetry(() => milvus.hasCollection({ collection_name: COLLECTION }));
 
   if (exists.value) {
     console.log('⚠️  Collection exists — dropping for fresh rebuild...');
-    await milvus.dropCollection({ collection_name: COLLECTION });
+    await withRetry(() => milvus.dropCollection({ collection_name: COLLECTION }));
+    await sleep(3000); // brief pause after drop
   }
 
   await milvus.createCollection({
