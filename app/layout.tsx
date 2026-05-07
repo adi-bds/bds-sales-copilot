@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BDS Sales Copilot",
-  description: "AI-powered sales assistant for the Backdropsource team",
+  title: "BackdropSource IQ",
+  description: "AI-powered intelligence platform for the Backdropsource team",
 };
 
 export default function RootLayout({

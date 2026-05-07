@@ -580,7 +580,7 @@ export default function Home() {
 
   const headerLabel = activeView === 'feedback'
     ? 'Response Feedback'
-    : activeGeo ? `${activeGeo.flag} ${activeGeo.label}` : activeNav?.label ?? 'BDS Sales Copilot';
+    : activeGeo ? `${activeGeo.flag} ${activeGeo.label}` : activeNav?.label ?? 'BackdropSource IQ';
   const isReady = !!(activeNav && (!activeNav.geo || activeGeo));
   const flagged = feedbackEntries.filter(e => e.rating !== 'correct').length;
 
@@ -594,14 +594,7 @@ export default function Home() {
         <div className="px-4 pt-5 pb-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.avif" alt="Backdropsource" className="w-40 h-auto" />
-          <div className="text-slate-500 text-[10px] mt-1.5 font-medium tracking-wide uppercase">Sales Copilot</div>
-        </div>
-
-        {/* New chat */}
-        <div className="px-3 mb-4">
-          <button onClick={startNewChat} className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-all text-sm">
-            <IconPlus /><span>New chat</span>
-          </button>
+          <div className="text-slate-500 text-[10px] mt-1.5 font-medium tracking-wide uppercase">BackdropSource IQ</div>
         </div>
 
         {/* Nav items */}
@@ -650,7 +643,7 @@ export default function Home() {
         {/* Bottom card */}
         <div className="p-3 border-t border-white/5">
           <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-3">
-            <div className="text-white font-semibold text-xs mb-0.5">Sales Copilot</div>
+            <div className="text-white font-semibold text-xs mb-0.5">BackdropSource IQ</div>
             <div className="text-red-200 text-xs leading-relaxed">17,771 orders · {feedbackEntries.length} rated</div>
           </div>
         </div>
@@ -680,11 +673,6 @@ export default function Home() {
                   <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded-full border border-red-100">Active</span>
                 )}
               </div>
-              {messages.length > 0 && (
-                <button onClick={startNewChat} className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-700 transition-colors">
-                  <IconPlus /><span>New chat</span>
-                </button>
-              )}
             </header>
 
             {/* Messages / empty state */}
@@ -693,7 +681,7 @@ export default function Home() {
                 <div className="flex flex-col items-center justify-center h-full px-8 text-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/serviceorg-medium.png" alt="Backdropsource" className="w-16 h-16 mb-5" />
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BDS Sales Copilot</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Welcome to BackdropSource IQ</h3>
                   <p className="text-slate-400 text-sm max-w-xs leading-relaxed">Select a category from the sidebar to get started.</p>
                 </div>
               )}
