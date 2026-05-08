@@ -167,114 +167,49 @@ function lookupOrders(messages: Message[]): string {
 }
 
 // ─── Retrieval Routing ────────────────────────────────────────────────────
-const ALWAYS_LOAD = ['core/sales_playbook.md'];
+// ALL core + playbook files load on every request — they're small and universally useful.
+// Product files are the only ones gated by keyword (they're large — 250KB combined).
+
+// Core files (~50KB total) — always loaded
+const CORE_FILES = [
+  'core/sales_playbook.md',
+  'core/rep_workflow.md',
+  'core/customization_rules.md',
+  'core/call_insights.md',
+  'core/order_patterns.md',
+  'core/discounts.md',
+];
+
+// Playbook files (~115KB total) — always loaded
+const PLAYBOOK_FILES = [
+  'uk/uk_complaints_playbook.md',
+  'uk/uk_objection_playbook.md',
+  'uk/uk_quote_playbook.md',
+  'uk/uk_followup_reorder_playbook.md',
+  'uk/uk_initial_inquiry_playbook.md',
+  'uk/uk_mockup_design_playbook.md',
+];
 
 type Message = { role: string; content: string };
 
 function detectFilesToLoad(messages: Message[], category?: string, geo?: string): string[] {
-  // Build detection text from recent messages ONLY — no category/geo hints injected.
-  // Category and geo drive explicit file loads below; injecting their keywords into
-  // recentText caused expensive files (blog_posts.md, b2b_customers.md) to load on
-  // every "hello" typed in the wrong category tab.
-  const recentText = messages
-    .slice(-4)
-    .map((m) => m.content)
-    .join(' ')
-    .toLowerCase();
+  const recentText = messages.slice(-4).map((m) => m.content).join(' ').toLowerCase();
+  const files = new Set<string>([...CORE_FILES, ...PLAYBOOK_FILES]);
 
-  const files = new Set<string>(ALWAYS_LOAD);
-
-  // ── Category-driven loads (explicit — no regex matching) ──────────────────
-  // Load the most useful file for the chosen category even when the message
-  // text alone wouldn't trigger it.  This replaces the old keyword-hint system.
-  if (category === 'training') {
-    // Rep is in training mode — load everything they need to learn the business
-    files.add('core/rep_workflow.md');
-    files.add('core/blog_posts.md');
-    files.add('core/customization_rules.md');
-    files.add('core/call_insights.md');
-    files.add('products/products_toc.md');
-    files.add('uk/uk_initial_inquiry_playbook.md');
-    files.add('uk/uk_objection_playbook.md');
-    files.add('uk/uk_quote_playbook.md');
-  }
-  if (category === 'callprep') {
-    // Rep is prepping for a call — load full context: customer data + product catalog + playbooks
+  // B2B customer list — load for call prep or when a company name is mentioned
+  if (category === 'callprep' || /call prep|i have a call|calling|customer|client intel|what do we know about/.test(recentText)) {
     files.add('core/b2b_customers.md');
-    files.add('core/rep_workflow.md');
-    files.add('core/customization_rules.md');
-    files.add('core/call_insights.md');
-    files.add('products/products_toc.md');
-    files.add('uk/uk_quote_playbook.md');
-    files.add('uk/uk_objection_playbook.md');
-    files.add('uk/uk_initial_inquiry_playbook.md');
-  }
-  if (category === 'product') {
-    // Product category — TOC is added further below after keyword checks
-  }
-  // Geo-specific order patterns only when the message actually mentions them
-  // (geo hint alone is not enough — we don't want to load 20KB for a "hello")
-
-  // ── Situation-based playbooks — apply to ALL geos ────────────────────────
-  // Only load when a specific situation is detected — never as a default.
-  // The sales_playbook.md already covers general guidance.
-  if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem|historically|common issue|most common|what do clients|clients say|feedback|returns/.test(recentText)) {
-    files.add('uk/uk_complaints_playbook.md');
-    files.add('core/call_insights.md');
-  }
-  if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better|common question|what do clients ask|faq|frequently asked/.test(recentText)) {
-    files.add('uk/uk_objection_playbook.md');
-    files.add('core/call_insights.md');
-  }
-  if (/mockup|artwork|proof|design|approve|approval|2d|visual/.test(recentText)) {
-    files.add('uk/uk_mockup_design_playbook.md');
-  }
-  if (/quote|pricing|cost|how much|invoice/.test(recentText)) {
-    files.add('uk/uk_quote_playbook.md');
-  }
-  if (/follow.?up|check.?in|reorder|repeat.?order|coming back|haven.t heard/.test(recentText)) {
-    files.add('uk/uk_followup_reorder_playbook.md');
-  }
-  if (/initial|first.?reply|first.?email|inquiry|enquir|new.?client|new.?lead|getting in touch|just reached out|just emailed/.test(recentText)) {
-    files.add('uk/uk_initial_inquiry_playbook.md');
   }
 
-  // ── Rep workflow & process guide ──────────────────────────────────────────
-  // Load the full order workflow doc whenever a rep asks about how the process
-  // works — delivery times, artwork specs, payments, mockup steps, EORI, etc.
-  // Also loads for general "how do I" / "what's the process" training questions.
-  if (
-    /workflow|process|how.?do.?(?:i|we)|step.?by.?step|onboard|new.?rep|train|training|delivery.?time|lead.?time|business.?day|turnaround|artwork.?spec|dpi|resolution|print.?template|wetransfer|dropbox|draft.?order|payment.?method|remittance|purchase.?order|\bpo\b|payment.?proof|eori|international.?ship|confirmed.?order|goes.?to.?production|mockup.?approved|how.?long.?does.?it.?take|when.?will.*ship|what.?happens.?after|next.?step/.test(
-      recentText
-    )
-  ) {
-    files.add('core/rep_workflow.md');
+  // Blog posts — load for training or pitch angle questions
+  if (category === 'training' || /pitch|angle|how do i sell|why buy|blog|content/.test(recentText)) {
+    files.add('core/blog_posts.md');
   }
 
-  // ── Discount codes ────────────────────────────────────────────────────────
-  // Only load when a client is explicitly pushing back on price or asking for
-  // a discount. Never loaded proactively — the AI is instructed not to suggest
-  // codes unless the client asks.
-  if (/discount|promo|coupon|cheaper|price.?match|better.?price|do.{0,10}better|reduce.{0,10}price|lower.?price|any.?deal|any.?offer|negotiate|best.?price|take.?off|knock.?off/.test(recentText)) {
-    files.add('core/discounts.md');
-  }
+  // Products TOC — always load so agent knows what categories exist
+  files.add('products/products_toc.md');
 
-  // ── Customization rules ───────────────────────────────────────────────────
-  if (/custom|size|dimension|width|height|non.?standard|bespoke|can you do|do you make|max size|minimum/.test(recentText)) {
-    files.add('core/customization_rules.md');
-  }
-
-  // ── Geo / market / order patterns ─────────────────────────────────────────
-  if (/australia|canada|new zealand|uae|india|germany|france|spain|market|geo|currency|shipping|seasonal|peak/.test(recentText)) {
-    files.add('core/order_patterns.md');
-  }
-
-  // ── Product catalog — keyword routing ────────────────────────────────────
-  // Always load the TOC for product queries so Claude knows what files exist.
-  // Then load only the specific file(s) relevant to the query.
-  if (category === 'product' || /\bproduct\b|recommend|what.?do.?we.?have|what.?do.?we.?sell|catalog|our.?range|what.?options/.test(recentText)) {
-    files.add('products/products_toc.md');
-  }
+  // ── Product files — keyword-gated (250KB combined, load selectively) ──────
 
   // Booth kits
   if (/\bbooth\b|exhibit|trade.?show|10.?x.?10|20.?x.?10|popup booth|seg.?booth|booth kit/.test(recentText)) {
@@ -284,49 +219,45 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   if (/media.?wall|tension.?fabric|archway|step.?repeat|seamwall|photo wall|\bseg\b|\bsego\b|seg.?wall|sego.?display/.test(recentText)) {
     files.add('products/products_media_walls_backdrops.md');
   }
-  // Banners & printing (includes scaffolding banners, mesh, vinyl, flags)
-  if (/\bbanner\b|roll.?up|flag|hanging|retractable|pull.?up|scaffold|mesh|vinyl print|feather|teardrop/.test(recentText)) {
+  // Banners & printing
+  if (/\bbanner\b|roll.?up|hanging|retractable|pull.?up|scaffold|mesh|feather|teardrop|wall.?hanging/.test(recentText)) {
     files.add('products/products_banners_printing.md');
   }
   // Counters, lightboxes, displays
-  if (/\bcounter\b|lightbox|light.?box|snap.?frame|display.?case|podium|\bseg\b|\bsego\b|backlit|led.?box|fabric.?display|modular.?display/.test(recentText)) {
+  if (/\bcounter\b|lightbox|light.?box|snap.?frame|podium|\bseg\b|\bsego\b|backlit|led.?box|fabric.?display|modular.?display/.test(recentText)) {
     files.add('products/products_counters_displays.md');
   }
   // Photo studio & table covers
-  if (/photo.?booth|photo.?studio|table.?cover|table cloth|table skirt/.test(recentText)) {
+  if (/photo.?booth|photo.?studio|table.?cover|table.?cloth|table skirt/.test(recentText)) {
     files.add('products/products_photo_studio.md');
   }
   // Outdoor — canopies, tents, flags
   if (/outdoor|canopy|tent|umbrella|inflat|gazebo/.test(recentText)) {
     files.add('products/products_outdoor_events.md');
   }
-  // Floral walls, stands, cases, accessories
-  if (/floral|flower|botanical|artificial.*wall|event.*wall|flower.*wall|led.*light|backdrop.*stand|stand.*backdrop|carry.?case|hard.?case|storage.?case|spare.?part|carry.?bag|accessory|accessories|tote|podium.?case/.test(recentText)) {
+  // Floral, stands, accessories
+  if (/floral|flower|botanical|backdrop.?stand|carry.?case|hard.?case|accessory|accessories/.test(recentText)) {
     files.add('products/products_other.md');
   }
-  // FIFA World Cup 2026 collection
-  if (/fifa|world.?cup|soccer|football.*event|fan.?zone|tifo|stadium.*banner|selfie.*frame|country.*flag/.test(recentText)) {
+  // FIFA 2026
+  if (/fifa|world.?cup|soccer|football.*event|fan.?zone|stadium.*banner|selfie.*frame/.test(recentText)) {
     files.add('products/products_fifa_2026.md');
   }
-  // "backdrop" + stand/frame → only load stand/accessory files, NOT the 54KB media walls file
-  if (/\bbackdrop\b/.test(recentText) && /\bstand\b|frame.?only|just.?the.?frame|no.?fabric/.test(recentText)) {
-    files.add('products/products_other.md');
-    files.add('products/products_banners_printing.md');
-  } else if (/\bbackdrop\b/.test(recentText)) {
-    // Generic "backdrop" → could be fabric media wall OR floral wall
+  // Generic backdrop → media walls + other (stands/floral)
+  if (/\bbackdrop\b/.test(recentText)) {
     files.add('products/products_media_walls_backdrops.md');
     files.add('products/products_other.md');
   }
-  // Ambiguous product query → load TOC only so the agent can ask one
-  // clarifying question. The rep's follow-up will have specific keywords
-  // that route to the right file on the next turn.
-  if (category === 'product') {
-    const hasSpecific = [...files].some(
-      (f) => f.startsWith('products/') && f !== 'products/products_toc.md'
-    );
-    if (!hasSpecific) {
-      files.add('products/products_toc.md');
-    }
+  // Generic product or recommend query → load all product files
+  if (category === 'product' || /what.?do.?we.?(have|sell|offer)|recommend|catalog|our.?range|full.?range|all.?products/.test(recentText)) {
+    files.add('products/products_booth_kits.md');
+    files.add('products/products_media_walls_backdrops.md');
+    files.add('products/products_banners_printing.md');
+    files.add('products/products_counters_displays.md');
+    files.add('products/products_photo_studio.md');
+    files.add('products/products_outdoor_events.md');
+    files.add('products/products_other.md');
+    files.add('products/products_fifa_2026.md');
   }
 
   // ── B2B client intelligence (Top 200 summary — call prep only) ───────────
