@@ -149,6 +149,51 @@ async function ensureCollection(): Promise<void> {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
+// ── Zilliz warmup — wake the cluster before any gRPC calls ───────────────────
+// Free tier clusters suspend after inactivity. The REST API wakes them faster
+// than gRPC, so we ping it first and wait until it responds, then proceed.
+
+async function warmupCluster(): Promise<void> {
+  const address = process.env.MILVUS_ADDRESS!;
+  const token   = process.env.MILVUS_TOKEN!;
+
+  // Convert gRPC endpoint to HTTPS REST endpoint
+  // e.g. "in03-xxxx.api.gcp-us-west1.zillizcloud.com:443"
+  //   → "https://in03-xxxx.api.gcp-us-west1.zillizcloud.com/v2/vectordb/collections/list"
+  const host = address.replace(/:443$/, '');
+  const url  = `https://${host}/v2/vectordb/collections/list`;
+
+  console.log('⏳ Warming up Zilliz cluster (REST ping)...');
+
+  for (let attempt = 1; attempt <= 8; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ dbName: 'default' }),
+        signal: AbortSignal.timeout(20000),
+      });
+
+      if (res.ok || res.status === 200) {
+        const data = await res.json() as { code: number };
+        if (data.code === 0) {
+          console.log(`✅ Cluster is awake (attempt ${attempt})\n`);
+          return;
+        }
+      }
+      console.log(`  Attempt ${attempt}: status ${res.status} — waiting 5s...`);
+    } catch (err) {
+      console.log(`  Attempt ${attempt}: ${(err as Error).message} — waiting 5s...`);
+    }
+    await sleep(5000);
+  }
+  console.warn('⚠️  Could not confirm cluster is awake — proceeding anyway...\n');
+}
+
 async function main(): Promise<void> {
   console.log('🚀 BDS Knowledge Base Indexer\n');
 
@@ -157,6 +202,9 @@ async function main(): Promise<void> {
     console.error('❌ Missing env vars. Check MILVUS_ADDRESS, MILVUS_TOKEN, OPENAI_API_KEY in .env.local');
     process.exit(1);
   }
+
+  // Wake cluster before attempting gRPC operations
+  await warmupCluster();
 
   await ensureCollection();
 
