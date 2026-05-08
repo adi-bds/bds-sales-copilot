@@ -100,7 +100,10 @@ async function ensureCollection(): Promise<void> {
     console.log('   Dropped.\n');
   }
 
-  // Create with schema
+  // Create with schema.
+  // NOTE: `dimension` at the top level auto-creates the vector index using
+  // `metricType`. Do NOT also pass `indexParams` — that tries to create a
+  // second index on the same field and throws Zilliz error 65535.
   await zilliz('/v2/vectordb/collections/create', {
     collectionName: COLLECTION,
     dimension: EMBEDDING_DIM,
@@ -117,9 +120,6 @@ async function ensureCollection(): Promise<void> {
         { fieldName: 'vector',   dataType: 'FloatVector', elementTypeParams: { dim: String(EMBEDDING_DIM) } },
       ],
     },
-    indexParams: [
-      { fieldName: 'vector', indexName: 'vector_idx', metricType: 'COSINE' },
-    ],
   });
 
   console.log('✅ Collection created.\n');
