@@ -1,80 +1,53 @@
 /**
- * BDS Knowledge Base Indexer
+ * BDS Knowledge Base Indexer — REST API version
  *
- * Chunks all markdown knowledge files and indexes them into Milvus
- * using OpenAI text-embedding-3-small embeddings.
+ * Uses Zilliz REST API directly (no gRPC SDK) because Zilliz Serverless
+ * clusters only support REST from external connections.
  *
  * Run with:
  *   npx ts-node --project tsconfig.scripts.json scripts/index_knowledge.ts
- *
- * Re-run any time knowledge files are updated (new products export, playbook changes, etc.)
- * The script drops and rebuilds the collection fresh each time.
  */
 
-import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 import OpenAI from 'openai';
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import * as dotenv from 'dotenv';
 
-// Load .env.local
 dotenv.config({ path: join(__dirname, '..', '.env.local') });
 
-const COLLECTION = 'bds_knowledge';
-const EMBEDDING_DIM = 1536; // text-embedding-3-small
+const COLLECTION    = 'bds_knowledge';
+const EMBEDDING_DIM = 1536;
 
-// Zilliz serverless addresses may include "https://" — strip it for gRPC.
-// gRPC requires "hostname:443". TLS is automatic on port 443 — do NOT pass tls option.
-const grpcAddress = (() => {
-  const host = process.env.MILVUS_ADDRESS!
-    .replace(/^https?:\/\//, '')
-    .replace(/\/$/, '')
-    .replace(/:443$/, '');
-  return `${host}:443`;
+// ── Zilliz REST client ────────────────────────────────────────────────────────
+
+const BASE_URL = (() => {
+  const addr = process.env.MILVUS_ADDRESS ?? '';
+  return addr.startsWith('http') ? addr.replace(/\/$/, '') : `https://${addr}`;
 })();
 
-const milvus = new MilvusClient({
-  address: grpcAddress,
-  token: process.env.MILVUS_TOKEN!,
-  timeout: 60000,
-});
+const TOKEN = process.env.MILVUS_TOKEN ?? '';
+
+async function zilliz(path: string, body: Record<string, unknown>): Promise<unknown> {
+  const res = await fetch(`${BASE_URL}${path}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(30000),
+  });
+
+  const data = await res.json() as { code: number; message?: string; data?: unknown };
+  if (data.code !== 0) {
+    throw new Error(`Zilliz error ${data.code}: ${data.message ?? JSON.stringify(data)}`);
+  }
+  return data.data;
+}
+
+// ── OpenAI embeddings ─────────────────────────────────────────────────────────
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-// ── Types ───────────────────────────────────────────────────────────────────
-
-interface Chunk {
-  text: string;
-  source: string;
-  category: string;
-}
-
-// ── Chunking ─────────────────────────────────────────────────────────────────
-// Product files: split on ### headings — each product = one chunk
-// Core/playbook files: keep as one chunk if small, split on ## if large
-
-function chunkMarkdown(content: string, source: string): Chunk[] {
-  const category =
-    source.startsWith('products/') ? 'product' :
-    source.startsWith('uk/')       ? 'playbook' :
-                                     'core';
-
-  // For small non-product files, keep as a single chunk
-  if (category !== 'product' && content.length < 6000) {
-    return [{ text: content.trim(), source, category }];
-  }
-
-  // Split on ### or ## headings
-  const delimiter = category === 'product' ? /\n(?=###\s)/ : /\n(?=##\s)/;
-  const chunks = content
-    .split(delimiter)
-    .map(c => c.trim())
-    .filter(c => c.length > 80);
-
-  return chunks.map(text => ({ text, source, category }));
-}
-
-// ── Embedding ─────────────────────────────────────────────────────────────────
 
 async function embed(text: string): Promise<number[]> {
   const res = await openai.embeddings.create({
@@ -84,154 +57,108 @@ async function embed(text: string): Promise<number[]> {
   return res.data[0].embedding;
 }
 
-// ── Collection setup ──────────────────────────────────────────────────────────
-
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
-async function withRetry<T>(fn: () => Promise<T>, retries = 3, delayMs = 5000): Promise<T> {
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      return await fn();
-    } catch (err: unknown) {
-      const isTimeout = err instanceof Error && err.message.includes('DEADLINE_EXCEEDED');
-      if (isTimeout && attempt < retries) {
-        console.log(`  ⏳ Timeout — retrying in ${delayMs / 1000}s (attempt ${attempt}/${retries})...`);
-        await sleep(delayMs);
-      } else {
-        throw err;
-      }
-    }
-  }
-  throw new Error('Max retries exceeded');
+// ── Types ─────────────────────────────────────────────────────────────────────
+
+interface Chunk {
+  text: string;
+  source: string;
+  category: string;
 }
 
-async function ensureCollection(): Promise<void> {
-  const exists = await withRetry(() => milvus.hasCollection({ collection_name: COLLECTION }));
+// ── Chunking ──────────────────────────────────────────────────────────────────
 
-  if (exists.value) {
-    console.log('⚠️  Collection exists — dropping for fresh rebuild...');
-    await withRetry(() => milvus.dropCollection({ collection_name: COLLECTION }));
-    await sleep(3000); // brief pause after drop
+function chunkMarkdown(content: string, source: string): Chunk[] {
+  const category =
+    source.startsWith('products/') ? 'product' :
+    source.startsWith('uk/')       ? 'playbook' :
+                                     'core';
+
+  if (category !== 'product' && content.length < 6000) {
+    return [{ text: content.trim(), source, category }];
   }
 
-  await milvus.createCollection({
-    collection_name: COLLECTION,
-    fields: [
-      {
-        name: 'id',
-        data_type: DataType.Int64,
-        is_primary_key: true,
-        autoID: true,
-      },
-      {
-        name: 'text',
-        data_type: DataType.VarChar,
-        max_length: 8000,
-      },
-      {
-        name: 'source',
-        data_type: DataType.VarChar,
-        max_length: 200,
-      },
-      {
-        name: 'category',
-        data_type: DataType.VarChar,
-        max_length: 50,
-      },
-      {
-        name: 'vector',
-        data_type: DataType.FloatVector,
-        dim: EMBEDDING_DIM,
-      },
+  const delimiter = category === 'product' ? /\n(?=###\s)/ : /\n(?=##\s)/;
+  return content
+    .split(delimiter)
+    .map(c => c.trim())
+    .filter(c => c.length > 80)
+    .map(text => ({ text, source, category }));
+}
+
+// ── Collection setup ──────────────────────────────────────────────────────────
+
+async function ensureCollection(): Promise<void> {
+  // Check if exists
+  const collections = await zilliz('/v2/vectordb/collections/list', { dbName: 'default' }) as string[];
+
+  if (collections.includes(COLLECTION)) {
+    console.log('⚠️  Collection exists — dropping for fresh rebuild...');
+    await zilliz('/v2/vectordb/collections/drop', { collectionName: COLLECTION });
+    await sleep(2000);
+    console.log('   Dropped.\n');
+  }
+
+  // Create with schema
+  await zilliz('/v2/vectordb/collections/create', {
+    collectionName: COLLECTION,
+    dimension: EMBEDDING_DIM,
+    metricType: 'COSINE',
+    primaryFieldName: 'id',
+    vectorFieldName: 'vector',
+    schema: {
+      autoId: true,
+      fields: [
+        { fieldName: 'id',       dataType: 'Int64',       isPrimary: true, autoId: true },
+        { fieldName: 'text',     dataType: 'VarChar',     elementTypeParams: { max_length: '8000' } },
+        { fieldName: 'source',   dataType: 'VarChar',     elementTypeParams: { max_length: '200'  } },
+        { fieldName: 'category', dataType: 'VarChar',     elementTypeParams: { max_length: '50'   } },
+        { fieldName: 'vector',   dataType: 'FloatVector', elementTypeParams: { dim: String(EMBEDDING_DIM) } },
+      ],
+    },
+    indexParams: [
+      { fieldName: 'vector', indexName: 'vector_idx', metricType: 'COSINE' },
     ],
   });
 
-  await milvus.createIndex({
-    collection_name: COLLECTION,
-    field_name: 'vector',
-    index_type: 'AUTOINDEX',
-    metric_type: 'COSINE',
-  });
-
-  await milvus.loadCollection({ collection_name: COLLECTION });
-  console.log('✅ Collection created and loaded.\n');
+  console.log('✅ Collection created.\n');
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-// ── Zilliz warmup — wake the cluster before any gRPC calls ───────────────────
-// Free tier clusters suspend after inactivity. The REST API wakes them faster
-// than gRPC, so we ping it first and wait until it responds, then proceed.
-
-async function warmupCluster(): Promise<void> {
-  const address = process.env.MILVUS_ADDRESS!;
-  const token   = process.env.MILVUS_TOKEN!;
-
-  // Normalize address to a clean base URL (handles both formats):
-  //   "https://in03-xxxx.serverless.aws-eu-central-1.cloud.zilliz.com"  (already has protocol)
-  //   "in03-xxxx.api.gcp-us-west1.zillizcloud.com:443"                  (gRPC style)
-  const base = address.startsWith('http')
-    ? address.replace(/\/$/, '')
-    : `https://${address.replace(/:443$/, '')}`;
-  const url  = `${base}/v2/vectordb/collections/list`;
-
-  console.log('⏳ Warming up Zilliz cluster (REST ping)...');
-
-  for (let attempt = 1; attempt <= 8; attempt++) {
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({ dbName: 'default' }),
-        signal: AbortSignal.timeout(20000),
-      });
-
-      if (res.ok || res.status === 200) {
-        const data = await res.json() as { code: number };
-        if (data.code === 0) {
-          console.log(`✅ Cluster is awake (attempt ${attempt})\n`);
-          return;
-        }
-      }
-      console.log(`  Attempt ${attempt}: status ${res.status} — waiting 5s...`);
-    } catch (err) {
-      console.log(`  Attempt ${attempt}: ${(err as Error).message} — waiting 5s...`);
-    }
-    await sleep(5000);
-  }
-  console.warn('⚠️  Could not confirm cluster is awake — proceeding anyway...\n');
-}
-
 async function main(): Promise<void> {
-  console.log('🚀 BDS Knowledge Base Indexer\n');
+  console.log('🚀 BDS Knowledge Base Indexer (REST)\n');
 
-  // Validate env vars
   if (!process.env.MILVUS_ADDRESS || !process.env.MILVUS_TOKEN || !process.env.OPENAI_API_KEY) {
-    console.error('❌ Missing env vars. Check MILVUS_ADDRESS, MILVUS_TOKEN, OPENAI_API_KEY in .env.local');
+    console.error('❌ Missing env vars: MILVUS_ADDRESS, MILVUS_TOKEN, OPENAI_API_KEY');
     process.exit(1);
   }
 
-  // Wake cluster before attempting gRPC operations
-  await warmupCluster();
+  console.log(`📡 Connecting to: ${BASE_URL}`);
+
+  // Quick connectivity check
+  try {
+    await zilliz('/v2/vectordb/collections/list', { dbName: 'default' });
+    console.log('✅ Zilliz REST API reachable\n');
+  } catch (err) {
+    console.error('❌ Cannot reach Zilliz:', err);
+    process.exit(1);
+  }
 
   await ensureCollection();
 
   const knowledgeDir = join(__dirname, '..', 'knowledge');
   const folders = ['core', 'products', 'uk'];
 
-  let totalFiles = 0;
+  let totalFiles  = 0;
   let totalChunks = 0;
+  const allChunks: (Chunk & { vector: number[] })[] = [];
 
+  // ── Embed all chunks first ──
   for (const folder of folders) {
     const folderPath = join(knowledgeDir, folder);
-    if (!existsSync(folderPath)) {
-      console.log(`  Skipping ${folder}/ — folder not found`);
-      continue;
-    }
+    if (!existsSync(folderPath)) { console.log(`  Skipping ${folder}/ — not found`); continue; }
 
     const files = readdirSync(folderPath).filter(f => f.endsWith('.md'));
     console.log(`📁 ${folder}/ — ${files.length} files`);
@@ -245,27 +172,36 @@ async function main(): Promise<void> {
 
       for (const chunk of chunks) {
         const vector = await embed(chunk.text);
-        await milvus.insert({
-          collection_name: COLLECTION,
-          data: [{
-            text: chunk.text,
-            source: chunk.source,
-            category: chunk.category,
-            vector,
-          }],
-        });
+        allChunks.push({ ...chunk, vector });
         totalChunks++;
+        await sleep(30); // gentle rate limiting
       }
 
       console.log('✓');
       totalFiles++;
     }
-
     console.log('');
   }
 
-  console.log(`\n✅ Done. Indexed ${totalFiles} files → ${totalChunks} chunks into Milvus.`);
-  console.log('You can now deploy the app — Milvus retrieval is live.\n');
+  // ── Insert in batches of 50 ──
+  console.log(`\n📤 Inserting ${totalChunks} chunks into Zilliz...`);
+  const BATCH = 50;
+  for (let i = 0; i < allChunks.length; i += BATCH) {
+    const batch = allChunks.slice(i, i + BATCH);
+    await zilliz('/v2/vectordb/entities/insert', {
+      collectionName: COLLECTION,
+      data: batch.map(c => ({
+        text: c.text,
+        source: c.source,
+        category: c.category,
+        vector: c.vector,
+      })),
+    });
+    process.stdout.write(`  ${Math.min(i + BATCH, allChunks.length)}/${totalChunks}\r`);
+  }
+
+  console.log(`\n\n✅ Done. Indexed ${totalFiles} files → ${totalChunks} chunks.`);
+  console.log('Knowledge base is live — deploy to Vercel and test.\n');
   process.exit(0);
 }
 
