@@ -96,8 +96,16 @@ async function ensureCollection(): Promise<void> {
   if (collections.includes(COLLECTION)) {
     console.log('⚠️  Collection exists — dropping for fresh rebuild...');
     await zilliz('/v2/vectordb/collections/drop', { collectionName: COLLECTION });
-    await sleep(2000);
-    console.log('   Dropped.\n');
+
+    // Poll until the collection is fully gone — a fixed sleep isn't reliable
+    process.stdout.write('   Waiting for drop to propagate');
+    for (let i = 0; i < 30; i++) {
+      await sleep(2000);
+      process.stdout.write('.');
+      const after = await zilliz('/v2/vectordb/collections/list', { dbName: 'default' }) as string[];
+      if (!after.includes(COLLECTION)) break;
+    }
+    console.log(' gone.\n');
   }
 
   // Create with schema.
