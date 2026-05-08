@@ -23,10 +23,15 @@ dotenv.config({ path: join(__dirname, '..', '.env.local') });
 const COLLECTION = 'bds_knowledge';
 const EMBEDDING_DIM = 1536; // text-embedding-3-small
 
-// Zilliz serverless addresses include "https://" — gRPC client needs just the hostname
-const grpcAddress = process.env.MILVUS_ADDRESS!
-  .replace(/^https?:\/\//, '')
-  .replace(/\/$/, '');
+// Zilliz serverless addresses may include "https://" — strip it for gRPC.
+// gRPC requires "hostname:443". TLS is automatic on port 443 — do NOT pass tls option.
+const grpcAddress = (() => {
+  const host = process.env.MILVUS_ADDRESS!
+    .replace(/^https?:\/\//, '')
+    .replace(/\/$/, '')
+    .replace(/:443$/, '');
+  return `${host}:443`;
+})();
 
 const milvus = new MilvusClient({
   address: grpcAddress,

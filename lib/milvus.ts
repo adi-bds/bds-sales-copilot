@@ -7,9 +7,11 @@ const COLLECTION = 'bds_knowledge';
 let milvusClient: MilvusClient | null = null;
 let openaiClient: OpenAI | null = null;
 
-// Zilliz serverless addresses include "https://" but gRPC client needs just the hostname
+// Zilliz serverless addresses may include "https://" — strip it for gRPC.
+// gRPC requires "hostname:443" (no protocol prefix). TLS is automatic on port 443.
 function normalizeGrpcAddress(addr: string): string {
-  return addr.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const host = addr.replace(/^https?:\/\//, '').replace(/\/$/, '').replace(/:443$/, '');
+  return `${host}:443`;
 }
 
 function getMilvus(): MilvusClient {
@@ -17,7 +19,6 @@ function getMilvus(): MilvusClient {
     milvusClient = new MilvusClient({
       address: normalizeGrpcAddress(process.env.MILVUS_ADDRESS!),
       token: process.env.MILVUS_TOKEN!,
-      tls: { serverName: normalizeGrpcAddress(process.env.MILVUS_ADDRESS!).split(':')[0] },
     });
   }
   return milvusClient;
