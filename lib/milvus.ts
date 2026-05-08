@@ -25,10 +25,15 @@ async function embed(text: string): Promise<number[]> {
   return res.data[0].embedding;
 }
 
+// Safety cap: never send more than this many chars per retrieved chunk to Claude.
+// Older collections may have large chunks; this ensures cost stays predictable
+// regardless of what's stored. At 3,000 chars × 5 chunks ≈ 3,750 tokens.
+const MAX_CHUNK_DISPLAY_CHARS = 3000;
+
 export async function retrieveKnowledge(
   query: string,
   category?: string,
-  topK = 6
+  topK = 5
 ): Promise<string> {
   try {
     const vector = await embed(query);
@@ -47,7 +52,9 @@ export async function retrieveKnowledge(
     }
 
     console.log(`[Zilliz] Retrieved ${results.length} chunks for category="${category ?? 'all'}"`);
-    return results.map(r => `[${r.source}]\n${r.text}`).join('\n\n---\n\n');
+    return results
+      .map(r => `[${r.source}]\n${r.text.slice(0, MAX_CHUNK_DISPLAY_CHARS)}`)
+      .join('\n\n---\n\n');
 
   } catch (err) {
     console.error('[Zilliz] Knowledge retrieval error:', err);

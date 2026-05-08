@@ -68,6 +68,30 @@ interface Chunk {
 }
 
 // ── Chunking ──────────────────────────────────────────────────────────────────
+//
+// Target: ~2,500 chars per chunk (~625 tokens).
+// At topK=5 that's ~3,000 tokens of knowledge context — cheap and focused.
+// Chunks that exceed MAX_CHUNK_CHARS are split further on blank-line boundaries.
+
+const MAX_CHUNK_CHARS = 2500;
+
+function splitOnParagraphs(text: string, source: string, category: string): Chunk[] {
+  if (text.length <= MAX_CHUNK_CHARS) return [{ text, source, category }];
+
+  const chunks: Chunk[] = [];
+  let current = '';
+
+  for (const para of text.split(/\n\n+/)) {
+    if (current.length + para.length + 2 > MAX_CHUNK_CHARS && current.length > 200) {
+      chunks.push({ text: current.trim(), source, category });
+      current = para;
+    } else {
+      current = current ? current + '\n\n' + para : para;
+    }
+  }
+  if (current.trim().length > 80) chunks.push({ text: current.trim(), source, category });
+  return chunks;
+}
 
 function chunkMarkdown(content: string, source: string): Chunk[] {
   const category =
@@ -75,16 +99,19 @@ function chunkMarkdown(content: string, source: string): Chunk[] {
     source.startsWith('uk/')       ? 'playbook' :
                                      'core';
 
-  if (category !== 'product' && content.length < 6000) {
+  // Split on section headers first, then apply MAX_CHUNK_CHARS sub-splitting
+  const delimiter = category === 'product' ? /\n(?=###\s)/ : /\n(?=##\s)/;
+  const sections = content
+    .split(delimiter)
+    .map(c => c.trim())
+    .filter(c => c.length > 80);
+
+  // For small non-product files, keep as a single chunk
+  if (category !== 'product' && content.length < MAX_CHUNK_CHARS) {
     return [{ text: content.trim(), source, category }];
   }
 
-  const delimiter = category === 'product' ? /\n(?=###\s)/ : /\n(?=##\s)/;
-  return content
-    .split(delimiter)
-    .map(c => c.trim())
-    .filter(c => c.length > 80)
-    .map(text => ({ text, source, category }));
+  return sections.flatMap(section => splitOnParagraphs(section, source, category));
 }
 
 // ── Collection setup ──────────────────────────────────────────────────────────

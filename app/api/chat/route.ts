@@ -167,20 +167,17 @@ function lookupOrders(messages: Message[]): string {
 }
 
 // ─── Retrieval Routing ────────────────────────────────────────────────────
-// ALL core + playbook files load on every request — they're small and universally useful.
-// Product files are the only ones gated by keyword (they're large — 250KB combined).
-
-// Core files (~50KB total) — always loaded
-const CORE_FILES = [
-  'core/sales_playbook.md',
-  'core/rep_workflow.md',
-  'core/customization_rules.md',
-  'core/call_insights.md',
-  'core/order_patterns.md',
-  'core/discounts.md',
+// File-based fallback (used when Milvus returns nothing).
+// Budget: keep under ~15K tokens for fast, cheap responses.
+//
+// Always loaded — small and universally needed (~9K tokens total):
+const ALWAYS_FILES = [
+  'core/sales_playbook.md',       // 2.4K tokens — pricing, tone, core rules
+  'core/customization_rules.md',  // 1.1K tokens — artwork, print specs
+  'core/discounts.md',            // 0.7K tokens — discount codes
 ];
 
-// Playbook files (~115KB total) — always loaded
+// Loaded by query type (never all at once):
 const PLAYBOOK_FILES = [
   'uk/uk_complaints_playbook.md',
   'uk/uk_objection_playbook.md',
@@ -194,10 +191,28 @@ type Message = { role: string; content: string };
 
 function detectFilesToLoad(messages: Message[], category?: string, geo?: string): string[] {
   const recentText = messages.slice(-4).map((m) => m.content).join(' ').toLowerCase();
-  const files = new Set<string>([...CORE_FILES, ...PLAYBOOK_FILES]);
+  const files = new Set<string>(ALWAYS_FILES);
 
-  // B2B customer list — load for call prep or when a company name is mentioned
-  if (category === 'callprep' || /call prep|i have a call|calling|customer|client intel|what do we know about/.test(recentText)) {
+  // Workflow details — only load when explicitly needed
+  if (/delivery|dispatch|artwork|dpi|payment|po |purchase.?order|production|timeline|lead.?time|how.?long|when.?will|workflow/.test(recentText)) {
+    files.add('core/rep_workflow.md');
+  }
+
+  // Order patterns / insights — only when asked about trends
+  if (/trend|common|most.?popular|average.?order|typical|pattern|insight|what do clients/.test(recentText)) {
+    files.add('core/call_insights.md');
+    files.add('core/order_patterns.md');
+  }
+
+  // UK/complaint playbooks — only when query is complaint, email, or UK-specific
+  const needsPlaybooks = geo === 'uk' ||
+    /complaint|issue|wrong|damaged|missing|refund|replacement|email|write.*email|draft|quote|follow.?up|reorder|inquiry|enquiry|objection|pushback|too.?expensive|cheaper/.test(recentText);
+  if (needsPlaybooks) {
+    PLAYBOOK_FILES.forEach(f => files.add(f));
+  }
+
+  // B2B customer list — load for call prep only
+  if (category === 'callprep' || /call prep|i have a call|client intel|what do we know about/.test(recentText)) {
     files.add('core/b2b_customers.md');
   }
 
@@ -248,8 +263,9 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('products/products_media_walls_backdrops.md');
     files.add('products/products_other.md');
   }
-  // Generic product or recommend query → load all product files
-  if (category === 'product' || /what.?do.?we.?(have|sell|offer)|recommend|catalog|our.?range|full.?range|all.?products/.test(recentText)) {
+  // Full catalog browse — only when rep explicitly asks for everything
+  // Don't trigger on category='product' alone (that's the frontend tab, not a browse intent)
+  if (/what.?do.?we.?(have|sell|offer)|full.?catalog|our.?range|full.?range|all.?products|show.?me.?everything/.test(recentText)) {
     files.add('products/products_booth_kits.md');
     files.add('products/products_media_walls_backdrops.md');
     files.add('products/products_banners_printing.md');
