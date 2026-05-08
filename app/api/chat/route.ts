@@ -188,14 +188,26 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   // Load the most useful file for the chosen category even when the message
   // text alone wouldn't trigger it.  This replaces the old keyword-hint system.
   if (category === 'training') {
-    // Rep is in training mode — give them pitch angles and product context
-    files.add('core/blog_posts.md');
-    // Always include the full sales & order workflow for training sessions
+    // Rep is in training mode — load everything they need to learn the business
     files.add('core/rep_workflow.md');
+    files.add('core/blog_posts.md');
+    files.add('core/customization_rules.md');
+    files.add('core/call_insights.md');
+    files.add('products/products_toc.md');
+    files.add('uk/uk_initial_inquiry_playbook.md');
+    files.add('uk/uk_objection_playbook.md');
+    files.add('uk/uk_quote_playbook.md');
   }
   if (category === 'callprep') {
-    // Rep is prepping for a call — load the B2B customer history file
+    // Rep is prepping for a call — load full context: customer data + product catalog + playbooks
     files.add('core/b2b_customers.md');
+    files.add('core/rep_workflow.md');
+    files.add('core/customization_rules.md');
+    files.add('core/call_insights.md');
+    files.add('products/products_toc.md');
+    files.add('uk/uk_quote_playbook.md');
+    files.add('uk/uk_objection_playbook.md');
+    files.add('uk/uk_initial_inquiry_playbook.md');
   }
   if (category === 'product') {
     // Product category — TOC is added further below after keyword checks
@@ -391,11 +403,12 @@ const CORE_INSTRUCTIONS = `You are the BDS Sales Copilot for Backdropsource (bac
 - Lead with the answer. Never open with "Great question!" or any filler.
 - Emails: write the full email only — no commentary before or after.
 - Products: name, price, URL, one-line reason. Max 3 options.
-- Unknown spec or price: say "Check Shopify admin." Nothing more.
 - Never fabricate product names, prices, or order history.
 - Product name matching: product names in the catalog may differ slightly from what the rep types (e.g. "SEG" vs "SEGO", "LED Light Box" vs "Backlit Lightbox", "Model 1" vs "– Model 1"). If you find a close match, present it directly and confidently as the likely product — never say "that exact product isn't in my catalog" when you have a near-identical match. Just say "Here's what I have:" and show it. Only say "Check Shopify admin" if you genuinely have nothing close.
 - Discounts: never volunteer a discount code or suggest a lower price unless the client explicitly asks for one. When they do ask, use the DISCOUNTS section only — do not invent codes.
 - Order history: the ORDER HISTORY (SHOPIFY) section is the authoritative source for all individual orders — always use it when present. The B2B CUSTOMERS section is a strategic summary only (revenue tier, top product, best month) and must never be used to answer "what did they order?" questions. If no ORDER HISTORY section is present, say "I don't have that order on file — check Shopify admin."
+- NEVER list what data you do or don't have loaded. Never say "I don't have X in this session" or produce a bullet list of available vs unavailable data. Just answer what you can with what you have. If something is genuinely unknown, say so in one sentence and move on.
+- NEVER describe your own context, session state, or knowledge sources to the user. You are a sales assistant, not a system status page.
 
 ## Company
 - HQ: Dallas TX | India office: Coimbatore
