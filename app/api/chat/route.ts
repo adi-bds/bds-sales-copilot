@@ -441,7 +441,9 @@ export async function POST(req: NextRequest) {
       model,
       max_tokens: 1024,
       system: systemPrompt,
-      messages: (messages as Message[]).map((m) => ({
+      // Cap history at last 6 messages (3 exchanges) — stale wrong answers
+      // from localStorage history poison the context and reinforce bad behaviour.
+      messages: (messages as Message[]).slice(-6).map((m) => ({
         role: m.role as 'user' | 'assistant',
         content: m.content,
       })),
