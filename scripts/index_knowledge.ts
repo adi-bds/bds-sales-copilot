@@ -23,10 +23,15 @@ dotenv.config({ path: join(__dirname, '..', '.env.local') });
 const COLLECTION = 'bds_knowledge';
 const EMBEDDING_DIM = 1536; // text-embedding-3-small
 
+// Zilliz serverless addresses include "https://" — gRPC client needs just the hostname
+const grpcAddress = process.env.MILVUS_ADDRESS!
+  .replace(/^https?:\/\//, '')
+  .replace(/\/$/, '');
+
 const milvus = new MilvusClient({
-  address: process.env.MILVUS_ADDRESS!,
+  address: grpcAddress,
   token: process.env.MILVUS_TOKEN!,
-  timeout: 60000, // 60s — needed for drop/create on slower connections
+  timeout: 60000,
 });
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -157,11 +162,13 @@ async function warmupCluster(): Promise<void> {
   const address = process.env.MILVUS_ADDRESS!;
   const token   = process.env.MILVUS_TOKEN!;
 
-  // Convert gRPC endpoint to HTTPS REST endpoint
-  // e.g. "in03-xxxx.api.gcp-us-west1.zillizcloud.com:443"
-  //   → "https://in03-xxxx.api.gcp-us-west1.zillizcloud.com/v2/vectordb/collections/list"
-  const host = address.replace(/:443$/, '');
-  const url  = `https://${host}/v2/vectordb/collections/list`;
+  // Normalize address to a clean base URL (handles both formats):
+  //   "https://in03-xxxx.serverless.aws-eu-central-1.cloud.zilliz.com"  (already has protocol)
+  //   "in03-xxxx.api.gcp-us-west1.zillizcloud.com:443"                  (gRPC style)
+  const base = address.startsWith('http')
+    ? address.replace(/\/$/, '')
+    : `https://${address.replace(/:443$/, '')}`;
+  const url  = `${base}/v2/vectordb/collections/list`;
 
   console.log('⏳ Warming up Zilliz cluster (REST ping)...');
 

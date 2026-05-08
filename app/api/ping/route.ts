@@ -17,8 +17,10 @@ export async function GET() {
   }
 
   try {
-    const host = address.replace(/:443$/, '');
-    const url  = `https://${host}/v2/vectordb/collections/list`;
+    const base = address.startsWith('http')
+      ? address.replace(/\/$/, '')
+      : `https://${address.replace(/:443$/, '')}`;
+    const url  = `${base}/v2/vectordb/collections/list`;
 
     const res = await fetch(url, {
       method: 'POST',
