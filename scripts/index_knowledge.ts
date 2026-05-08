@@ -114,7 +114,7 @@ async function ensureCollection(): Promise<void> {
       autoId: true,
       fields: [
         { fieldName: 'id',       dataType: 'Int64',       isPrimary: true, autoId: true },
-        { fieldName: 'text',     dataType: 'VarChar',     elementTypeParams: { max_length: '8000' } },
+        { fieldName: 'text',     dataType: 'VarChar',     elementTypeParams: { max_length: '65535' } },
         { fieldName: 'source',   dataType: 'VarChar',     elementTypeParams: { max_length: '200'  } },
         { fieldName: 'category', dataType: 'VarChar',     elementTypeParams: { max_length: '50'   } },
         { fieldName: 'vector',   dataType: 'FloatVector', elementTypeParams: { dim: String(EMBEDDING_DIM) } },
