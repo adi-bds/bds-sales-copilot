@@ -218,11 +218,13 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
   // ── Situation-based playbooks — apply to ALL geos ────────────────────────
   // Only load when a specific situation is detected — never as a default.
   // The sales_playbook.md already covers general guidance.
-  if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem/.test(recentText)) {
+  if (/complaint|wrong item|damaged|missing|broken|refund|defect|issue|problem|historically|common issue|most common|what do clients|clients say|feedback|returns/.test(recentText)) {
     files.add('uk/uk_complaints_playbook.md');
+    files.add('core/call_insights.md');
   }
-  if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better/.test(recentText)) {
+  if (/objection|too expensive|cheaper|competitor|price.?match|reduce the price|can you do better|common question|what do clients ask|faq|frequently asked/.test(recentText)) {
     files.add('uk/uk_objection_playbook.md');
+    files.add('core/call_insights.md');
   }
   if (/mockup|artwork|proof|design|approve|approval|2d|visual/.test(recentText)) {
     files.add('uk/uk_mockup_design_playbook.md');
