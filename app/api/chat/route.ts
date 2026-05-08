@@ -428,8 +428,18 @@ export async function POST(req: NextRequest) {
         retrieveKnowledge(recentQuery, category),
         transcriptQuery ? retrieveTranscripts(recentQuery) : Promise.resolve(''),
       ]);
-      systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext, transcriptContext);
-      console.log(`[BDS Copilot] Mode: Milvus RAG | category=${category ?? 'none'}`);
+
+      if (knowledgeContext) {
+        // Milvus returned results — use RAG path
+        systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext, transcriptContext);
+        console.log(`[BDS Copilot] Mode: Milvus RAG | category=${category ?? 'none'}`);
+      } else {
+        // Milvus configured but returned nothing (not indexed yet, or cold cluster)
+        // Fall back to file-based routing so the agent always has knowledge
+        const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
+        systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
+        console.warn(`[BDS Copilot] Milvus returned empty — fell back to file routing | category=${category ?? 'none'}`);
+      }
     } else {
       // Fallback: keyword-based file routing (works without Milvus configured)
       const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
