@@ -97,7 +97,10 @@ async function ensureCollection(): Promise<void> {
     console.log('⚠️  Collection exists — dropping for fresh rebuild...');
     await zilliz('/v2/vectordb/collections/drop', { collectionName: COLLECTION });
 
-    // Poll until the collection is fully gone — a fixed sleep isn't reliable
+    // Poll until gone from the list. The list endpoint can be cached so even
+    // after the collection disappears from the list, Zilliz may still reject
+    // a create with "duplicate parameters". We add an extra 10s buffer after
+    // the list confirms it's gone to let the underlying metadata settle.
     process.stdout.write('   Waiting for drop to propagate');
     for (let i = 0; i < 30; i++) {
       await sleep(2000);
@@ -105,14 +108,16 @@ async function ensureCollection(): Promise<void> {
       const after = await zilliz('/v2/vectordb/collections/list', { dbName: 'default' }) as string[];
       if (!after.includes(COLLECTION)) break;
     }
-    console.log(' gone.\n');
+    process.stdout.write(' listed as gone, settling');
+    await sleep(10000); // extra buffer for metadata propagation
+    console.log(' ✓\n');
   }
 
-  // Create with schema.
+  // Create with schema — retry if Zilliz metadata is still settling.
   // NOTE: `dimension` at the top level auto-creates the vector index using
   // `metricType`. Do NOT also pass `indexParams` — that tries to create a
   // second index on the same field and throws Zilliz error 65535.
-  await zilliz('/v2/vectordb/collections/create', {
+  const createBody = {
     collectionName: COLLECTION,
     dimension: EMBEDDING_DIM,
     metricType: 'COSINE',
@@ -128,9 +133,23 @@ async function ensureCollection(): Promise<void> {
         { fieldName: 'vector',   dataType: 'FloatVector', elementTypeParams: { dim: String(EMBEDDING_DIM) } },
       ],
     },
-  });
+  };
 
-  console.log('✅ Collection created.\n');
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    try {
+      await zilliz('/v2/vectordb/collections/create', createBody);
+      console.log('✅ Collection created.\n');
+      return;
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (attempt < 6 && msg.includes('duplicate collection')) {
+        console.log(`   Create attempt ${attempt}/6 — still propagating, waiting 10s...`);
+        await sleep(10000);
+      } else {
+        throw err;
+      }
+    }
+  }
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
