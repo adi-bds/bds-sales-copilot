@@ -69,27 +69,16 @@ function exportCSV(entries: FeedbackEntry[]) {
   URL.revokeObjectURL(url);
 }
 
-// ─── Chat history localStorage helpers ───────────────────────────────────
-const CHAT_PREFIX = 'bds_chat_v1_';
-
-function chatStorageKey(navId: string | null, geoCode: string | null): string {
-  if (geoCode) return `${CHAT_PREFIX}geo_${geoCode}`;
-  if (navId)   return `${CHAT_PREFIX}${navId}`;
-  return '';
+// ─── Chat history — session-only (no persistence) ────────────────────────
+// Chats are intentionally NOT saved to localStorage. Each refresh/session
+// starts fresh so stale answers can't poison future context.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function loadChat(_navId: string | null, _geoCode: string | null): Message[] {
+  return [];
 }
-function loadChat(navId: string | null, geoCode: string | null): Message[] {
-  const key = chatStorageKey(navId, geoCode);
-  if (!key) return [];
-  try { return JSON.parse(localStorage.getItem(key) ?? '[]'); }
-  catch { return []; }
-}
-function saveChat(navId: string | null, geoCode: string | null, msgs: Message[]) {
-  const key = chatStorageKey(navId, geoCode);
-  if (!key) return;
-  try {
-    if (msgs.length === 0) localStorage.removeItem(key);
-    else localStorage.setItem(key, JSON.stringify(msgs));
-  } catch {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function saveChat(_navId: string | null, _geoCode: string | null, _msgs: Message[]) {
+  // no-op — chats are session-only
 }
 
 // ─── Nav types ────────────────────────────────────────────────────────────
@@ -450,6 +439,15 @@ export default function Home() {
 
   // Load feedback from localStorage on mount
   useEffect(() => { setFeedbackEntries(loadFeedback()); }, []);
+
+  // One-time cleanup: purge any old chat keys left over from when chats were persisted
+  useEffect(() => {
+    try {
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('bds_chat_'))
+        .forEach(k => localStorage.removeItem(k));
+    } catch {}
+  }, []);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
   useEffect(() => {
     if (activeNav && messages.length === 0) setTimeout(() => textareaRef.current?.focus(), 80);
