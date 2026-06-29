@@ -316,6 +316,25 @@ function detectFilesToLoad(messages: Message[], category?: string, geo?: string)
     files.add('products/products_fifa_2026.md');
   }
 
+  // ── Store-specific pricing — swap US files for geo-specific versions ───────
+  // When a geo is selected, replace US product files with the matching store files.
+  // Geo codes: 'uk' | 'ca' | 'au' | 'nz'
+  const GEO_SUFFIX: Record<string, string> = { uk: 'uk', ca: 'ca', au: 'au', nz: 'nz' };
+  const storeGeo = geo && GEO_SUFFIX[geo.toLowerCase()];
+  if (storeGeo) {
+    const swapped = new Set<string>();
+    for (const f of files) {
+      if (f.startsWith('products/products_') && !f.includes('_toc')) {
+        // e.g. products/products_outdoor_events.md → products/products_outdoor_events_uk.md
+        const geoFile = f.replace(/\.md$/, `_${storeGeo}.md`);
+        swapped.add(geoFile);
+      } else {
+        swapped.add(f);
+      }
+    }
+    return [...swapped];
+  }
+
   // ── B2B client intelligence (Top 200 summary — call prep only) ───────────
   // b2b_customers.md is a strategic summary (revenue tier, discount level,
   // best month) for the top 200 companies. It is NOT order history and must
