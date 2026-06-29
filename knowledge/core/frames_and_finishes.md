@@ -49,7 +49,7 @@ GSM = grams per square meter. Higher GSM = thicker and stronger fabric.
 | **Air mesh fabric** | Light and breathable | **130 GSM** |
 | **Barrier fabric** | Medium thickness, used for crowd control banners | **260 GSM** |
 | **Media wall fabric** | Smooth and stretchable, used in tension displays | **260 GSM** |
-| **Canopy fabric** | Strong and weather-resistant | 600D polyester |
+| **Canopy fabric** | Strong and weather-resistant | **600D PU polyester** — NOT polyester mesh. Do not quote 130 GSM for canopy tents. |
 | **Inflatable fabric** | Very strong | 600D Oxford fabric |
 
 ---
@@ -77,6 +77,8 @@ Backdrop frames are structures used to support banners, fabrics, or branding dis
 
 **Concept:** Uses a telescopic pipe system — pipes slide into each other to adjust size.
 
+**Product name:** Backdrop with Adjustable Stand — fabric backdrop media wall with adjustable telescopic stand.
+
 **Structure & Build:**
 - Telescopic crossbars and vertical uprights
 - Tiered pipe design for smooth adjustment
@@ -89,6 +91,16 @@ Backdrop frames are structures used to support banners, fabrics, or branding dis
 **Bases:**
 - Standard base
 - Heavy base (same dimensions, added stability)
+
+---
+
+### Full Coverage Seamless Graphic Wall — Velcro Fixing
+
+**How velcro works for a full coverage seamless graphic wall (e.g. shell scheme):**
+- **Loop velcro** is stitched onto the print/graphic
+- **Hook velcro** (adhesive-backed roll) is attached to the shell scheme structure/wall by the client
+- The graphic is then pressed on top — it attaches firmly and can be removed and repositioned
+- For exact velcro placement and fixing guidance for a specific wall setup, confirm with **Idris, Kaviya, Jennifer, or Areefa**
 
 ---
 
@@ -125,6 +137,11 @@ Backdrop frames are structures used to support banners, fabrics, or branding dis
 **Concept:** A collapsible frame system that expands instantly using a pop-up mechanism.
 
 **Finishing:** Velcro — commonly used, can be customised.
+
+**How the graphic attaches:**
+- **Loop velcro** is stitched directly onto the print/fabric
+- **Hook velcro** (adhesive-backed roll) is attached to the pop-up frame structure
+- The print is then pressed onto the frame — loop side on print, hook side on frame
 
 **Structure:**
 - Aluminum frame with scissor-style pop-up design

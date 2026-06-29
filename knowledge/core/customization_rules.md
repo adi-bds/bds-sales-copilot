@@ -43,12 +43,15 @@ These are sold as-is — do not offer custom printing or sizing:
 
 ## Popup Display — Customization Conditions
 
-The popup frame is a **3x3 grid** where each cell is approximately **2.5ft x 2.5ft**.
+The popup frame is a **3x3 grid** where each cell is approximately **2.5ft (0.75m)**.
 
-- Dimensions must be in **multiples of 2.5ft** (both width and height)
-- **Recommended max:** 12.5ft H x 25ft W
-- **Over 25ft wide:** Combine multiple frames side by side
-  - Example: Client wants 50ft → place two 25ft frames adjacently = 50ft display
+- Dimensions must be in **multiples of 2.5ft / 0.75m** (both width and height)
+- **Max size: 6m wide × 2.3m high (19.7ft × 7.5ft)** — fixed constraint of the popup frame system
+- **Min size: 1.5m wide × 2.3m high**
+- Height is fixed at **2.3m (7.5ft)** — cannot go higher on a popup frame
+- **Common available widths:** 1.5m, 2.25m, 3m, 3.75m, 4.5m, 5.25m, 6m
+- **Over 6m wide:** Combine multiple frames side by side
+- **If client wants 5m × 2m exactly:** The popup system cannot match this. Recommend a **Straight Tension Media Wall** or **SEG Media Wall** instead — both support fully custom dimensions
 - **Pricing:** Calculate from the closest available standard dimensions
 
 ---

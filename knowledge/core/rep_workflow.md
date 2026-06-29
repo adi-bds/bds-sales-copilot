@@ -158,6 +158,16 @@ EORI = Economic Operators Registration and Identification number. Required for s
 - **Customer does NOT have EORI:** delivery in 15 days. BDS handles clearance and customs on their behalf.
 - Ask for EORI number before the order ships — the difference is 5–7 days vs 15 days.
 
+## Carry Cases & Bags
+
+Most BDS backdrop and display products ship with a carry bag or case included:
+- **Soft carry bag** — included with most portable displays (tension walls, pop-up walls, banner stands)
+- **Hard/rolling case** — included with premium setups (some podium counters, larger booth kits)
+
+The exact type (soft bag vs. hard case) varies by product. Always confirm per product before promising a specific type to a client. Check with **Idris, Kaviya, Jennifer, or Areefa** if unsure.
+
+---
+
 ## Blind Shipping
 
 BDS offers blind shipping for resellers. When requested:

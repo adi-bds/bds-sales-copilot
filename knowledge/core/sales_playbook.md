@@ -10,7 +10,7 @@
 - **Jennifer Rytter** — Sales Manager | jennifer@backdropsource.com | WhatsApp: +1 737 204 1523
 - **Idris** — Production/technical escalations (SEG custom pricing, floor carpets, complex installs)
 - **Kaviya / Lavanya / Areefa** — Also confirm custom SEG lightbox pricing
-- **Artwork submissions** → sales@backdropsource.com | Large files: WeTransfer or Dropbox link
+- **Artwork submissions** → ask client to share via WeTransfer, Dropbox, or Google Drive (preferred for large files)
 
 ---
 
@@ -45,7 +45,7 @@ One of the most common repeat-client requests. Key points:
 2. Get dimensions and quantity
 3. Raise invoice manually and share purchase link via chat/email
 4. Send design template PDF to client if they don't have artwork ready
-5. Client sends artwork to sales@backdropsource.com
+5. Client sends artwork via WeTransfer, Dropbox, or Google Drive
 
 ---
 
@@ -53,7 +53,7 @@ One of the most common repeat-client requests. Key points:
 
 - **Free design assistance** is offered after order is placed — always mention this proactively
 - Design template (PDF) should be sent to client before they place the order if artwork isn't ready
-- Artwork submission: email to sales@backdropsource.com — WeTransfer or Dropbox for large files
+- Artwork submission: client shares via WeTransfer, Dropbox, or Google Drive — no email address needed
 - File format preference: AI, PDF, EPS, or high-res PNG/JPG (150 DPI minimum)
 - Once artwork is received, proof images are sent for client approval before production starts
 
@@ -108,7 +108,7 @@ Firefly is just a brand name for the same type of SEG lightbox product. BDS prod
 
 Clients sometimes need the same product shipped to multiple addresses (e.g., 6 office locations):
 - Place the order with **one address** via the invoice link
-- Client sends remaining delivery addresses via email to sales@backdropsource.com
+- Client sends remaining delivery addresses directly to the assigned rep (Jennifer or whoever is handling the account)
 - BDS will fulfill to all addresses from a single order — no need for multiple purchase links
 - If one address needs a different spec (e.g., fabric + frame vs. fabric only), note it in the email
 
