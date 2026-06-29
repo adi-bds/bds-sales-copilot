@@ -77,6 +77,8 @@ Two frame profiles based on height:
 | 6.5ft H and above | 120mm |
 | Client requests 120mm for smaller frames | Can accommodate |
 
+**⚠️ Max depth is 120mm — we do NOT offer 150mm or any depth beyond 120mm. If a client asks for 150mm, the answer is no.**
+
 **Key specs:**
 - Power supply is external; cable exits from **left side bottom**
 - LED modules are embedded on the **left and right sides** running through the full height of the frame

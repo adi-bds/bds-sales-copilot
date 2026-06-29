@@ -1,5 +1,16 @@
 # Banners & Printing
 
+## ── FABRIC GSM SPECS ──
+NOTE: "Material: [number]" in product listings below = Shopify price-tier SKU, NOT GSM. Real GSM values are only these:
+- Duplex Knitted Polyester: 115 GSM (standard dye-sub, wrinkle-resistant)
+- Airmesh / Poly Canvas: 120 GSM (breathable mesh)
+- Polyester Mesh: 130 GSM (outdoor/FIFA events)
+- Poly Canvas: 250 GSM (heavier canvas)
+- Standard Dye-Sub Polyester: 260 GSM (main backdrop/banner fabric)
+- Flannel Polyester: 280 GSM (soft, no-glare)
+- Felt Polyester: 280 GSM (textured surface)
+- Duplex Blockout Polyester: 300 GSM (light-blocking, double-sided)
+
 **Total products: 184**
 
 ### Custom Wall-Hanging Backdrop with Clamps

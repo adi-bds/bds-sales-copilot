@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large generated files — rebuild locally with: npx tsx scripts/build_embeddings.ts
+knowledge/embeddings.json

@@ -23,10 +23,24 @@ type FeedbackEntry = {
   model: string;
 };
 
+// ─── Model selector config ─────────────────────────────────────────────────
+type ModelOption = { id: string; label: string; provider: string; badge: string };
+const AVAILABLE_MODELS: ModelOption[] = [
+  { id: 'claude-sonnet-4-6',         label: 'Claude Sonnet',    provider: 'Anthropic', badge: '◆' },
+  { id: 'claude-haiku-4-5-20251001', label: 'Claude Haiku',     provider: 'Anthropic', badge: '◆' },
+  { id: 'deepseek-chat',             label: 'DeepSeek V3',      provider: 'DeepSeek',  badge: '✦' },
+  { id: 'llama-3.3-70b-versatile',   label: 'Llama 3.3 70B',   provider: 'Groq',      badge: '⚡' },
+  { id: 'llama-3.1-8b-instant',      label: 'Llama 3.1 8B',    provider: 'Groq',      badge: '⚡' },
+];
+const DEFAULT_MODEL = AVAILABLE_MODELS[0];
+
 // ─── Token cost calculator ─────────────────────────────────────────────────
 const MODEL_PRICES: Record<string, { input: number; output: number }> = {
-  'claude-sonnet-4-6':         { input: 3.00, output: 15.00 },
-  'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00  },
+  'claude-sonnet-4-6':          { input: 3.00,  output: 15.00 },
+  'claude-haiku-4-5-20251001':  { input: 0.80,  output: 4.00  },
+  'deepseek-chat':              { input: 0.27,  output: 1.10  },
+  'llama-3.3-70b-versatile':    { input: 0.059, output: 0.079 },
+  'llama-3.1-8b-instant':       { input: 0.005, output: 0.008 },
 };
 function calcCost(usage: TokenUsage): number {
   const p = MODEL_PRICES[usage.model] ?? { input: 3.00, output: 15.00 };
@@ -432,6 +446,7 @@ export default function Home() {
   const [geoOpen, setGeoOpen]         = useState(false);
   const [activeView, setActiveView]   = useState<'chat' | 'feedback'>('chat');
   const [feedbackEntries, setFeedbackEntries] = useState<FeedbackEntry[]>([]);
+  const [selectedModel, setSelectedModel] = useState<ModelOption>(DEFAULT_MODEL);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef    = useRef<HTMLTextAreaElement>(null);
@@ -541,7 +556,7 @@ export default function Home() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: apiMessages, category, geo }),
+        body: JSON.stringify({ messages: apiMessages, category, geo, model: selectedModel.id }),
         signal: ctrl.signal,
       });
       if (!res.ok) throw new Error(`${res.status}`);
@@ -565,7 +580,7 @@ export default function Home() {
       setIsStreaming(false);
       abortRef.current = null;
     }
-  }, [messages, isStreaming, activeNav, activeGeo]);
+  }, [messages, isStreaming, activeNav, activeGeo, selectedModel]);
 
   const handleKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input); }
@@ -603,15 +618,15 @@ export default function Home() {
             const isActive = activeView === 'chat' && (!isGeoParent ? activeNav?.id === item.id : !!activeGeo);
             return (
               <div key={item.id}>
-                <button onClick={() => selectNav(item)} className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${isActive ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}>
-                  <span className={isActive ? 'text-red-400' : 'text-slate-500'}>{item.icon}</span>
+                <button onClick={() => selectNav(item)} className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${isActive ? 'bg-indigo-600 text-white font-medium' : 'text-slate-400 hover:text-white hover:bg-white/[0.07]'}`}>
+                  <span className={isActive ? 'text-white' : 'text-slate-500'}>{item.icon}</span>
                   <span className="flex-1 text-left">{item.label}</span>
                   {isGeoParent && <IconChevron open={geoOpen} />}
                 </button>
                 {isGeoParent && geoOpen && (
                   <div className="ml-3 mt-0.5 space-y-0.5 border-l border-white/10 pl-3">
                     {GEO_REGIONS.map(geo => (
-                      <button key={geo.code} onClick={() => selectGeo(geo)} className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-all ${activeGeo?.code === geo.code && activeView === 'chat' ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-500 hover:text-slate-200 hover:bg-white/5'}`}>
+                      <button key={geo.code} onClick={() => selectGeo(geo)} className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-all ${activeGeo?.code === geo.code && activeView === 'chat' ? 'bg-indigo-600 text-white font-medium' : 'text-slate-500 hover:text-white hover:bg-white/[0.07]'}`}>
                         <span className="text-base leading-none">{geo.flag}</span>
                         <span>{geo.label}</span>
                       </button>
@@ -627,9 +642,9 @@ export default function Home() {
             <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Quality</p>
             <button
               onClick={() => setActiveView('feedback')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${activeView === 'feedback' ? 'bg-red-600/15 text-red-400 font-medium' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all ${activeView === 'feedback' ? 'bg-indigo-600 text-white font-medium' : 'text-slate-400 hover:text-white hover:bg-white/[0.07]'}`}
             >
-              <span className={activeView === 'feedback' ? 'text-red-400' : 'text-slate-500'}><IconChart /></span>
+              <span className={activeView === 'feedback' ? 'text-white' : 'text-slate-500'}><IconChart /></span>
               <span className="flex-1 text-left">Feedback</span>
               {flagged > 0 && (
                 <span className="bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">{flagged}</span>
@@ -638,12 +653,37 @@ export default function Home() {
           </div>
         </nav>
 
-        {/* Bottom card */}
-        <div className="p-3 border-t border-white/5">
-          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-3">
-            <div className="text-white font-semibold text-xs mb-0.5">BackdropSource IQ</div>
-            <div className="text-red-200 text-xs leading-relaxed">17,771 orders · {feedbackEntries.length} rated</div>
+        {/* Model selector */}
+        <div className="px-3 pb-3 border-t border-white/5 pt-3">
+          <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider px-2 mb-2">Model</p>
+          <div className="space-y-0.5">
+            {AVAILABLE_MODELS.map(m => (
+              <button
+                key={m.id}
+                onClick={() => setSelectedModel(m)}
+                className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all text-left ${
+                  selectedModel.id === m.id
+                    ? 'bg-indigo-600 text-white font-medium'
+                    : 'text-slate-400 hover:text-white hover:bg-white/[0.07]'
+                }`}
+              >
+                <span className={`text-xs flex-shrink-0 ${selectedModel.id === m.id ? 'text-white' : 'text-slate-500'}`}>{m.badge}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs truncate">{m.label}</div>
+                  <div className={`text-[10px] ${selectedModel.id === m.id ? 'text-indigo-200' : 'text-slate-600'}`}>{m.provider}</div>
+                </div>
+                {selectedModel.id === m.id && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
+                )}
+              </button>
+            ))}
           </div>
+        </div>
+
+        {/* Bottom info */}
+        <div className="px-4 py-3 border-t border-white/5">
+          <div className="text-slate-400 text-xs font-medium">BackdropSource IQ</div>
+          <div className="text-slate-500 text-xs mt-0.5">17,771 orders · {feedbackEntries.length} rated</div>
         </div>
       </aside>
 
