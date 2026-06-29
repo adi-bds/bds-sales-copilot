@@ -413,9 +413,9 @@ What products BDS sells, pricing, dimensions, GSM values, fabric specs, lead tim
 If a BDS-specific fact (a product, a price, a spec) is not explicitly in the KNOWLEDGE BASE provided, say so and stop — do not guess or estimate. A wrong product detail costs a sale. No answer is always safer than a wrong one.
 
 When a BDS-specific fact isn't available, say one of:
-- "I don't have that spec on file — check with Idris, Kaviya, Jennifer, or Areefa."
-- "I don't have pricing for that — confirm with Idris, Kaviya, Jennifer, or Areefa before quoting."
-- "That's not something I have details on — check with Idris, Kaviya, Jennifer, or Areefa before quoting the client."
+- "I don't have that spec on file — check with Idris, Kaviya, or Areefa."
+- "I don't have pricing for that — confirm with Idris, Kaviya, or Areefa before quoting."
+- "That's not something I have details on — check with Idris, Kaviya, or Areefa before quoting the client."
 
 ## Response rules
 - Be brief. Most answers: 3–5 bullet points or 2–3 sentences. No waffle.
@@ -434,7 +434,7 @@ When a BDS-specific fact isn't available, say one of:
 - HQ: Dallas TX | India office: Coimbatore
 - US warehouses: Grand Prairie TX, Irvine CA | AU: Brisbane | UK: High Peak, Derbyshire
 - backdropsource.com | backdropsource.co.uk | +1 (650) 614-1888
-- This is an internal tool for the sales team — never direct reps to email sales@backdropsource.com or suggest they contact "the team" generically. When in doubt, name the person: Idris, Kaviya, Jennifer, or Areefa.
+- This is an internal tool for the sales team — never direct reps to email sales@backdropsource.com or suggest they contact "the team" generically. When in doubt, name the person: Idris, Kaviya, or Areefa.
 - Markets: US (USD), Canada (CAD), UK (GBP), AU (AUD), NZ (NZD), UAE (AED), India (INR), EU (EUR)
 - Always use the correct currency for the client's market.
 
@@ -475,7 +475,7 @@ Keep the clarifying question to one line. Don't list every possible option — p
 ## Order & workflow process (REP WORKFLOW section)
 When the REP WORKFLOW section is loaded, use it as the authoritative source for: delivery timelines, artwork requirements, payment methods (Shopify / PO / remittance), when production starts (payment + approval both required), EORI numbers, mockup/revision process, and tool usage (Streak/Shopify/Trello). Quote specifics directly — e.g. "minimum 150 DPI at full size", "5–7 business days from payment and mockup approval."
 
-## Escalate to Idris, Kaviya, Jennifer, or Areefa
+## Escalate to Idris, Kaviya, or Areefa
 Custom pricing, discounts over 10%, order exceptions, complaints over £1,000 or involving safety issues, clients threatening chargebacks or legal action. Always name one of them specifically — never say "escalate to management" or "contact the team".`;
 
 // ─── Model Selection ──────────────────────────────────────────────────────
@@ -537,15 +537,35 @@ export async function POST(req: NextRequest) {
       ]);
 
       if (knowledgeContext) {
-        // Milvus returned results — use RAG path
-        systemPrompt = buildSystemPromptMilvus(knowledgeContext, orderContext, transcriptContext);
-        console.log(`[BDS Copilot] Mode: Milvus RAG | category=${category ?? 'none'}`);
+        // Hybrid retrieval: semantic search + keyword file detection merged together.
+        // Semantic search excels at specific queries ("Heavy Duty Canopy Tent 20ft price").
+        // Keyword detection handles vague queries ("canopy tent price") where the top
+        // similarity chunks may miss the right product file entirely.
+        // Running both ensures the copilot always has the right context.
+        const keywordFiles = detectFilesToLoad(messages as Message[], category, geo);
+        let hybridContext = knowledgeContext;
+        if (keywordFiles.length > 0) {
+          const MAX_EXTRA_CHARS = 6000; // cap extra file content to avoid token bloat
+          const extraContent = keywordFiles
+            .map(fp => {
+              const content = loadFile(fp);
+              if (!content) return null;
+              const label = fp.replace(/^(core|products|uk)\//, '').replace(/\.md$/, '').replace(/_/g, ' ').toUpperCase();
+              return `## ═══ ${label} ═══\n\n${content.slice(0, MAX_EXTRA_CHARS)}`;
+            })
+            .filter(Boolean)
+            .join('\n\n---\n\n');
+          if (extraContent) {
+            hybridContext = knowledgeContext + '\n\n---\n\n' + extraContent;
+          }
+        }
+        systemPrompt = buildSystemPromptMilvus(hybridContext, orderContext, transcriptContext);
+        console.log(`[BDS Copilot] Mode: Hybrid RAG+keywords | category=${category ?? 'none'} | extraFiles=${keywordFiles.length}`);
       } else {
-        // Milvus configured but returned nothing (not indexed yet, or cold cluster)
-        // Fall back to file-based routing so the agent always has knowledge
+        // Semantic search returned nothing — fall back to keyword file routing
         const selectedFiles = detectFilesToLoad(messages as Message[], category, geo);
         systemPrompt = buildSystemPrompt(selectedFiles, orderContext);
-        console.warn(`[BDS Copilot] Milvus returned empty — fell back to file routing | category=${category ?? 'none'}`);
+        console.warn(`[BDS Copilot] Semantic search empty — fell back to file routing | category=${category ?? 'none'}`);
       }
     } else {
       // Fallback: keyword-based file routing (works without Milvus configured)

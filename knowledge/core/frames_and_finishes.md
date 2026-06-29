@@ -100,7 +100,7 @@ Backdrop frames are structures used to support banners, fabrics, or branding dis
 - **Loop velcro** is stitched onto the print/graphic
 - **Hook velcro** (adhesive-backed roll) is attached to the shell scheme structure/wall by the client
 - The graphic is then pressed on top — it attaches firmly and can be removed and repositioned
-- For exact velcro placement and fixing guidance for a specific wall setup, confirm with **Idris, Kaviya, Jennifer, or Areefa**
+- For exact velcro placement and fixing guidance for a specific wall setup, confirm with **Idris, Kaviya, or Areefa**
 
 ---
 
