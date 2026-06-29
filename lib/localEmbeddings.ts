@@ -8,6 +8,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as zlib from 'zlib';
 import OpenAI from 'openai';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -29,16 +30,26 @@ let _chunks: Chunk[] | null = null;
 function getChunks(): Chunk[] {
   if (_chunks) return _chunks;
 
-  const filePath = path.join(process.cwd(), 'knowledge', 'embeddings.json');
-  if (!fs.existsSync(filePath)) {
-    console.error('[LocalEmbeddings] embeddings.json not found. Run: npx tsx scripts/build_embeddings.ts');
+  // Try compressed file first (used in production), fall back to plain JSON (legacy)
+  const gzPath   = path.join(process.cwd(), 'knowledge', 'embeddings.json.gz');
+  const jsonPath  = path.join(process.cwd(), 'knowledge', 'embeddings.json');
+
+  let raw: string;
+  if (fs.existsSync(gzPath)) {
+    const compressed = fs.readFileSync(gzPath);
+    raw = zlib.gunzipSync(compressed).toString('utf-8');
+    console.log('[LocalEmbeddings] Loaded from embeddings.json.gz');
+  } else if (fs.existsSync(jsonPath)) {
+    raw = fs.readFileSync(jsonPath, 'utf-8');
+    console.log('[LocalEmbeddings] Loaded from embeddings.json');
+  } else {
+    console.error('[LocalEmbeddings] No embeddings file found. Run: npx tsx scripts/build_embeddings.ts');
     return [];
   }
 
-  const raw = fs.readFileSync(filePath, 'utf-8');
   const data: EmbeddingsFile = JSON.parse(raw);
   _chunks = data.chunks;
-  console.log(`[LocalEmbeddings] Loaded ${_chunks.length} chunks from embeddings.json`);
+  console.log(`[LocalEmbeddings] ${_chunks.length} chunks ready`);
   return _chunks;
 }
 

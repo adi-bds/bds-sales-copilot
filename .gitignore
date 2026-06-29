@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Large generated files — rebuild locally with: npx tsx scripts/build_embeddings.ts
 knowledge/embeddings.json
+knowledge/embeddings.json.gz

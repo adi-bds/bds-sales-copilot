@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
   // Vercel/Next.js App Router — include knowledge files in the serverless bundle.
   // Multiple key formats listed for compatibility across Next.js versions.
   outputFileTracingIncludes: {
-    "/api/chat": ["./knowledge/**/*"],
-    "app/api/chat": ["./knowledge/**/*"],
-    "/app/api/chat/route": ["./knowledge/**/*"],
+    "/api/chat": ["./knowledge/**/*", "./knowledge/embeddings.json.gz"],
+    "app/api/chat": ["./knowledge/**/*", "./knowledge/embeddings.json.gz"],
+    "/app/api/chat/route": ["./knowledge/**/*", "./knowledge/embeddings.json.gz"],
   },
 };
 

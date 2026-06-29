@@ -15,6 +15,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as zlib from 'zlib';
 import OpenAI from 'openai';
 import * as dotenv from 'dotenv';
 
@@ -63,7 +64,7 @@ async function embedBatch(texts: string[]): Promise<number[][]> {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
   const knowledgeDir = path.join(process.cwd(), 'knowledge');
-  const outputPath = path.join(knowledgeDir, 'embeddings.json');
+  const outputPath = path.join(knowledgeDir, 'embeddings.json.gz');
 
   // Collect all .md files
   const allFiles: string[] = [];
@@ -174,14 +175,15 @@ async function main() {
 
   console.log(`\n✅ Embedded ${totalChunks} total chunks`);
 
-  fs.writeFileSync(outputPath, JSON.stringify({ chunks: allChunks }, null, 0));
+  const json = JSON.stringify({ chunks: allChunks }, null, 0);
+  const compressed = zlib.gzipSync(Buffer.from(json, 'utf-8'), { level: 6 });
+  fs.writeFileSync(outputPath, compressed);
 
   const fileSizeKB = Math.round(fs.statSync(outputPath).size / 1024);
-  console.log(`💾 Saved to knowledge/embeddings.json (${fileSizeKB} KB)`);
+  console.log(`💾 Saved to knowledge/embeddings.json.gz (${fileSizeKB} KB compressed)`);
   console.log('\nNext steps:');
   console.log('  1. Add USE_BUNDLED_EMBEDDINGS=true to .env.local');
-  console.log('  2. git add knowledge/embeddings.json && git push');
-  console.log('  3. Add USE_BUNDLED_EMBEDDINGS=true to Vercel env vars\n');
+  console.log('  2. npm run dev\n');
 }
 
 main().catch(err => {
