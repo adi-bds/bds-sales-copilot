@@ -1,264 +1,275 @@
-# BDS Sales Copilot — Handoff Guide
+# BDS Sales Copilot
 
-AI-powered sales assistant for Backdropsource reps. Built on Next.js 16, Anthropic Claude, Zilliz vector search, and Vercel.
+AI-powered sales assistant for Backdropsource reps. Built on Next.js, with multi-model LLM support and a fully local RAG system (no external vector database required).
 
 ---
 
 ## What it does
 
 A chat interface reps use daily to:
-- Get instant product specs, sizing, and pricing
-- Draft complaint and quote emails using real playbooks
-- Look up customer order history by name/email/order number
+- Get instant product specs, sizing, fabric details, and frame types
+- Draft complaint, quote, and follow-up emails using real playbooks
+- Look up customer order history by name / email / order number
 - Prep for calls with B2B client intelligence
-- Handle UK-specific queries with a separate geo selector
+- Switch between AI models depending on speed/quality needs
 
 ---
 
-## Architecture overview
+## Architecture
 
 ```
 Browser (page.tsx)
-    ↓ POST /api/chat
+    ↓ POST /api/chat  (includes selected model)
 app/api/chat/route.ts
-    ↓ embed last 4 messages
-Zilliz (cloud.zilliz.com) — bds_knowledge collection
-    ↓ top 5 most similar chunks
-Claude claude-sonnet-4-6 (streaming)
+    ↓ embed last 4 messages via OpenAI text-embedding-3-small
+lib/localEmbeddings.ts  ← cosine similarity over knowledge/embeddings.json
+    ↓ top 5 most relevant knowledge chunks
+LLM API (Anthropic / Groq / DeepSeek) — streaming
     ↓ Server-Sent Events
 Browser renders response
 ```
 
-**Two retrieval modes:**
-- **Milvus RAG** (primary): semantic search over 1,000+ knowledge chunks → cheapest, ~$0.015/query
-- **File fallback** (backup when Milvus is cold/empty): keyword-based file loading → ~$0.035/query
+**RAG is fully local** — embeddings live in `knowledge/embeddings.json` (generated once, not committed to git). No external vector DB needed at runtime. Only OpenAI is called to embed each incoming query (~0.01¢/query).
 
 ---
 
-## Accounts & services you need access to
+## Prerequisites
 
-| Service | What it's for | Where to find credentials |
+Before you start, make sure you have:
+
+| Tool | Version | Install |
 |---|---|---|
-| **Vercel** | Hosts the app | vercel.com — project: bds-sales-copilot |
-| **Anthropic** | Claude API (chat) | console.anthropic.com |
-| **OpenAI** | Embeddings only (text-embedding-3-small) | platform.openai.com |
-| **Zilliz Cloud** | Vector database for knowledge search | cloud.zilliz.com |
-| **GitHub** | Source code | github.com — repo: adidevas/bds-sales-copilot |
+| **Node.js** | 20+ | [nodejs.org](https://nodejs.org) — download the LTS version |
+| **npm** | comes with Node | (no separate install needed) |
+| **Git** | any recent | [git-scm.com](https://git-scm.com) |
+
+To check if you already have them:
+```bash
+node --version    # should say v20.x or higher
+npm --version     # should say 10.x or higher
+git --version
+```
 
 ---
 
-## Environment variables
+## API keys you need
 
-Create `.env.local` in the project root (never commit this file — it's gitignored):
+Sign up / log in to each service and get an API key:
+
+| Service | What it's for | Where to get the key |
+|---|---|---|
+| **OpenAI** | Embedding queries (text-embedding-3-small) | [platform.openai.com](https://platform.openai.com) → API keys |
+| **Groq** | Llama 3.3 70B and Llama 3.1 8B models (fast, free tier available) | [console.groq.com](https://console.groq.com) → API keys |
+| **Anthropic** | Claude Sonnet + Claude Haiku models | [console.anthropic.com](https://console.anthropic.com) → API keys |
+| **DeepSeek** *(optional)* | DeepSeek V3 model | [platform.deepseek.com](https://platform.deepseek.com) → API keys |
+
+You need OpenAI plus at least one LLM provider. Groq is the easiest to start with — it has a generous free tier.
+
+---
+
+## Setup (step by step)
+
+### 1. Clone the repo
 
 ```bash
-# Anthropic — get from console.anthropic.com → API keys
+git clone https://github.com/adi-bds/bds-sales-copilot.git
+cd bds-sales-copilot/bds-sales-copilot
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+This installs everything: Next.js, the Anthropic SDK, Groq SDK, OpenAI SDK, and all other packages listed in `package.json`.
+
+### 3. Create your `.env.local` file
+
+Create a file called `.env.local` in the project root (same folder as `package.json`). This file is gitignored and never committed — you create it fresh on each machine.
+
+```bash
+# --- Required ---
+
+# OpenAI — used only for embedding queries at runtime (not for chat)
+OPENAI_API_KEY=sk-...
+
+# Groq — for Llama 3.3 70B and Llama 3.1 8B
+GROQ_API_KEY=gsk_...
+
+# Anthropic — for Claude Sonnet and Claude Haiku
 ANTHROPIC_API_KEY=sk-ant-...
 
-# Zilliz — get from cloud.zilliz.com → your cluster → Connect → REST API
-MILVUS_ADDRESS=https://in03-xxxx.serverless.aws-eu-central-1.cloud.zilliz.com
-MILVUS_TOKEN=your_api_key_here
+# Must be true to use the local embeddings system
+USE_BUNDLED_EMBEDDINGS=true
 
-# OpenAI — get from platform.openai.com → API keys
-OPENAI_API_KEY=sk-...
+# Default LLM provider when no model is selected in the UI
+# Options: groq | anthropic | deepseek
+LLM_PROVIDER=groq
+
+# --- Optional ---
+
+# DeepSeek — for DeepSeek V3 model (leave blank or remove if not using)
+DEEPSEEK_API_KEY=
 ```
 
-These same four keys must also be set in **Vercel → Project Settings → Environment Variables**.
+### 4. Build the knowledge embeddings
 
----
-
-## Local development
+The knowledge base lives in `knowledge/` as markdown files. Before the app can do semantic search, you need to generate an embeddings file. This calls OpenAI's embedding API once and saves the result locally.
 
 ```bash
-# 1. Clone
-git clone https://github.com/adidevas/bds-sales-copilot
-cd bds-sales-copilot/bds-sales-copilot
+npx tsx scripts/build_embeddings.ts
+```
 
-# 2. Install dependencies
-npm install
+This takes 2–5 minutes and produces `knowledge/embeddings.json` (~200MB). You only need to run this:
+- Once on a fresh setup
+- Again any time you edit or add knowledge files
 
-# 3. Create .env.local with the four keys above
+### 5. Start the dev server
 
-# 4. Run dev server
+```bash
 npm run dev
-# → http://localhost:3000
 ```
+
+Open [http://localhost:3000](http://localhost:3000). The copilot should be up and running.
 
 ---
 
-## Deploying to production
+## Deploying to Vercel
 
-The app auto-deploys on every `git push` to `main` via Vercel.
+The app auto-deploys on every `git push` to `main`.
 
-```bash
-git add .
-git commit -m "your change"
-git push
-```
+**First-time Vercel setup:**
+1. Go to [vercel.com](https://vercel.com) and import the GitHub repo (`adi-bds/bds-sales-copilot`)
+2. Go to Project Settings → Environment Variables and add all the same keys from your `.env.local`
+3. Make sure `USE_BUNDLED_EMBEDDINGS=true` and `LLM_PROVIDER=groq` are included
 
-Vercel picks it up in ~60 seconds. No manual deploy step needed.
+**Note on `embeddings.json` and Vercel:**
+`embeddings.json` is gitignored (too large for GitHub at ~200MB). For production, you would need to either:
+- Upload `embeddings.json` to S3/Cloudflare R2 and fetch it at cold start *(not yet set up)*
+- Or switch back to Milvus/Zilliz as the vector DB *(original architecture — all the code is still there in `lib/milvus.ts`)*
+
+For now, this is set up for local development. Production deployment needs a solution for this — check with Adi.
+
+---
+
+## Available AI models
+
+| Model | Provider | Best for |
+|---|---|---|
+| Claude Sonnet | Anthropic | Complex reasoning, nuanced emails |
+| Claude Haiku | Anthropic | Quick lookups, short answers |
+| DeepSeek V3 | DeepSeek | General use |
+| Llama 3.3 70B | Groq | Good balance of speed and quality |
+| Llama 3.1 8B | Groq | Fastest responses, very low cost |
+
+Switch models using the dropdown in the sidebar. Selection persists for the session.
 
 ---
 
 ## Knowledge base — how to update
 
-### Product catalog (most common update)
-
-When Shopify prices/variants change, rebuild the product files from a fresh CSV export:
-
-```bash
-# Export orders from Shopify → paste CSV path below
-python3 scripts/rebuild_products.py /path/to/shopify_export.csv
-```
-
-This rewrites all 8 product markdown files in `knowledge/products/`.
-
-After updating any knowledge file, **re-run the indexer** (see below).
-
-### Knowledge files location
+All knowledge lives in `knowledge/` as plain markdown files. Edit them directly in any text editor.
 
 ```
 knowledge/
 ├── core/
-│   ├── sales_playbook.md       — pricing tiers, tone rules, core workflow
-│   ├── rep_workflow.md         — delivery timelines, artwork specs, payment methods
-│   ├── customization_rules.md  — print specs, DPI, pole pockets, fabric types
-│   ├── call_insights.md        — patterns mined from 9,321 call transcripts
-│   ├── order_patterns.md       — geo-specific sales intelligence from 12,561 orders
-│   ├── discounts.md            — discount codes and escalation rules
-│   ├── b2b_customers.md        — top 200 B2B customers for call prep
-│   └── blog_posts.md           — pitch angles and selling points
+│   ├── frames_and_finishes.md      — frame types, finish specs, GSM table, kit configs
+│   ├── rep_workflow.md             — delivery timelines, artwork specs, payment methods
+│   ├── customization_rules.md      — sizing rules, what BDS can/can't do
+│   ├── call_insights.md            — patterns from call transcripts
+│   ├── order_patterns.md           — geo-specific sales intelligence
+│   ├── discounts.md                — discount codes and escalation rules
+│   └── b2b_customers.md            — top B2B customers for call prep
 ├── products/
-│   ├── products_toc.md         — product category overview (always loaded)
+│   ├── products_toc.md             — product category overview
 │   ├── products_booth_kits.md
 │   ├── products_media_walls_backdrops.md
 │   ├── products_banners_printing.md
 │   ├── products_counters_displays.md
 │   ├── products_photo_studio.md
 │   ├── products_outdoor_events.md
-│   ├── products_other.md
-│   └── products_fifa_2026.md
-├── uk/
-│   ├── uk_complaints_playbook.md
-│   ├── uk_objection_playbook.md
-│   ├── uk_quote_playbook.md
-│   ├── uk_followup_reorder_playbook.md
-│   ├── uk_initial_inquiry_playbook.md
-│   └── uk_mockup_design_playbook.md
-└── orders/
-    └── orders_index.json       — 17,000+ Shopify orders indexed by order#/email/name
+│   └── products_other.md
+└── uk/
+    ├── uk_complaints_playbook.md
+    ├── uk_objection_playbook.md
+    ├── uk_quote_playbook.md
+    ├── uk_followup_reorder_playbook.md
+    ├── uk_initial_inquiry_playbook.md
+    └── uk_mockup_design_playbook.md
 ```
 
-Just edit the relevant `.md` file, then re-index.
-
----
-
-## Zilliz indexer — IMPORTANT
-
-The Zilliz collection must be re-indexed every time knowledge files change. This embeds all chunks and uploads them to Zilliz.
+**After editing any knowledge file, always rebuild embeddings:**
 
 ```bash
-# Run from the project root
-npx ts-node --project tsconfig.scripts.json scripts/index_knowledge.ts
+npx tsx scripts/build_embeddings.ts
 ```
 
-**If it fails with "duplicate collection" error:**
-1. Go to cloud.zilliz.com → your cluster → Collections
-2. Delete the `bds_knowledge` collection manually
-3. Re-run the indexer
-
-The indexer takes ~3–5 minutes to embed 1,000+ chunks.
-
-### Transcript indexer (optional)
-
-If you have new call recordings to add to the RAG corpus:
-
-```bash
-npx ts-node --project tsconfig.scripts.json scripts/index_transcripts.ts
-```
-
----
-
-## Orders index — updating
-
-When new Shopify orders come in, regenerate the orders index:
-
-```bash
-# (script location — ask Adi for the orders CSV export process)
-# The index lives at knowledge/orders/orders_index.json
-# It's indexed by order number (US#16111), email, and customer name
-```
-
----
-
-## Vercel keepalive cron
-
-`vercel.json` has a cron job that pings `/api/ping` every 5 minutes to keep the Zilliz free-tier cluster awake. If the cluster goes to sleep, the first query falls back to file-based routing (still works, slightly higher cost).
-
----
-
-## Cost per query
-
-| Mode | Input tokens | Cost |
-|---|---|---|
-| Milvus RAG (normal) | ~5K | ~$0.015 |
-| File fallback (cold Milvus) | ~12K | ~$0.035 |
-| Old behaviour (before cost fix) | ~126K | ~$0.38 |
-
----
-
-## Code map — what does what
-
-| File | Purpose |
-|---|---|
-| `app/page.tsx` | Full chat UI — nav, geo selector, streaming, feedback buttons |
-| `app/api/chat/route.ts` | Main API handler — retrieval routing, system prompt, Claude streaming |
-| `app/api/ping/route.ts` | Zilliz keepalive — called by Vercel cron every 5 min |
-| `lib/zilliz.ts` | Zilliz REST client — search, insert, collection management |
-| `lib/milvus.ts` | Knowledge retrieval — embed query, search, return top chunks |
-| `scripts/index_knowledge.ts` | Re-index knowledge base into Zilliz |
-| `scripts/index_transcripts.ts` | Index call transcripts into Zilliz |
-| `scripts/rebuild_products.py` | Rebuild product .md files from Shopify CSV |
-| `next.config.ts` | Bundles knowledge/ files into Vercel serverless function |
-| `vercel.json` | Cron job config for keepalive |
-
----
-
-## Claude Cowork skill (for Adi's machine)
-
-There's a Claude skill at `~/.claude/skills/bds-sales-copilot/` on Adi's machine. This is separate from the deployed app — it lets Adi (or you) ask Claude directly about BDS products and sales without opening the web app. To use it on your machine:
-
-1. Install Claude desktop app + Cowork
-2. Copy the `bds-sales-copilot/` folder to `~/.claude/skills/` on your machine
-3. The skill auto-triggers when you ask BDS-related questions in Cowork
+The `embeddings.json` output stays local (gitignored) — no need to commit it.
 
 ---
 
 ## Common tasks
 
-**Update a product price:**
-Edit `knowledge/products/products_<category>.md` directly → re-run indexer → push.
+**Update a product price or spec:**
+Edit the relevant `knowledge/products/products_<category>.md` → rebuild embeddings → push.
 
-**Add a new UK playbook:**
-Create `knowledge/uk/uk_newplaybook.md` → add filename to `PLAYBOOK_FILES` array in `app/api/chat/route.ts` → re-run indexer → push.
+**Add a new playbook:**
+Create a `.md` file in `knowledge/uk/` or `knowledge/core/` → rebuild embeddings → push.
 
-**Agent gives wrong answer:**
-Check the relevant knowledge file — the answer is probably outdated there. Edit the .md file, re-index, push.
+**Change the agent's personality or rules:**
+Edit `CORE_INSTRUCTIONS` in `app/api/chat/route.ts` → push. No embeddings rebuild needed.
 
-**Zilliz cluster is asleep (first query is slow):**
-The cron keepalive should prevent this. If it happens, the first query falls back to file routing (still works). Second query onwards uses Milvus.
+**Copilot gives a wrong answer:**
+Find the relevant knowledge file → fix the fact → rebuild embeddings → push.
 
-**Change the agent's personality/rules:**
-Edit `CORE_INSTRUCTIONS` in `app/api/chat/route.ts` → push. No re-indexing needed.
+**Add a new AI model:**
+1. Add the model ID and provider to `MODEL_TO_PROVIDER` in `app/api/chat/route.ts`
+2. Add it to `AVAILABLE_MODELS` in `app/page.tsx`
+3. Add the provider's API key to `.env.local`
 
 ---
 
-## Git history
+## Code map
 
-The full build history is in git. Key commits:
-- `fa7359c` — Milvus fallback to file routing when empty
-- `5f4efc0` — Cost reduction: chunking + file fallback overhaul
-- `3a6f458` — Session-only chats (no localStorage persistence)
-- `3a00c9a` — Switched to Zilliz REST (gRPC doesn't work on serverless)
-- `07bf770` — call_insights.md from 9,321 transcripts
-- `876168b` — Wall-Hanging Backdrop size variants fix + rebuild_products.py
+| File | Purpose |
+|---|---|
+| `app/page.tsx` | Chat UI — model selector, nav, geo selector, streaming, cost display |
+| `app/api/chat/route.ts` | Main API — retrieval routing, system prompt, multi-model streaming |
+| `lib/localEmbeddings.ts` | RAG engine — cosine similarity search over embeddings.json |
+| `lib/milvus.ts` | Legacy Zilliz/Milvus retrieval (still works if you want to switch back) |
+| `scripts/build_embeddings.ts` | Generates knowledge/embeddings.json from all markdown files |
+| `scripts/summarize_transcripts.ts` | Summarizes call recordings into knowledge chunks using Groq |
+| `next.config.ts` | Bundles knowledge/ files into the serverless function |
+| `vercel.json` | Vercel cron config |
+
+---
+
+## Approximate cost per query
+
+| Component | Cost |
+|---|---|
+| Query embedding (OpenAI) | ~$0.000002 |
+| Claude Sonnet (~1K output tokens) | ~$0.005 |
+| Claude Haiku (~1K output tokens) | ~$0.0005 |
+| Llama 3.3 70B via Groq | ~$0.001 |
+| Llama 3.1 8B via Groq | ~$0.0001 |
+
+---
+
+## Troubleshooting
+
+**"embeddings.json not found" on startup**
+Run `npx tsx scripts/build_embeddings.ts` — the file needs to be generated locally first.
+
+**Model not responding / "not-configured" error**
+The API key for that model's provider is missing from `.env.local`. Add it and restart the dev server.
+
+**Copilot doesn't know about something I just added to the knowledge base**
+You edited a markdown file but didn't rebuild embeddings. Run `npx tsx scripts/build_embeddings.ts`.
+
+**`npm install` fails**
+Make sure you're on Node.js 20+. Run `node --version` to check, then download the LTS version from nodejs.org if needed.
+
+**Port 3000 already in use**
+Another process is using port 3000. Either stop it, or run `npm run dev -- -p 3001` to use a different port.
